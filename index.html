@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hokkaido Flow - Controle de Produção</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .table-input {
+            width: 100%;
+            background-color: transparent;
+            border: 1px solid transparent;
+            padding: 8px;
+            box-sizing: border-box;
+            text-align: center;
+            border-radius: 4px;
+            transition: all 0.2s;
+        }
+        .table-input:focus {
+            outline: none;
+            background-color: #f0f9ff;
+            border-color: #38bdf8;
+            box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.4);
+        }
+        .toast {
+            animation: toast-in 0.5s, toast-out 0.5s 4.5s;
+            transform: translateX(110%);
+        }
+        @keyframes toast-in { from { transform: translateX(110%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+        @keyframes toast-out { from { transform: translateX(0); opacity: 1; } to { transform: translateX(110%); opacity: 0; } }
+        .loading-overlay { display: flex; transition: opacity 0.3s; }
+        .tab-button.active {
+            border-color: #0ea5e9;
+            color: #0284c7;
+            background-color: #f0f9ff;
+        }
+
+        /* --- ESTILOS DE IMPRESSÃO --- */
+        @media print {
+            body {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            .no-print {
+                display: none !important;
+            }
+            .page-section {
+                display: block !important; /* Mostra ambas as seções */
+                box-shadow: none !important;
+                border: none !important;
+                margin-bottom: 2rem;
+                page-break-inside: avoid;
+            }
+            #material-container {
+                page-break-before: always; /* Força uma nova página para a segunda aba */
+            }
+            .print-header {
+                display: block !important;
+            }
+            @page {
+                size: A4 landscape;
+                margin: 0.5in;
+            }
+            table {
+                font-size: 9pt;
+            }
+            th, td {
+                padding: 4px 6px;
+            }
+            .container {
+                padding: 0 !important;
+                margin: 0 !important;
+                max-width: 100% !important;
+            }
+        }
+    </style>
+</head>
+<body class="bg-slate-100 text-slate-800">
+
+    <div id="toast-container" class="fixed top-5 right-5 z-[100] space-y-2 no-print"></div>
+
+    <div class="container mx-auto p-4 md:p-6">
+        <header class="mb-6 text-center no-print">
+            <h1 class="text-3xl md:text-4xl font-bold text-slate-800">Hokkaido Flow</h1>
+            <p class="text-md text-slate-500">Controle de Produção em Tempo Real</p>
+        </header>
+        
+        <div class="flex flex-col md:flex-row justify-between items-center mb-6 p-4 bg-white rounded-lg shadow-sm no-print">
+             <div class="flex items-center gap-4">
+                 <label for="date-selector" class="font-semibold text-slate-600">Data de Produção:</label>
+                 <input type="date" id="date-selector" class="border-slate-300 rounded-md p-2 bg-slate-50 focus:ring-2 focus:ring-cyan-500">
+                 <button id="print-btn" class="bg-slate-600 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded-lg transition-colors flex items-center gap-2">
+                    <i data-lucide="printer"></i> Imprimir / PDF
+                </button>
+             </div>
+             <div id="save-status" class="text-sm text-slate-500 font-medium h-6 flex items-center gap-2 mt-4 md:mt-0">
+                 <div id="connection-status-dot" class="w-3 h-3 rounded-full bg-yellow-400 animate-pulse"></div>
+                 <span id="connection-status-text">Conectando...</span>
+             </div>
+        </div>
+        
+        <!-- Abas de Navegação -->
+        <div class="mb-6 border-b border-slate-200 no-print">
+            <nav class="-mb-px flex space-x-6" aria-label="Tabs">
+                <button id="tab-ciclo" data-target="#ciclo-container" class="tab-button active whitespace-nowrap py-4 px-1 border-b-2 font-medium text-lg leading-5 text-slate-500 hover:text-sky-600 hover:border-sky-300 focus:outline-none focus:text-sky-800 focus:border-sky-700 transition-colors duration-200">
+                    Controle de Ciclo
+                </button>
+                <button id="tab-material" data-target="#material-container" class="tab-button whitespace-nowrap py-4 px-1 border-b-2 border-transparent font-medium text-lg leading-5 text-slate-500 hover:text-green-600 hover:border-green-300 focus:outline-none focus:text-green-800 focus:border-green-700 transition-colors duration-200">
+                    Anotação de Material
+                </button>
+            </nav>
+        </div>
+
+        <!-- Seção 1: Controle de Ciclo e Cavitação -->
+        <section id="ciclo-container" class="page-section relative bg-white p-6 rounded-lg shadow-lg border-t-4 border-sky-500">
+            <div class="print-header hidden mb-4">
+                <h1 class="text-xl font-bold">Relatório Diário de Produção - Hokkaido Flow</h1>
+                <p class="text-sm">Data: <span class="print-date"></span></p>
+            </div>
+            <div class="loading-overlay hidden opacity-0 absolute inset-0 bg-white/80 justify-center items-center z-10 rounded-lg">
+                <i data-lucide="loader-2" class="w-8 h-8 text-sky-500 animate-spin"></i>
+            </div>
+            <h2 class="text-2xl font-semibold text-sky-700 flex items-center gap-2 border-b border-slate-200 pb-4 mb-6 no-print"><i data-lucide="settings-2"></i>Controle de Ciclo & Cavitação</h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 no-print">
+                <!-- Coluna 1: Visualizador de Apontamento -->
+                <div class="lg:col-span-1">
+                    <h3 class="font-semibold text-slate-700 mb-2">Visualizar Apontamento</h3>
+                    <div class="bg-slate-50 p-3 rounded-md border">
+                         <label for="summary-machine-selector" class="block text-sm font-medium text-slate-700">Máquina</label>
+                         <select id="summary-machine-selector" class="mt-1 block w-full p-2 border-slate-300 rounded-md shadow-sm focus:ring-sky-500 focus:border-sky-500">
+                            <option value="">Nenhum apontamento</option>
+                         </select>
+                    </div>
+                </div>
+                <!-- Coluna 2: Formulário de Edição -->
+                <div class="lg:col-span-2">
+                     <form id="ciclo-form">
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
+                            <div class="md:col-span-2">
+                                <label for="machine-selector" class="block text-sm font-medium text-slate-700">Selecionar Máquina para Apontar/Editar</label>
+                                <select id="machine-selector" class="mt-1 block w-full p-2 border-slate-300 bg-slate-50 rounded-md shadow-sm focus:ring-sky-500 focus:border-sky-500">
+                                    <option value="">-- Escolha uma máquina --</option>
+                                </select>
+                            </div>
+                            <button id="save-ciclo-btn" type="submit" class="w-full bg-sky-600 hover:bg-sky-700 text-white font-bold py-2 px-4 rounded-lg transition-colors flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed">
+                               <i data-lucide="save" class="w-5 h-5"></i> Salvar
+                            </button>
+                        </div>
+                        
+                        <fieldset id="ciclo-fields" disabled class="mt-6 border-t pt-6">
+                            <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                                <div><label class="block text-sm font-medium text-slate-600">CAV.</label><input data-col="cav" type="text" class="mt-1 table-input border-slate-300 border bg-white"></div>
+                                <div><label class="block text-sm font-medium text-slate-600">CICLO</label><input data-col="ciclo" type="text" class="mt-1 table-input border-slate-300 border bg-white"></div>
+                                <div><label class="block text-sm font-medium text-slate-600">P.M.</label><input data-col="pm" type="text" class="mt-1 table-input border-slate-300 border bg-white"></div>
+                                <div class="col-span-2 md:col-span-3"><label class="block text-sm font-medium text-slate-600">PEÇA</label><input data-col="peca" type="text" class="mt-1 table-input border-slate-300 border bg-white text-left px-2"></div>
+                                <div><label class="block text-sm font-medium text-slate-600">FIM</label><input data-col="fim" type="text" class="mt-1 table-input border-slate-300 border bg-white"></div>
+                                <div><label class="block text-sm font-medium text-slate-600">MATERIAL</label><input data-col="material" type="text" class="mt-1 table-input border-slate-300 border bg-white"></div>
+                                <div><label class="block text-sm font-medium text-slate-600">OP</label><input data-col="op" type="text" class="mt-1 table-input border-slate-300 border bg-white"></div>
+                            </div>
+                        </fieldset>
+                     </form>
+                </div>
+            </div>
+
+            <div class="mt-8 border-t pt-6">
+                <h3 class="text-lg font-semibold text-slate-700 mb-4">Relatório de Lançamentos de Ciclo</h3>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-slate-200">
+                        <thead class="bg-slate-100">
+                            <tr>
+                                <th class="px-4 py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider">Máquina</th>
+                                <th class="px-4 py-3 text-center text-xs font-medium text-slate-600 uppercase tracking-wider">CAV.</th>
+                                <th class="px-4 py-3 text-center text-xs font-medium text-slate-600 uppercase tracking-wider">Ciclo</th>
+                                <th class="px-4 py-3 text-center text-xs font-medium text-slate-600 uppercase tracking-wider">P.M.</th>
+                                <th class="px-4 py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider">Peça</th>
+                                <th class="px-4 py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider">Material</th>
+                                <th class="px-4 py-3 text-center text-xs font-medium text-slate-600 uppercase tracking-wider">OP</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabela-ciclo-body" class="bg-white divide-y divide-slate-200">
+                            <!-- Rows will be generated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="mt-8 border-t pt-6">
+                <label for="observacoes" class="block text-md font-semibold text-slate-700 no-print">Observações Gerais do Dia:</label>
+                <textarea id="observacoes" rows="3" class="mt-2 block w-full p-3 border border-slate-300 rounded-md shadow-sm focus:ring-sky-500 focus:border-sky-500 no-print" placeholder="Observações relevantes sobre o turno, máquinas ou materiais..."></textarea>
+                 <div class="print:block hidden mt-4">
+                    <h3 class="text-lg font-semibold text-slate-700">Observações:</h3>
+                    <p id="print-observacoes" class="text-sm border p-2 rounded-md bg-slate-50 h-24"></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção 2: Anotação de Material Preparado -->
+        <section id="material-container" class="page-section hidden relative bg-white p-6 rounded-lg shadow-lg border-t-4 border-green-500">
+             <div class="loading-overlay hidden opacity-0 absolute inset-0 bg-white/80 justify-center items-center z-10 rounded-lg">
+                <i data-lucide="loader-2" class="w-8 h-8 text-green-500 animate-spin"></i>
+             </div>
+             <h2 class="text-2xl font-semibold text-green-700 border-b border-slate-200 pb-4 mb-6"><i data-lucide="box"></i>Anotação de Material Preparado</h2>
+             <form id="form-material" class="bg-slate-50 p-6 rounded-md border border-slate-200 mb-8 no-print">
+                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-6">
+                    <div>
+                        <label for="preparador" class="block text-sm font-medium text-slate-700">Preparador</label>
+                        <select id="preparador" required class="mt-1 block w-full p-2 border-slate-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500">
+                            <option value="">Selecione</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="maquina-prep" class="block text-sm font-medium text-slate-700">Máquina</label>
+                        <select id="maquina-prep" required class="mt-1 block w-full p-2 border-slate-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500">
+                            <option value="">Selecione</option>
+                        </select>
+                    </div>
+                    <div><label for="cod-produto" class="block text-sm font-medium text-slate-700">Cód. do Produto</label><input type="text" id="cod-produto" class="mt-1 block w-full p-2 border-slate-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500"></div>
+                    <div><label for="op-prep" class="block text-sm font-medium text-slate-700">OP</label><input type="text" id="op-prep" class="bg-white mt-1 block w-full p-2 border-slate-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500"></div>
+                    <div class="sm:col-span-2"><label for="nome-peca" class="block text-sm font-medium text-slate-700">Nome da Peça</label><input type="text" id="nome-peca" required class="bg-white mt-1 block w-full p-2 border-slate-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500"></div>
+                    <div><label for="qtd-mat" class="block text-sm font-medium text-slate-700">Qtd. Mat.</label><input type="number" id="qtd-mat" class="mt-1 block w-full p-2 border-slate-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500"></div>
+                    <div><label for="sk-resina" class="block text-sm font-medium text-slate-700">SK Resina</label><input type="text" id="sk-resina" class="mt-1 block w-full p-2 border-slate-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500"></div>
+                    <div><label for="lote-resina" class="block text-sm font-medium text-slate-700">Lote Resina</label><input type="text" id="lote-resina" class="mt-1 block w-full p-2 border-slate-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500"></div>
+                    <div><label for="sk-mt-ad" class="block text-sm font-medium text-slate-700">SK MT/AD</label><input type="text" id="sk-mt-ad" class="mt-1 block w-full p-2 border-slate-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500"></div>
+                    <div><label for="lote-master" class="block text-sm font-medium text-slate-700">Lote Master</label><input type="text" id="lote-master" class="mt-1 block w-full p-2 border-slate-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500"></div>
+                    <div><label for="lote-adit" class="block text-sm font-medium text-slate-700">Lote Adit.</label><input type="text" id="lote-adit" class="mt-1 block w-full p-2 border-slate-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500"></div>
+                    <div><label for="percent-usado" class="block text-sm font-medium text-slate-700">% Usado</label><input type="number" step="0.001" id="percent-usado" class="mt-1 block w-full p-2 border-slate-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500"></div>
+                 </div>
+                 <div class="mt-6 text-right">
+                    <button type="submit" class="inline-flex justify-center py-2 px-6 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+                        <i data-lucide="plus-circle" class="w-5 h-5 mr-2"></i> Adicionar Registro
+                    </button>
+                 </div>
+             </form>
+             <div class="overflow-x-auto">
+                <table class="min-w-full divide-y divide-slate-200">
+                    <thead class="bg-slate-100">
+                        <tr>
+                            <th class="px-4 py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider">Preparador</th>
+                            <th class="px-4 py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider">Máquina</th>
+                            <th class="px-4 py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider">Cód. Prod.</th>
+                            <th class="px-4 py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider">OP</th>
+                            <th class="px-4 py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider">Nome da Peça</th>
+                            <th class="px-4 py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider">Qtd. Mat.</th>
+                            <th class="px-4 py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider">SK Resina</th>
+                            <th class="px-4 py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider">Lote Resina</th>
+                            <th class="px-4 py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider">SK MT/AD</th>
+                            <th class="px-4 py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider">Lote Master</th>
+                            <th class="px-4 py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider">Lote Adit.</th>
+                            <th class="px-4 py-3 text-center text-xs font-medium text-slate-600 uppercase tracking-wider">% Usado</th>
+                            <th class="px-4 py-3 text-center text-xs font-medium text-slate-600 uppercase tracking-wider no-print">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabela-material-body" class="bg-white divide-y divide-slate-200"></tbody>
+                </table>
+             </div>
+        </section>
+    </div>
+    
+    <div id="confirm-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex justify-center items-center no-print">
+        <div class="bg-white rounded-lg shadow-xl p-6 w-full max-w-sm m-4 text-center">
+            <div class="flex justify-center mb-4"><div class="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center"><i data-lucide="alert-triangle" class="w-8 h-8 text-yellow-500"></i></div></div>
+            <h3 class="text-lg font-bold">Tem certeza?</h3>
+            <p class="text-sm text-slate-600 my-2" id="confirm-modal-text"></p>
+            <div class="mt-6 flex justify-center gap-3">
+                <button id="confirm-modal-cancel-btn" class="bg-slate-200 hover:bg-slate-300 text-slate-800 font-bold py-2 px-4 rounded-lg transition-colors">Cancelar</button>
+                <button id="confirm-modal-ok-btn" class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg transition-colors">Confirmar Exclusão</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, doc, getDoc, setDoc, addDoc, deleteDoc, onSnapshot, collection, query, where, serverTimestamp, writeBatch, getDocs } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'hokkaido-flow-dev';
+        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : { apiKey: "DEV", authDomain: "DEV", projectId: "DEV" };
+        const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+
+        let db, auth, userId;
+        let selectedDate = new Date().toISOString().split('T')[0];
+        let materialUnsubscribe = () => {};
+        let cicloData = { maquinas: {}, observacoes: '' };
+        
+        const maquinas = [
+            'H-01', 'H-02', 'H-03', 'H-04', 'H-05', 'H-06', 'H-07', 'H-08', 'H-09', 'H-10', 
+            'H-11', 'H-12', 'H-13', 'H-14', 'H-15', 'H-16', 'H-17', 'H-18', 'H-19', 'H-20', 
+            'H-26', 'H-27', 'H-28', 'H-29', 'H-30', 'H-31', 'H-32'
+        ];
+
+        const preparadores = [
+            'Daniel', 'João', 'Luis', 'Manaus', 'Rafael', 'Stanley', 'Wagner'
+        ];
+
+        // Banco de dados de produtos
+        const productDatabase = [
+            { code: 'P21867', op: '21867', name: 'SUPORTE DO COPO 4CAV.' },
+            { code: 'P22000', op: '22000', name: 'ROSCA GS 28 VINHO' },
+            { code: 'P21180', op: '21180', name: 'ACUMULADOR P2000' },
+            { code: 'P21946', op: '21946', name: 'ACUMULADOR M300' },
+            { code: 'P22105', op: '22105', name: 'ATUADOR SPRAY SILGAN' },
+            { code: 'P21555', op: '21555', name: 'ROSCA ALTA P2000 28/410' },
+            { code: 'P20987', op: '20987', name: 'CAPA KAIAK 16 CAV' },
+            { code: 'P21345', op: '21345', name: 'CLIP K2 APTAR' },
+            { code: 'P22301', op: '22301', name: 'ROSCA SENTIDOS - MOLDE 1 (A)' },
+            { code: 'P22302', op: '22302', name: 'ROSCA SENTIDOS - MOLDE 2 (D)' }
+        ];
+        
+        const dateSelector = document.getElementById('date-selector');
+        const cicloForm = document.getElementById('ciclo-form');
+        const machineSelector = document.getElementById('machine-selector');
+        const summaryMachineSelector = document.getElementById('summary-machine-selector');
+        const cicloFields = document.getElementById('ciclo-fields');
+        const obsTextarea = document.getElementById('observacoes');
+        const formMaterial = document.getElementById('form-material');
+        const tabelaMaterialBody = document.getElementById('tabela-material-body');
+        const tabelaCicloBody = document.getElementById('tabela-ciclo-body');
+        const tabButtons = document.querySelectorAll('.tab-button');
+        const pageSections = document.querySelectorAll('.page-section');
+        const printBtn = document.getElementById('print-btn');
+
+        const showLoading = (containerId, isLoading) => {
+            const container = document.getElementById(containerId);
+            if(container) {
+                const overlay = container.querySelector('.loading-overlay');
+                overlay.classList.toggle('hidden', !isLoading);
+                overlay.classList.toggle('opacity-0', !isLoading);
+            }
+        };
+
+        const showToast = (message, type = 'info') => {
+            const colors = {info: 'bg-blue-500', success: 'bg-green-500', warning: 'bg-yellow-500', error: 'bg-red-500'};
+            const icons = {info: 'info', success: 'check-circle-2', warning: 'alert-triangle', error: 'alert-circle'};
+            const toast = document.createElement('div');
+            toast.className = `toast flex items-center gap-3 text-white p-4 rounded-lg shadow-lg`;
+            toast.classList.add(colors[type]);
+            toast.innerHTML = `<i data-lucide="${icons[type]}"></i><p>${message}</p>`;
+            document.getElementById('toast-container').appendChild(toast);
+            lucide.createIcons();
+            setTimeout(() => toast.remove(), 5000);
+        };
+
+        const updateConnectionStatus = (text, color) => {
+            document.getElementById('connection-status-text').textContent = text;
+            const dot = document.getElementById('connection-status-dot');
+            dot.className = `w-3 h-3 rounded-full ${color}`;
+            dot.classList.remove('animate-pulse');
+        };
+        
+        const updateMachineSelector = () => {
+            const maquinasComDados = Object.keys(cicloData.maquinas || {}).filter(maq =>
+                Object.values(cicloData.maquinas[maq]).some(val => val !== '')
+            ).sort((a, b) => parseInt(a.split('-')[1]) - parseInt(b.split('-')[1]));
+
+            const maquinasDisponiveis = maquinas.filter(maq => !maquinasComDados.includes(maq));
+            
+            const currentSelection = machineSelector.value;
+            machineSelector.innerHTML = '<option value="">-- Escolha uma máquina --</option>';
+
+            if (maquinasDisponiveis.length > 0) {
+                const optgroupDisponiveis = document.createElement('optgroup');
+                optgroupDisponiveis.label = 'Máquinas para Novo Apontamento';
+                maquinasDisponiveis.forEach(maq => {
+                    const option = document.createElement('option');
+                    option.value = maq;
+                    option.textContent = maq;
+                    optgroupDisponiveis.appendChild(option);
+                });
+                machineSelector.appendChild(optgroupDisponiveis);
+            }
+
+            if (maquinasComDados.length > 0) {
+                const optgroupComDados = document.createElement('optgroup');
+                optgroupComDados.label = 'Editar Apontamento Existente';
+                maquinasComDados.forEach(maq => {
+                    const option = document.createElement('option');
+                    option.value = maq;
+                    option.textContent = maq;
+                    optgroupComDados.appendChild(option);
+                });
+                machineSelector.appendChild(optgroupComDados);
+            }
+            machineSelector.value = currentSelection;
+        };
+        
+        const renderSummarySelector = () => {
+            const maquinasComDados = Object.keys(cicloData.maquinas || {}).filter(maq =>
+                Object.values(cicloData.maquinas[maq]).some(val => val !== '')
+            ).sort((a, b) => parseInt(a.split('-')[1]) - parseInt(b.split('-')[1]));
+            
+            const currentSelection = summaryMachineSelector.value;
+            summaryMachineSelector.innerHTML = '';
+
+            if (maquinasComDados.length === 0) {
+                summaryMachineSelector.innerHTML = `<option value="">Nenhum apontamento</option>`;
+                summaryMachineSelector.disabled = true;
+                return;
+            }
+
+            summaryMachineSelector.disabled = false;
+            summaryMachineSelector.innerHTML = `<option value="">-- Selecione para visualizar --</option>`;
+            maquinasComDados.forEach(maq => {
+                const option = document.createElement('option');
+                option.value = maq;
+                option.textContent = `${maq} - ${cicloData.maquinas[maq].peca || 'Sem peça'}`;
+                summaryMachineSelector.appendChild(option);
+            });
+            summaryMachineSelector.value = currentSelection;
+        };
+
+        const renderCicloTable = () => {
+            const maquinasComDados = Object.keys(cicloData.maquinas || {}).filter(maq => 
+                Object.values(cicloData.maquinas[maq]).some(val => val !== '')
+            ).sort((a, b) => parseInt(a.split('-')[1]) - parseInt(b.split('-')[1]));
+
+            tabelaCicloBody.innerHTML = '';
+            if (maquinasComDados.length === 0) {
+                tabelaCicloBody.innerHTML = `<tr><td colspan="7" class="text-center p-4 text-slate-500">Nenhum lançamento de ciclo para esta data.</td></tr>`;
+                return;
+            }
+
+            maquinasComDados.forEach(maq => {
+                const data = cicloData.maquinas[maq];
+                const row = document.createElement('tr');
+                row.className = 'hover:bg-slate-50';
+                row.innerHTML = `
+                    <td class="px-4 py-3 text-sm font-medium text-slate-800">${maq}</td>
+                    <td class="px-4 py-3 text-sm text-slate-700 text-center">${data.cav || '-'}</td>
+                    <td class="px-4 py-3 text-sm text-slate-700 text-center">${data.ciclo || '-'}</td>
+                    <td class="px-4 py-3 text-sm text-slate-700 text-center">${data.pm || '-'}</td>
+                    <td class="px-4 py-3 text-sm text-slate-700">${data.peca || '-'}</td>
+                    <td class="px-4 py-3 text-sm text-slate-700">${data.material || '-'}</td>
+                    <td class="px-4 py-3 text-sm text-slate-700 text-center">${data.op || '-'}</td>
+                `;
+                tabelaCicloBody.appendChild(row);
+            });
+        };
+        
+        const clearAndDisableCicloForm = () => {
+            cicloForm.reset();
+            cicloFields.disabled = true;
+            summaryMachineSelector.value = "";
+        };
+        
+        const populateCicloForm = (maq) => {
+            const data = cicloData.maquinas[maq] || {};
+            cicloFields.querySelector('[data-col="cav"]').value = data.cav || '';
+            cicloFields.querySelector('[data-col="ciclo"]').value = data.ciclo || '';
+            cicloFields.querySelector('[data-col="pm"]').value = data.pm || '';
+            cicloFields.querySelector('[data-col="peca"]').value = data.peca || '';
+            cicloFields.querySelector('[data-col="fim"]').value = data.fim || '';
+            cicloFields.querySelector('[data-col="material"]').value = data.material || '';
+            cicloFields.querySelector('[data-col="op"]').value = data.op || '';
+            cicloFields.disabled = false;
+        };
+
+        const loadCicloData = async () => {
+            if (!db) return;
+            showLoading('ciclo-container', true);
+            const docRef = doc(db, `artifacts/${appId}/public/data/ciclo_controles`, selectedDate);
+            try {
+                const docSnap = await getDoc(docRef);
+                cicloData = docSnap.exists() ? docSnap.data() : { maquinas: {}, observacoes: '' };
+                obsTextarea.value = cicloData.observacoes || '';
+                renderSummarySelector();
+                updateMachineSelector();
+                renderCicloTable();
+                clearAndDisableCicloForm();
+            } catch (error) {
+                console.error("Erro ao carregar dados de ciclo:", error);
+                showToast("Erro ao carregar dados de ciclo.", 'error');
+            } finally {
+                showLoading('ciclo-container', false);
+            }
+        };
+        
+        const saveCicloData = async (e) => {
+            e.preventDefault();
+            const selectedMachine = machineSelector.value;
+            if (!selectedMachine) {
+                showToast("Selecione uma máquina para salvar os dados.", 'warning');
+                return;
+            }
+
+            if (!db) return;
+            showLoading('ciclo-container', true);
+
+            const maquinaData = {
+                cav: cicloFields.querySelector('[data-col="cav"]').value,
+                ciclo: cicloFields.querySelector('[data-col="ciclo"]').value,
+                pm: cicloFields.querySelector('[data-col="pm"]').value,
+                peca: cicloFields.querySelector('[data-col="peca"]').value,
+                fim: cicloFields.querySelector('[data-col="fim"]').value,
+                material: cicloFields.querySelector('[data-col="material"]').value,
+                op: cicloFields.querySelector('[data-col="op"]').value
+            };
+            
+            cicloData.maquinas = cicloData.maquinas || {};
+            cicloData.maquinas[selectedMachine] = maquinaData;
+            cicloData.observacoes = obsTextarea.value;
+            
+            try {
+                const docRef = doc(db, `artifacts/${appId}/public/data/ciclo_controles`, selectedDate);
+                await setDoc(docRef, cicloData); 
+                showToast(`Dados da ${selectedMachine} salvos!`, 'success');
+                renderSummarySelector();
+                updateMachineSelector();
+                renderCicloTable();
+                populateCicloForm(selectedMachine); 
+
+            } catch (error) {
+                console.error("Erro ao salvar dados de ciclo:", error);
+                showToast("Erro ao salvar os dados de ciclo.", 'error');
+            } finally {
+                showLoading('ciclo-container', false);
+            }
+        };
+
+        const addMaterial = async (e) => {
+            e.preventDefault();
+            if (!db) return;
+            const btn = e.target.querySelector('button[type="submit"]');
+            btn.disabled = true;
+
+            const materialData = {
+                date: selectedDate,
+                preparador: document.getElementById('preparador').value,
+                maquina: document.getElementById('maquina-prep').value,
+                codProduto: document.getElementById('cod-produto').value,
+                op: document.getElementById('op-prep').value,
+                qtdMat: document.getElementById('qtd-mat').value,
+                nomePeca: document.getElementById('nome-peca').value,
+                skResina: document.getElementById('sk-resina').value,
+                loteResina: document.getElementById('lote-resina').value,
+                skMtAd: document.getElementById('sk-mt-ad').value,
+                loteMaster: document.getElementById('lote-master').value,
+                loteAdit: document.getElementById('lote-adit').value,
+                percentUsado: document.getElementById('percent-usado').value,
+                createdAt: serverTimestamp()
+            };
+
+            try {
+                const collectionRef = collection(db, `artifacts/${appId}/public/data/materiais_preparados`);
+                await addDoc(collectionRef, materialData);
+                showToast("Material adicionado com sucesso!", 'success');
+                formMaterial.reset();
+            } catch (error) {
+                console.error("Erro ao adicionar material:", error);
+                showToast("Erro ao adicionar o material.", 'error');
+            } finally {
+                btn.disabled = false;
+            }
+        };
+        
+        const deleteMaterial = async (id) => {
+            if (!db) return;
+            try {
+                const docRef = doc(db, `artifacts/${appId}/public/data/materiais_preparados`, id);
+                await deleteDoc(docRef);
+                showToast("Registro removido.", 'info');
+            } catch (error) {
+                console.error("Erro ao remover material:", error);
+                showToast("Erro ao remover registro.", 'error');
+            }
+        };
+        
+        const listenToMaterials = () => {
+            if (!db) return;
+            materialUnsubscribe();
+            showLoading('material-container', true);
+
+            const q = query(collection(db, `artifacts/${appId}/public/data/materiais_preparados`), where("date", "==", selectedDate));
+            
+            materialUnsubscribe = onSnapshot(q, (querySnapshot) => {
+                const sortedDocs = querySnapshot.docs.sort((a,b) => (a.data().createdAt?.toDate() || 0) < (b.data().createdAt?.toDate() || 0) ? 1 : -1);
+
+                tabelaMaterialBody.innerHTML = '';
+                if(querySnapshot.empty){
+                    tabelaMaterialBody.innerHTML = `<tr><td colspan="13" class="text-center p-4 text-slate-500">Nenhum material preparado para esta data.</td></tr>`;
+                } else {
+                    sortedDocs.forEach((doc) => {
+                        const data = doc.data();
+                        const row = document.createElement('tr');
+                        row.className = 'hover:bg-slate-50';
+                        row.innerHTML = `
+                            <td class="px-4 py-3 text-sm text-slate-700">${data.preparador || '-'}</td>
+                            <td class="px-4 py-3 text-sm text-slate-700">${data.maquina}</td>
+                            <td class="px-4 py-3 text-sm text-slate-700">${data.codProduto || '-'}</td>
+                            <td class="px-4 py-3 text-sm text-slate-700">${data.op || '-'}</td>
+                            <td class="px-4 py-3 text-sm font-medium text-slate-800">${data.nomePeca}</td>
+                            <td class="px-4 py-3 text-sm text-slate-700 text-center">${data.qtdMat || '-'}</td>
+                            <td class="px-4 py-3 text-sm text-slate-700">${data.skResina || '-'}</td>
+                            <td class="px-4 py-3 text-sm text-slate-700">${data.loteResina || '-'}</td>
+                            <td class="px-4 py-3 text-sm text-slate-700">${data.skMtAd || '-'}</td>
+                            <td class="px-4 py-3 text-sm text-slate-700">${data.loteMaster || '-'}</td>
+                            <td class="px-4 py-3 text-sm text-slate-700">${data.loteAdit || '-'}</td>
+                            <td class="px-4 py-3 text-sm text-slate-700 text-center">${data.percentUsado || '-'}</td>
+                            <td class="px-4 py-3 text-center no-print">
+                                <button data-id="${doc.id}" data-peca="${data.nomePeca}" class="delete-material-btn text-red-500 hover:text-red-700 p-1">
+                                    <i data-lucide="trash-2" class="w-4 h-4"></i>
+                                </button>
+                            </td>
+                        `;
+                        tabelaMaterialBody.appendChild(row);
+                    });
+                }
+                lucide.createIcons();
+                showLoading('material-container', false);
+            }, (error) => {
+                console.error("Erro no listener de materiais:", error);
+                showToast("Erro de conexão com a tabela de materiais.", 'error');
+                showLoading('material-container', false);
+            });
+        };
+        
+        const seedTestData = async () => {
+            if(!db) return;
+             const collectionRef = collection(db, `artifacts/${appId}/public/data/materiais_preparados`);
+             const q = query(collectionRef, where("date", "==", selectedDate));
+             const existingData = await getDocs(q);
+
+             if (existingData.empty) {
+                const testData = [
+                    { date: selectedDate, maquina: "H-29", codProduto: "P21867", op: "21867", qtdMat: "150", nomePeca: "SUPORTE DO COPO 4CAV.", loteResina: "608371", preparador: "Wagner", createdAt: serverTimestamp()},
+                    { date: selectedDate, maquina: "H-30", codProduto: "P22000", op: "22000", qtdMat: "206", nomePeca: "ROSCA GS 28 VINHO", loteResina: "RSGGOF004E", preparador: "Wagner", createdAt: serverTimestamp()},
+                    { date: selectedDate, maquina: "H-10", codProduto: "P21180", op: "21180", qtdMat: "205", nomePeca: "ACUMULADOR P2000", loteResina: "RJIAOC045E", preparador: "Wagner", createdAt: serverTimestamp()},
+                    { date: selectedDate, maquina: "H-03", codProduto: "P21946", op: "21946", qtdMat: "102", nomePeca: "ACUMULADOR M300", loteResina: "SPHAOD028E", preparador: "Wagner", createdAt: serverTimestamp()},
+                ];
+                const batch = writeBatch(db);
+                testData.forEach(item => {
+                    const newDocRef = doc(collectionRef);
+                    batch.set(newDocRef, item);
+                });
+                await batch.commit();
+                showToast("Dados de teste carregados.", "info");
+             }
+        };
+
+        const initialize = async () => {
+            const app = initializeApp(firebaseConfig);
+            db = getFirestore(app);
+            auth = getAuth(app);
+            
+            try {
+                if (initialAuthToken) { await signInWithCustomToken(auth, initialAuthToken); } 
+                else { await signInAnonymously(auth); }
+            } catch(error) {
+                console.error("Erro na autenticação:", error);
+                updateConnectionStatus("Falha na Autenticação", "bg-red-500");
+                showToast("Não foi possível conectar ao servidor.", 'error');
+                return;
+            }
+
+            onAuthStateChanged(auth, (user) => {
+                if (user) {
+                    userId = user.uid;
+                    updateConnectionStatus("Conectado em tempo real", "bg-green-500");
+                    loadAllDataForDate();
+                    seedTestData();
+                } else {
+                    userId = null;
+                    updateConnectionStatus("Desconectado", "bg-red-500");
+                    materialUnsubscribe();
+                }
+            });
+        };
+
+        const loadAllDataForDate = () => {
+            loadCicloData();
+            listenToMaterials();
+        };
+
+        const setupEventListeners = () => {
+            dateSelector.value = selectedDate;
+            dateSelector.addEventListener('change', (e) => {
+                selectedDate = e.target.value;
+                loadAllDataForDate();
+            });
+
+            tabButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    tabButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+
+                    const target = document.querySelector(button.dataset.target);
+                    pageSections.forEach(section => section.classList.add('hidden'));
+                    target.classList.remove('hidden');
+                });
+            });
+
+            printBtn.addEventListener('click', () => {
+                const printDateSpans = document.querySelectorAll('.print-date');
+                const formattedDate = new Date(selectedDate + 'T00:00:00').toLocaleDateString('pt-BR', { timeZone: 'UTC' });
+                printDateSpans.forEach(span => span.textContent = formattedDate);
+                document.getElementById('print-observacoes').textContent = obsTextarea.value;
+
+                document.body.classList.add('printing');
+                
+                // Força as seções a serem visíveis para impressão
+                pageSections.forEach(section => section.classList.remove('hidden'));
+
+                window.print();
+
+                // Limpa após a impressão
+                document.body.classList.remove('printing');
+                const activeTab = document.querySelector('.tab-button.active');
+                pageSections.forEach(section => {
+                    if (section.id !== activeTab.dataset.target.substring(1)) {
+                        section.classList.add('hidden');
+                    }
+                });
+            });
+
+            cicloForm.addEventListener('submit', saveCicloData);
+            
+            machineSelector.addEventListener('change', () => {
+                const selectedMachine = machineSelector.value;
+                if(selectedMachine){
+                    populateCicloForm(selectedMachine);
+                    summaryMachineSelector.value = selectedMachine;
+                } else {
+                    clearAndDisableCicloForm();
+                }
+            });
+            
+            summaryMachineSelector.addEventListener('change', () => {
+                const selectedMachine = summaryMachineSelector.value;
+                if (selectedMachine) {
+                    machineSelector.value = selectedMachine;
+                    populateCicloForm(selectedMachine);
+                } else {
+                    clearAndDisableCicloForm();
+                    machineSelector.value = "";
+                }
+            });
+            
+            const codProdutoInput = document.getElementById('cod-produto');
+            const opPrepInput = document.getElementById('op-prep');
+            const nomePecaInput = document.getElementById('nome-peca');
+
+            codProdutoInput.addEventListener('input', () => {
+                const productCode = codProdutoInput.value.trim().toUpperCase();
+                const product = productDatabase.find(p => p.code.toUpperCase() === productCode);
+
+                if (product) {
+                    nomePecaInput.value = product.name;
+                    opPrepInput.value = product.op;
+                    
+                    nomePecaInput.readOnly = true;
+                    opPrepInput.readOnly = true;
+
+                    nomePecaInput.classList.add('bg-slate-200');
+                    opPrepInput.classList.add('bg-slate-200');
+                } else {
+                    if (productCode === '') {
+                        nomePecaInput.value = '';
+                        opPrepInput.value = '';
+                    }
+                    nomePecaInput.readOnly = false;
+                    opPrepInput.readOnly = false;
+                    
+                    nomePecaInput.classList.remove('bg-slate-200');
+                    opPrepInput.classList.remove('bg-slate-200');
+                }
+            });
+
+            formMaterial.addEventListener('submit', addMaterial);
+            
+            formMaterial.addEventListener('reset', () => {
+                setTimeout(() => {
+                    const nomePecaInput = document.getElementById('nome-peca');
+                    const opPrepInput = document.getElementById('op-prep');
+                    
+                    nomePecaInput.readOnly = false;
+                    opPrepInput.readOnly = false;
+
+                    nomePecaInput.classList.remove('bg-slate-200');
+                    opPrepInput.classList.remove('bg-slate-200');
+                }, 0);
+            });
+
+            document.getElementById('material-container').addEventListener('click', e => {
+                const deleteBtn = e.target.closest('.delete-material-btn');
+                if(deleteBtn) {
+                    const id = deleteBtn.dataset.id;
+                    const peca = deleteBtn.dataset.peca;
+                    const modal = document.getElementById('confirm-modal');
+                    modal.querySelector('#confirm-modal-text').textContent = `Isso removerá permanentemente o registro do material para a peça "${peca}".`;
+                    modal.classList.remove('hidden');
+                    const okBtn = modal.querySelector('#confirm-modal-ok-btn');
+                    const cancelBtn = modal.querySelector('#confirm-modal-cancel-btn');
+                    const handleOkClick = () => { deleteMaterial(id); closeModal(); };
+                    const closeModal = () => { modal.classList.add('hidden'); okBtn.removeEventListener('click', handleOkClick); };
+                    okBtn.addEventListener('click', handleOkClick, { once: true });
+                    cancelBtn.addEventListener('click', closeModal, { once: true });
+                }
+            });
+        };
+
+        const populateMaterialMachineSelector = () => {
+            const select = document.getElementById('maquina-prep');
+            maquinas.forEach(maq => {
+                const option = document.createElement('option');
+                option.value = maq;
+                option.textContent = maq;
+                select.appendChild(option);
+            });
+        };
+
+        const populatePreparadorSelector = () => {
+            const select = document.getElementById('preparador');
+            preparadores.forEach(nome => {
+                const option = document.createElement('option');
+                option.value = nome;
+                option.textContent = nome;
+                select.appendChild(option);
+            });
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+            populateMaterialMachineSelector();
+            populatePreparadorSelector();
+            setupEventListeners();
+            initialize();
+        });
+    </script>
+</body>
+</html>
+
+
+
