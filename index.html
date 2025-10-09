@@ -85,7 +85,7 @@
     <div class="container mx-auto p-4 md:p-6">
         <header class="mb-6 text-center no-print">
             <h1 class="text-3xl md:text-4xl font-bold text-slate-800">Hokkaido Flow</h1>
-            <p class="text-md text-slate-500">Controle de Produção em Tempo Real</p>
+            <p class="text-md text-slate-500">Controle de PMP</p>
         </header>
         
         <div class="flex flex-col md:flex-row justify-between items-center mb-6 p-4 bg-white rounded-lg shadow-sm no-print">
@@ -125,50 +125,38 @@
             </div>
             <h2 class="text-2xl font-semibold text-sky-700 flex items-center gap-2 border-b border-slate-200 pb-4 mb-6"><i data-lucide="settings-2"></i>Controle de Ciclo & Cavitação</h2>
             
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 no-print">
-                <!-- Coluna 1: Visualizador de Apontamento -->
-                <div class="lg:col-span-1">
-                    <h3 class="font-semibold text-slate-700 mb-2">Visualizar Apontamento</h3>
-                    <div class="bg-slate-50 p-3 rounded-md border">
-                         <label for="summary-machine-selector" class="block text-sm font-medium text-slate-700">Máquina</label>
-                         <select id="summary-machine-selector" class="mt-1 block w-full p-2 border-slate-300 rounded-md shadow-sm focus:ring-sky-500 focus:border-sky-500">
-                            <option value="">Nenhum apontamento</option>
-                         </select>
-                    </div>
-                </div>
-                <!-- Coluna 2: Formulário de Edição -->
-                <div class="lg:col-span-2">
-                     <form id="ciclo-form">
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
-                            <div class="md:col-span-2">
-                                <label for="machine-selector" class="block text-sm font-medium text-slate-700">Selecionar Máquina para Apontar/Editar</label>
-                                <select id="machine-selector" class="mt-1 block w-full p-2 border-slate-300 bg-slate-50 rounded-md shadow-sm focus:ring-sky-500 focus:border-sky-500">
-                                    <option value="">-- Escolha uma máquina --</option>
-                                </select>
-                            </div>
-                            <button id="save-ciclo-btn" type="submit" class="w-full bg-sky-600 hover:bg-sky-700 text-white font-bold py-2 px-4 rounded-lg transition-colors flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed">
-                               <i data-lucide="save" class="w-5 h-5"></i> Salvar
-                            </button>
+            <div class="no-print">
+                 <form id="ciclo-form">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-end mb-6">
+                        <div class="md:col-span-2">
+                            <label for="machine-selector" class="block text-sm font-medium text-slate-700">Selecionar Máquina para Apontar/Editar</label>
+                            <select id="machine-selector" class="mt-1 block w-full p-2 border-slate-300 bg-slate-50 rounded-md shadow-sm focus:ring-sky-500 focus:border-sky-500">
+                                <option value="">-- Escolha uma máquina --</option>
+                            </select>
                         </div>
-                        
-                        <fieldset id="ciclo-fields" disabled class="mt-6 border-t pt-6">
-                            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                                <div><label class="block text-sm font-medium text-slate-600">QTD TOTAL OP</label><input data-col="qtd_total_op" type="number" class="mt-1 table-input bg-white"></div>
-                                <div><label class="block text-sm font-medium text-slate-600">QTD REAL</label><input data-col="qtd_real" type="number" class="mt-1 table-input bg-white"></div>
-                                <div class="md:col-span-2"><label class="block text-sm font-medium text-slate-600">SALDO OP (FIM)</label><input data-col="fim" readonly class="mt-1 table-input bg-slate-200 font-bold"></div>
+                        <button id="save-ciclo-btn" type="submit" class="w-full bg-sky-600 hover:bg-sky-700 text-white font-bold py-2 px-4 rounded-lg transition-colors flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed">
+                           <i data-lucide="save" class="w-5 h-5"></i> Salvar Dados da Máquina
+                        </button>
+                    </div>
+                    
+                    <fieldset id="ciclo-fields" disabled class="mt-6 border-t pt-6">
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                            <div><label class="block text-sm font-medium text-slate-600">QTD TOTAL OP</label><input data-col="qtd_total_op" type="number" class="mt-1 table-input bg-white"></div>
+                            <div><label class="block text-sm font-medium text-slate-600">QTD REAL</label><input data-col="qtd_real" type="number" class="mt-1 table-input bg-white"></div>
+                            <div class="md:col-span-2"><label class="block text-sm font-medium text-slate-600">SALDO OP (FIM)</label><input data-col="fim" readonly class="mt-1 table-input bg-slate-200 font-bold"></div>
 
-                                <div class="col-span-2 md:col-span-4"><label class="block text-sm font-medium text-slate-600">PEÇA</label><input data-col="peca" type="text" class="mt-1 table-input bg-white text-left px-2"></div>
-                                
-                                <div><label class="block text-sm font-medium text-slate-600">CAV.</label><input data-col="cav" type="text" class="mt-1 table-input bg-white"></div>
-                                <div><label class="block text-sm font-medium text-slate-600">CICLO</label><input data-col="ciclo" type="text" class="mt-1 table-input bg-white"></div>
-                                <div><label class="block text-sm font-medium text-slate-600">P.M.</label><input data-col="pm" type="text" class="mt-1 table-input bg-white"></div>
-                                <div><label class="block text-sm font-medium text-slate-600">OP</label><input data-col="op" type="text" class="mt-1 table-input bg-white"></div>
-                                
-                                <div class="col-span-2 md:col-span-4"><label class="block text-sm font-medium text-slate-600">MATERIAL</label><input data-col="material" type="text" class="mt-1 table-input bg-white text-left px-2"></div>
-                            </div>
-                        </fieldset>
-                     </form>
-                </div>
+                            <div><label class="block text-sm font-medium text-slate-600">Cód. do Produto</label><input data-col="cod_produto" type="text" class="mt-1 table-input bg-white"></div>
+                            <div class="col-span-2 md:col-span-3"><label class="block text-sm font-medium text-slate-600">PEÇA</label><input data-col="peca" type="text" class="mt-1 table-input bg-white text-left px-2"></div>
+                            
+                            <div><label class="block text-sm font-medium text-slate-600">CAV.</label><input data-col="cav" type="text" class="mt-1 table-input bg-white"></div>
+                            <div><label class="block text-sm font-medium text-slate-600">CICLO</label><input data-col="ciclo" type="text" class="mt-1 table-input bg-white"></div>
+                            <div><label class="block text-sm font-medium text-slate-600">P.M.</label><input data-col="pm" type="text" class="mt-1 table-input bg-white"></div>
+                            <div><label class="block text-sm font-medium text-slate-600">OP</label><input data-col="op" type="text" class="mt-1 table-input bg-white"></div>
+                            
+                            <div class="col-span-2 md:col-span-4"><label class="block text-sm font-medium text-slate-600">MATERIAL</label><input data-col="material" type="text" class="mt-1 table-input bg-white text-left px-2"></div>
+                        </div>
+                    </fieldset>
+                 </form>
             </div>
 
             <div class="mt-8 border-t pt-6">
@@ -187,11 +175,10 @@
                                 <th class="px-4 py-3 text-center text-xs font-medium text-slate-600 uppercase tracking-wider">Ciclo</th>
                                 <th class="px-4 py-3 text-center text-xs font-medium text-slate-600 uppercase tracking-wider">P.M.</th>
                                 <th class="px-4 py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider">Material</th>
+                                <th class="px-4 py-3 text-center text-xs font-medium text-slate-600 uppercase tracking-wider no-print">Ações</th>
                             </tr>
                         </thead>
-                        <tbody id="tabela-ciclo-body" class="bg-white divide-y divide-slate-200">
-                            <!-- Rows will be generated by JavaScript -->
-                        </tbody>
+                        <tbody id="tabela-ciclo-body" class="bg-white divide-y divide-slate-200"></tbody>
                     </table>
                 </div>
             </div>
@@ -213,7 +200,7 @@
              </div>
              <h2 class="text-2xl font-semibold text-green-700 border-b border-slate-200 pb-4 mb-6"><i data-lucide="box"></i>Anotação de Material Preparado</h2>
              <form id="form-material" class="bg-slate-50 p-6 rounded-md border border-slate-200 mb-8 no-print">
-                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-6">
+                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                     <div>
                         <label for="preparador" class="block text-sm font-medium text-slate-700">Preparador</label>
                         <select id="preparador" required class="mt-1 block w-full p-2 border-slate-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500">
@@ -226,24 +213,14 @@
                             <option value="">Selecione</option>
                         </select>
                     </div>
-                    <div>
-                        <label for="client-prep" class="block text-sm font-medium text-slate-700">Cliente</label>
-                        <select id="client-prep" required class="mt-1 block w-full p-2 border-slate-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500">
-                            <option value="">Selecione</option>
-                        </select>
-                    </div>
-                     <div>
-                        <label for="product-prep" class="block text-sm font-medium text-slate-700">Produto</label>
-                        <select id="product-prep" required class="mt-1 block w-full p-2 border-slate-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500" disabled>
-                            <option value="">Selecione um cliente</option>
-                        </select>
-                    </div>
+                    <div><label for="cod-produto-material" class="block text-sm font-medium text-slate-700">Cód. do Produto</label><input type="text" id="cod-produto-material" class="mt-1 block w-full p-2 border-slate-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500"></div>
+                    <div class="sm:col-span-2 lg:col-span-1"><label for="nome-peca" class="block text-sm font-medium text-slate-700">Nome da Peça</label><input type="text" id="nome-peca" required class="bg-white mt-1 block w-full p-2 border-slate-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500"></div>
                     <div><label for="op-prep" class="block text-sm font-medium text-slate-700">OP</label><input type="text" id="op-prep" class="bg-white mt-1 block w-full p-2 border-slate-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500"></div>
-                    <div class="sm:col-span-2"><label for="nome-peca" class="block text-sm font-medium text-slate-700">Nome da Peça</label><input type="text" id="nome-peca" required readonly class="bg-slate-200 mt-1 block w-full p-2 border-slate-300 rounded-md shadow-sm"></div>
                     <div><label for="qtd-mat" class="block text-sm font-medium text-slate-700">Qtd. Mat.</label><input type="number" id="qtd-mat" class="mt-1 block w-full p-2 border-slate-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500"></div>
                     <div><label for="sk-resina" class="block text-sm font-medium text-slate-700">SK Resina</label><input type="text" id="sk-resina" class="mt-1 block w-full p-2 border-slate-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500"></div>
                     <div><label for="lote-resina" class="block text-sm font-medium text-slate-700">Lote Resina</label><input type="text" id="lote-resina" class="mt-1 block w-full p-2 border-slate-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500"></div>
-                    <div><label for="sk-mt-ad" class="block text-sm font-medium text-slate-700">SK MT/AD</label><input type="text" id="sk-mt-ad" class="mt-1 block w-full p-2 border-slate-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500"></div>
+                    <div><label for="sk-master" class="block text-sm font-medium text-slate-700">SK Master</label><input type="text" id="sk-master" class="mt-1 block w-full p-2 border-slate-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500"></div>
+                    <div><label for="sk-aditivo" class="block text-sm font-medium text-slate-700">SK Aditivo</label><input type="text" id="sk-aditivo" class="mt-1 block w-full p-2 border-slate-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500"></div>
                     <div><label for="lote-master" class="block text-sm font-medium text-slate-700">Lote Master</label><input type="text" id="lote-master" class="mt-1 block w-full p-2 border-slate-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500"></div>
                     <div><label for="lote-adit" class="block text-sm font-medium text-slate-700">Lote Adit.</label><input type="text" id="lote-adit" class="mt-1 block w-full p-2 border-slate-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500"></div>
                     <div><label for="percent-usado" class="block text-sm font-medium text-slate-700">% Usado</label><input type="number" step="0.001" id="percent-usado" class="mt-1 block w-full p-2 border-slate-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500"></div>
@@ -260,13 +237,15 @@
                         <tr>
                             <th class="px-4 py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider">Preparador</th>
                             <th class="px-4 py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider">Máquina</th>
+                            <th class="px-4 py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider">Cód. Prod.</th>
                             <th class="px-4 py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider">OP</th>
                             <th class="px-4 py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider">Nome da Peça</th>
                             <th class="px-4 py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider">Qtd. Mat.</th>
                             <th class="px-4 py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider">SK Resina</th>
                             <th class="px-4 py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider">Lote Resina</th>
-                            <th class="px-4 py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider">SK MT/AD</th>
+                            <th class="px-4 py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider">SK Master</th>
                             <th class="px-4 py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider">Lote Master</th>
+                            <th class="px-4 py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider">SK Aditivo</th>
                             <th class="px-4 py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider">Lote Adit.</th>
                             <th class="px-4 py-3 text-center text-xs font-medium text-slate-600 uppercase tracking-wider">% Usado</th>
                             <th class="px-4 py-3 text-center text-xs font-medium text-slate-600 uppercase tracking-wider no-print">Ações</th>
@@ -295,8 +274,6 @@
         import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
         import { getFirestore, doc, getDoc, setDoc, addDoc, deleteDoc, onSnapshot, collection, query, where, serverTimestamp, writeBatch, getDocs } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-        const appId = 'pmphokkaido';
-        
         // --- INÍCIO DA CONFIGURAÇÃO DO FIREBASE ---
         const firebaseConfig = {
           apiKey: "AIzaSyBm1x7UJwJafQkeffshu19SbR05cE5cVMw",
@@ -308,30 +285,16 @@
         };
         // --- FIM DA CONFIGURAÇÃO DO FIREBASE ---
 
+        const appId = firebaseConfig.projectId;
+
         let db, auth, userId;
         let selectedDate = new Date().toISOString().split('T')[0];
         let materialUnsubscribe = () => {};
         let cicloData = { maquinas: {}, observacoes: '' };
         
-        const maquinas = [
-            'H-01', 'H-02', 'H-03', 'H-04', 'H-05', 'H-06', 'H-07', 'H-08', 'H-09', 'H-10', 
-            'H-11', 'H-12', 'H-13', 'H-14', 'H-15', 'H-16', 'H-17', 'H-18', 'H-19', 'H-20', 
-            'H-26', 'H-27', 'H-28', 'H-29', 'H-30', 'H-31', 'H-32'
-        ];
-
-        const preparadores = [
-            'Daniel', 'João', 'Luis', 'Manaus', 'Rafael', 'Stanley', 'Wagner'
-        ];
-
-        // Banco de dados de produtos
-        const productDatabase = [
-            { client: 'APTAR', name: 'ATUADOR CLASSIC' },{ client: 'APTAR', name: 'ATUADOR SENTIDOS / POEMA' },{ client: 'APTAR', name: 'CAPA KAIAK 16 CAVIDADES' },{ client: 'APTAR', name: 'CAPA KAIAK 8 CAVIDADES' },{ client: 'APTAR', name: 'CLIP K2' },{ client: 'APTAR', name: 'CLIP Q3' },{ client: 'APTAR', name: 'ROSCA 24/410 ESTRIADA / LISA - APTAR' },{ client: 'APTAR', name: 'ROSCA SENTIDOS - MOLDE 1 (A)' },{ client: 'APTAR', name: 'ROSCA SENTIDOS - MOLDE 2 (D)' },{ client: 'APTAR', name: 'TAMPA EUROMIST' },{ client: 'CSN', name: 'FACE INTERNA' },{ client: 'GERDAU', name: 'CARRETEL' },{ client: 'GERDAU', name: 'TRAVA DO CARRETEL' },{ client: 'HOKKAIDO', name: 'I - 180 - VERMELHO' },{ client: 'HOKKAIDO', name: 'L - 90 - AMARELO' },{ client: 'HOKKAIDO', name: 'POTE DO SORVETE' },{ client: 'HOKKAIDO', name: 'R - 120 - VERDE' },{ client: 'HOKKAIDO', name: 'T - 180/90 - AZUL' },{ client: 'HOKKAIDO', name: 'TAMPA DO POTE DO SORVETE' },{ client: 'HOKKAIDO', name: 'V- 30 CINZA' },{ client: 'HOKKAIDO', name: 'X - 360 - MARROM' },{ client: 'INDUSMACK', name: 'BICO ENTRADA (ESPIGÃO)' },{ client: 'INDUSMACK', name: 'BOCAL I2' },{ client: 'INDUSMACK', name: 'BOCAL I3' },{ client: 'INDUSMACK', name: 'BOCAL I4' },{ client: 'INDUSMACK', name: 'BOCAL I5' },{ client: 'INDUSMACK', name: 'BOCAL I6' },{ client: 'INDUSMACK', name: 'SUPORTE DA MANGUEIRA' },{ client: 'INDUSMACK', name: 'SUPORTE REDONDO 1"' },{ client: 'INDUSMACK', name: 'SUPORTE REDONDO 3/4"' },{ client: 'JORNADA', name: 'FACE EXTERNA' },{ client: 'JORNADA', name: 'TAMPÃO' },{ client: 'LH COLUS', name: 'BARRA TRIPLA CORREDIÇA (SLIDE THREE BAR )' },{ client: 'LH COLUS', name: 'BASE TRIANGULAR - KG3 - SK4647' },{ client: 'LH COLUS', name: 'CEILING RING NYLON' },{ client: 'LH COLUS', name: 'CORREDIÇA FUNDO VAZADO 3M SEM FURO - KG 1B - SK4764' },{ client: 'LH COLUS', name: 'CORREDIÇA FUNDO VAZADO 6M SEM FURO - KG 4B - SK4763' },{ client: 'LH COLUS', name: 'FIXADOR FUNDO FECHADO 3M SEM FURO - KG 1A - SK4766' },{ client: 'LH COLUS', name: 'FIXADOR FUNDO FECHADO 6M SEM FURO - KG 4A - SK4769' },{ client: 'LH COLUS', name: 'JUNÇÃO SEM FURO - KG2 - SK4732' },{ client: 'LH COLUS', name: 'MANOPLA MACA (HANDLER)' },{ client: 'LH COLUS', name: 'SHIM SUPPORT LITTER (SUPORTE CALÇO MACA)' },{ client: 'ÓRICA', name: 'CLIP' },{ client: 'ÓRICA', name: 'CONECTOR' },{ client: 'PARKER', name: 'ADAPTADOR' },{ client: 'PARKER', name: 'BOCAL P/ FILTRO / PISTÃO' },{ client: 'PARKER', name: 'CONJUNTO TAMPÃO' },{ client: 'PARKER', name: 'COROA P/ FILTRO' },{ client: 'PARKER', name: 'CORPO DO DRENO' },{ client: 'PARKER', name: 'CÔNICO' },{ client: 'PARKER', name: 'PLUG 1/2' },{ client: 'PARKER', name: 'PLUG 1/4' },{ client: 'PARKER', name: 'PLUG DO DRENO' },{ client: 'PARKER', name: 'PUXADOR COM BOMBA' },{ client: 'PARKER', name: 'SUPORTE DO COPO - 6 CAVS - NOVO' },{ client: 'PARKER', name: 'SUPORTE ESCAL 600' },{ client: 'PARKER', name: 'SUPORTE R260' },{ client: 'PARKER', name: 'SUPORTE USINADO INJETADO' },{ client: 'PARKER', name: 'TAMPA 4 CAVIDADES' },{ client: 'PARKER', name: 'TAMPA 5831' },{ client: 'PARKER', name: 'TAMPA 5923' },{ client: 'PARKER', name: 'TAMPA BEGE INFERIOR' },{ client: 'PARKER', name: 'TAMPA BEGE SUPERIOR' },{ client: 'PARKER', name: 'TAMPA PLÁSTICA C/ FURO' },{ client: 'PARKER', name: 'TAMPA PLÁSTICA S/ FURO' },{ client: 'PARKER', name: 'TAMPÃO PLÁSTICO' },{ client: 'PARKER', name: 'TURBINA 1' },{ client: 'PARKER', name: 'TURBina 2' },{ client: 'SILGAN', name: 'ACUMULADOR M300' },{ client: 'SILGAN', name: 'ACUMULADOR P2000' },{ client: 'SILGAN', name: 'ANEL TRAVA BRILHANTE / TEXTURIZADA' },{ client: 'SILGAN', name: 'ATUADOR DISPENSADOR' },{ client: 'SILGAN', name: 'ATUADOR P2000' },{ client: 'SILGAN', name: 'ATUADOR SPRAY' },{ client: 'SILGAN', name: 'BUCHA P2000' },{ client: 'SILGAN', name: 'CLIKIT 17' },{ client: 'SILGAN', name: 'RETENTOR DA MOLA 24 CAV' },{ client: 'SILGAN', name: 'RETENTOR DA MOLA 64 CAV' },{ client: 'SILGAN', name: 'ROSCA ALTA P2000 24/410 LISA' },{ client: 'SILGAN', name: 'ROSCA ALTA P2000 28/410 FOSCA / ESTRIADA' },{ client: 'SILGAN', name: 'ROSCA BAIXA P2000' },{ client: 'SILGAN', name: 'ROSCA M300' },{ client: 'SILGAN', name: 'ROSCA MKIV 18/415' },{ client: 'SILGAN', name: 'ROSCA MKIV 20/410' },{ client: 'SILGAN', name: 'ROSCA MKIV 22/415' },{ client: 'SILGAN', name: 'ROSCA MKIV 24/410' },{ client: 'SILGAN', name: 'SOBRETAMPA' },{ client: 'SUNVISOR', name: 'COMEDOR CATBOWL' },{ client: 'SUNVISOR', name: 'PRATO DESCARTÁVEL' }
-        ];
-        
         const dateSelector = document.getElementById('date-selector');
         const cicloForm = document.getElementById('ciclo-form');
         const machineSelector = document.getElementById('machine-selector');
-        const summaryMachineSelector = document.getElementById('summary-machine-selector');
         const cicloFields = document.getElementById('ciclo-fields');
         const obsTextarea = document.getElementById('observacoes');
         const formMaterial = document.getElementById('form-material');
@@ -370,6 +333,11 @@
         };
         
         const updateMachineSelector = () => {
+             const maquinas = [
+                'H-01', 'H-02', 'H-03', 'H-04', 'H-05', 'H-06', 'H-07', 'H-08', 'H-09', 'H-10', 
+                'H-11', 'H-12', 'H-13', 'H-14', 'H-15', 'H-16', 'H-17', 'H-18', 'H-19', 'H-20', 
+                'H-26', 'H-27', 'H-28', 'H-29', 'H-30', 'H-31', 'H-32'
+            ];
             const maquinasComDados = Object.keys(cicloData.maquinas || {}).filter(maq =>
                 Object.values(cicloData.maquinas[maq]).some(val => val !== '')
             ).sort((a, b) => parseInt(a.split('-')[1]) - parseInt(b.split('-')[1]));
@@ -405,39 +373,18 @@
             machineSelector.value = currentSelection;
         };
         
-        const renderSummarySelector = () => {
-            const maquinasComDados = Object.keys(cicloData.maquinas || {}).filter(maq =>
-                Object.values(cicloData.maquinas[maq]).some(val => val !== '')
-            ).sort((a, b) => parseInt(a.split('-')[1]) - parseInt(b.split('-')[1]));
-            
-            const currentSelection = summaryMachineSelector.value;
-            summaryMachineSelector.innerHTML = '';
-
-            if (maquinasComDados.length === 0) {
-                summaryMachineSelector.innerHTML = `<option value="">Nenhum apontamento</option>`;
-                summaryMachineSelector.disabled = true;
-                return;
-            }
-
-            summaryMachineSelector.disabled = false;
-            summaryMachineSelector.innerHTML = `<option value="">-- Selecione para visualizar --</option>`;
-            maquinasComDados.forEach(maq => {
-                const option = document.createElement('option');
-                option.value = maq;
-                option.textContent = `${maq} - ${cicloData.maquinas[maq].peca || 'Sem peça'}`;
-                summaryMachineSelector.appendChild(option);
-            });
-            summaryMachineSelector.value = currentSelection;
-        };
-
         const renderCicloTable = () => {
             const maquinasComDados = Object.keys(cicloData.maquinas || {}).filter(maq => 
                 Object.values(cicloData.maquinas[maq]).some(val => val !== '')
-            ).sort((a, b) => parseInt(a.split('-')[1]) - parseInt(b.split('-')[1]));
+            ).sort((a, b) => {
+                const numA = parseInt(a.split('-')[1] || 0);
+                const numB = parseInt(b.split('-')[1] || 0);
+                return numA - numB;
+            });
 
             tabelaCicloBody.innerHTML = '';
             if (maquinasComDados.length === 0) {
-                tabelaCicloBody.innerHTML = `<tr><td colspan="7" class="text-center p-4 text-slate-500">Nenhum lançamento de ciclo para esta data.</td></tr>`;
+                tabelaCicloBody.innerHTML = `<tr><td colspan="11" class="text-center p-4 text-slate-500">Nenhum lançamento de ciclo para esta data.</td></tr>`;
                 return;
             }
 
@@ -447,30 +394,41 @@
                 row.className = 'hover:bg-slate-50';
                 row.innerHTML = `
                     <td class="px-4 py-3 text-sm font-medium text-slate-800">${maq}</td>
+                    <td class="px-4 py-3 text-sm text-slate-700">${data.peca || '-'}</td>
+                    <td class="px-4 py-3 text-sm text-slate-700 text-center">${data.op || '-'}</td>
+                    <td class="px-4 py-3 text-sm text-slate-700 text-center">${data.qtd_total_op || '-'}</td>
+                    <td class="px-4 py-3 text-sm text-slate-700 text-center">${data.qtd_real || '-'}</td>
+                    <td class="px-4 py-3 text-sm text-slate-700 text-center font-bold">${data.fim || '-'}</td>
                     <td class="px-4 py-3 text-sm text-slate-700 text-center">${data.cav || '-'}</td>
                     <td class="px-4 py-3 text-sm text-slate-700 text-center">${data.ciclo || '-'}</td>
                     <td class="px-4 py-3 text-sm text-slate-700 text-center">${data.pm || '-'}</td>
-                    <td class="px-4 py-3 text-sm text-slate-700">${data.peca || '-'}</td>
                     <td class="px-4 py-3 text-sm text-slate-700">${data.material || '-'}</td>
-                    <td class="px-4 py-3 text-sm text-slate-700 text-center">${data.op || '-'}</td>
+                    <td class="px-4 py-3 text-center no-print">
+                        <button data-maq="${maq}" class="delete-ciclo-btn text-red-500 hover:text-red-700 p-1">
+                            <i data-lucide="x-circle" class="w-4 h-4"></i>
+                        </button>
+                    </td>
                 `;
                 tabelaCicloBody.appendChild(row);
             });
+            lucide.createIcons();
         };
         
         const clearAndDisableCicloForm = () => {
             cicloForm.reset();
             cicloFields.disabled = true;
-            summaryMachineSelector.value = "";
         };
         
         const populateCicloForm = (maq) => {
             const data = cicloData.maquinas[maq] || {};
+            cicloFields.querySelector('[data-col="qtd_total_op"]').value = data.qtd_total_op || '';
+            cicloFields.querySelector('[data-col="qtd_real"]').value = data.qtd_real || '';
+            cicloFields.querySelector('[data-col="fim"]').value = data.fim || '';
+            cicloFields.querySelector('[data-col="cod_produto"]').value = data.cod_produto || '';
             cicloFields.querySelector('[data-col="cav"]').value = data.cav || '';
             cicloFields.querySelector('[data-col="ciclo"]').value = data.ciclo || '';
             cicloFields.querySelector('[data-col="pm"]').value = data.pm || '';
             cicloFields.querySelector('[data-col="peca"]').value = data.peca || '';
-            cicloFields.querySelector('[data-col="fim"]').value = data.fim || '';
             cicloFields.querySelector('[data-col="material"]').value = data.material || '';
             cicloFields.querySelector('[data-col="op"]').value = data.op || '';
             cicloFields.disabled = false;
@@ -481,16 +439,45 @@
             showLoading('ciclo-container', true);
             const docRef = doc(db, `artifacts/${appId}/public/data/ciclo_controles`, selectedDate);
             try {
-                const docSnap = await getDoc(docRef);
+                // Adiciona um timeout à requisição
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 segundos
+                
+                const docSnap = await getDoc(docRef, { signal: controller.signal });
+                clearTimeout(timeoutId);
+
                 cicloData = docSnap.exists() ? docSnap.data() : { maquinas: {}, observacoes: '' };
                 obsTextarea.value = cicloData.observacoes || '';
-                renderSummarySelector();
                 updateMachineSelector();
                 renderCicloTable();
                 clearAndDisableCicloForm();
             } catch (error) {
                 console.error("Erro ao carregar dados de ciclo:", error);
-                showToast("Erro ao carregar dados de ciclo.", 'error');
+                if (error.name === 'AbortError') {
+                    showToast("Erro de conexão: A base de dados não respondeu. Verifique se o Firestore foi criado no seu projeto Firebase e se as regras de segurança estão corretas.", 'error');
+                } else {
+                    showToast("Erro ao carregar dados de ciclo.", 'error');
+                }
+            } finally {
+                showLoading('ciclo-container', false);
+            }
+        };
+
+        const deleteCicloEntry = async (maq) => {
+            if (!db || !cicloData.maquinas || !cicloData.maquinas[maq]) return;
+            
+            delete cicloData.maquinas[maq];
+            showLoading('ciclo-container', true);
+            try {
+                const docRef = doc(db, `artifacts/${appId}/public/data/ciclo_controles`, selectedDate);
+                await setDoc(docRef, cicloData); 
+                showToast(`Lançamento da ${maq} removido!`, 'info');
+                updateMachineSelector();
+                renderCicloTable();
+                clearAndDisableCicloForm();
+            } catch (error) {
+                 console.error("Erro ao remover lançamento de ciclo:", error);
+                showToast("Erro ao remover o lançamento.", 'error');
             } finally {
                 showLoading('ciclo-container', false);
             }
@@ -508,11 +495,14 @@
             showLoading('ciclo-container', true);
 
             const maquinaData = {
+                qtd_total_op: cicloFields.querySelector('[data-col="qtd_total_op"]').value,
+                qtd_real: cicloFields.querySelector('[data-col="qtd_real"]').value,
+                fim: cicloFields.querySelector('[data-col="fim"]').value,
+                cod_produto: cicloFields.querySelector('[data-col="cod_produto"]').value,
                 cav: cicloFields.querySelector('[data-col="cav"]').value,
                 ciclo: cicloFields.querySelector('[data-col="ciclo"]').value,
                 pm: cicloFields.querySelector('[data-col="pm"]').value,
                 peca: cicloFields.querySelector('[data-col="peca"]').value,
-                fim: cicloFields.querySelector('[data-col="fim"]').value,
                 material: cicloFields.querySelector('[data-col="material"]').value,
                 op: cicloFields.querySelector('[data-col="op"]').value
             };
@@ -525,7 +515,6 @@
                 const docRef = doc(db, `artifacts/${appId}/public/data/ciclo_controles`, selectedDate);
                 await setDoc(docRef, cicloData); 
                 showToast(`Dados da ${selectedMachine} salvos!`, 'success');
-                renderSummarySelector();
                 updateMachineSelector();
                 renderCicloTable();
                 populateCicloForm(selectedMachine); 
@@ -550,11 +539,13 @@
                 maquina: document.getElementById('maquina-prep').value,
                 op: document.getElementById('op-prep').value,
                 nomePeca: document.getElementById('nome-peca').value,
+                codProduto: document.getElementById('cod-produto-material').value,
                 qtdMat: document.getElementById('qtd-mat').value,
                 skResina: document.getElementById('sk-resina').value,
                 loteResina: document.getElementById('lote-resina').value,
-                skMtAd: document.getElementById('sk-mt-ad').value,
+                skMaster: document.getElementById('sk-master').value,
                 loteMaster: document.getElementById('lote-master').value,
+                skAditivo: document.getElementById('sk-aditivo').value,
                 loteAdit: document.getElementById('lote-adit').value,
                 percentUsado: document.getElementById('percent-usado').value,
                 createdAt: serverTimestamp()
@@ -597,7 +588,7 @@
 
                 tabelaMaterialBody.innerHTML = '';
                 if(querySnapshot.empty){
-                    tabelaMaterialBody.innerHTML = `<tr><td colspan="12" class="text-center p-4 text-slate-500">Nenhum material preparado para esta data.</td></tr>`;
+                    tabelaMaterialBody.innerHTML = `<tr><td colspan="14" class="text-center p-4 text-slate-500">Nenhum material preparado para esta data.</td></tr>`;
                 } else {
                     sortedDocs.forEach((doc) => {
                         const data = doc.data();
@@ -606,13 +597,15 @@
                         row.innerHTML = `
                             <td class="px-4 py-3 text-sm text-slate-700">${data.preparador || '-'}</td>
                             <td class="px-4 py-3 text-sm text-slate-700">${data.maquina}</td>
+                            <td class="px-4 py-3 text-sm text-slate-700">${data.codProduto || '-'}</td>
                             <td class="px-4 py-3 text-sm text-slate-700">${data.op || '-'}</td>
                             <td class="px-4 py-3 text-sm font-medium text-slate-800">${data.nomePeca}</td>
                             <td class="px-4 py-3 text-sm text-slate-700 text-center">${data.qtdMat || '-'}</td>
                             <td class="px-4 py-3 text-sm text-slate-700">${data.skResina || '-'}</td>
                             <td class="px-4 py-3 text-sm text-slate-700">${data.loteResina || '-'}</td>
-                            <td class="px-4 py-3 text-sm text-slate-700">${data.skMtAd || '-'}</td>
+                            <td class="px-4 py-3 text-sm text-slate-700">${data.skMaster || '-'}</td>
                             <td class="px-4 py-3 text-sm text-slate-700">${data.loteMaster || '-'}</td>
+                            <td class="px-4 py-3 text-sm text-slate-700">${data.skAditivo || '-'}</td>
                             <td class="px-4 py-3 text-sm text-slate-700">${data.loteAdit || '-'}</td>
                             <td class="px-4 py-3 text-sm text-slate-700 text-center">${data.percentUsado || '-'}</td>
                             <td class="px-4 py-3 text-center no-print">
@@ -631,29 +624,6 @@
                 showToast("Erro de conexão com a tabela de materiais.", 'error');
                 showLoading('material-container', false);
             });
-        };
-        
-        const seedTestData = async () => {
-            if(!db) return;
-             const collectionRef = collection(db, `artifacts/${appId}/public/data/materiais_preparados`);
-             const q = query(collectionRef, where("date", "==", selectedDate));
-             const existingData = await getDocs(q);
-
-             if (existingData.empty) {
-                const testData = [
-                    { date: selectedDate, maquina: "H-29", op: "21867", nomePeca: "SUPORTE DO COPO 4CAV.", loteResina: "608371", preparador: "Wagner", createdAt: serverTimestamp()},
-                    { date: selectedDate, maquina: "H-30", op: "22000", nomePeca: "ROSCA GS 28 VINHO", loteResina: "RSGGOF004E", preparador: "Wagner", createdAt: serverTimestamp()},
-                    { date: selectedDate, maquina: "H-10", op: "21180", nomePeca: "ACUMULADOR P2000", loteResina: "RJIAOC045E", preparador: "Wagner", createdAt: serverTimestamp()},
-                    { date: selectedDate, maquina: "H-03", op: "21946", nomePeca: "ACUMULADOR M300", loteResina: "SPHAOD028E", preparador: "Wagner", createdAt: serverTimestamp()},
-                ];
-                const batch = writeBatch(db);
-                testData.forEach(item => {
-                    const newDocRef = doc(collectionRef);
-                    batch.set(newDocRef, item);
-                });
-                await batch.commit();
-                showToast("Dados de teste carregados.", "info");
-             }
         };
 
         const initialize = async () => {
@@ -733,59 +703,25 @@
                 const selectedMachine = machineSelector.value;
                 if(selectedMachine){
                     populateCicloForm(selectedMachine);
-                    summaryMachineSelector.value = selectedMachine;
                 } else {
                     clearAndDisableCicloForm();
                 }
             });
             
-            summaryMachineSelector.addEventListener('change', () => {
-                const selectedMachine = summaryMachineSelector.value;
-                if (selectedMachine) {
-                    machineSelector.value = selectedMachine;
-                    populateCicloForm(selectedMachine);
-                } else {
-                    clearAndDisableCicloForm();
-                    machineSelector.value = "";
-                }
-            });
+            const qtdTotalOpInput = cicloFields.querySelector('[data-col="qtd_total_op"]');
+            const qtdRealInput = cicloFields.querySelector('[data-col="qtd_real"]');
+            const fimInput = cicloFields.querySelector('[data-col="fim"]');
+
+            const calculateSaldo = () => {
+                const total = parseInt(qtdTotalOpInput.value, 10) || 0;
+                const real = parseInt(qtdRealInput.value, 10) || 0;
+                fimInput.value = total - real;
+            };
+
+            qtdTotalOpInput.addEventListener('input', calculateSaldo);
+            qtdRealInput.addEventListener('input', calculateSaldo);
             
-            const clientPrepSelect = document.getElementById('client-prep');
-            const productPrepSelect = document.getElementById('product-prep');
-            const opPrepInput = document.getElementById('op-prep');
-            const nomePecaInput = document.getElementById('nome-peca');
-
-            clientPrepSelect.addEventListener('change', () => {
-                const selectedClient = clientPrepSelect.value;
-                productPrepSelect.innerHTML = '<option value="">Selecione um produto</option>';
-                nomePecaInput.value = '';
-
-                if (selectedClient) {
-                    const products = productDatabase.filter(p => p.client === selectedClient);
-                    products.forEach(p => {
-                        const option = document.createElement('option');
-                        option.value = p.name;
-                        option.textContent = p.name;
-                        productPrepSelect.appendChild(option);
-                    });
-                    productPrepSelect.disabled = false;
-                } else {
-                    productPrepSelect.disabled = true;
-                }
-            });
-
-            productPrepSelect.addEventListener('change', () => {
-                nomePecaInput.value = productPrepSelect.value;
-            });
-
             formMaterial.addEventListener('submit', addMaterial);
-            
-            formMaterial.addEventListener('reset', () => {
-                setTimeout(() => {
-                    productPrepSelect.innerHTML = '<option value="">Selecione um cliente</option>';
-                    productPrepSelect.disabled = true;
-                }, 0);
-            });
 
             document.getElementById('material-container').addEventListener('click', e => {
                 const deleteBtn = e.target.closest('.delete-material-btn');
@@ -803,44 +739,52 @@
                     cancelBtn.addEventListener('click', closeModal, { once: true });
                 }
             });
+
+            tabelaCicloBody.addEventListener('click', (e) => {
+                const deleteBtn = e.target.closest('.delete-ciclo-btn');
+                if (deleteBtn) {
+                    const maq = deleteBtn.dataset.maq;
+                    const modal = document.getElementById('confirm-modal');
+                    modal.querySelector('#confirm-modal-text').textContent = `Isso removerá permanentemente o lançamento de ciclo para a máquina "${maq}".`;
+                    modal.classList.remove('hidden');
+                    const okBtn = modal.querySelector('#confirm-modal-ok-btn');
+                    const cancelBtn = modal.querySelector('#confirm-modal-cancel-btn');
+                    const handleOkClick = () => { deleteCicloEntry(maq); closeModal(); };
+                    const closeModal = () => { modal.classList.add('hidden'); okBtn.removeEventListener('click', handleOkClick); };
+                    okBtn.addEventListener('click', handleOkClick, { once: true });
+                    cancelBtn.addEventListener('click', closeModal, { once: true });
+                }
+            });
         };
 
-        const populateMaterialMachineSelector = () => {
-            const select = document.getElementById('maquina-prep');
+        const populateDropdowns = () => {
+            const maquinas = [
+                'H-01', 'H-02', 'H-03', 'H-04', 'H-05', 'H-06', 'H-07', 'H-08', 'H-09', 'H-10', 
+                'H-11', 'H-12', 'H-13', 'H-14', 'H-15', 'H-16', 'H-17', 'H-18', 'H-19', 'H-20', 
+                'H-26', 'H-27', 'H-28', 'H-29', 'H-30', 'H-31', 'H-32'
+            ];
+            const preparadores = ['Daniel', 'João', 'Luis', 'Manaus', 'Rafael', 'Stanley', 'Wagner', 'Yohan'].sort();
+
+            const maquinaPrepSelect = document.getElementById('maquina-prep');
             maquinas.forEach(maq => {
                 const option = document.createElement('option');
                 option.value = maq;
                 option.textContent = maq;
-                select.appendChild(option);
+                maquinaPrepSelect.appendChild(option);
             });
-        };
 
-        const populatePreparadorSelector = () => {
-            const select = document.getElementById('preparador');
+            const preparadorSelect = document.getElementById('preparador');
             preparadores.forEach(nome => {
                 const option = document.createElement('option');
                 option.value = nome;
                 option.textContent = nome;
-                select.appendChild(option);
-            });
-        };
-        
-        const populateMaterialClients = () => {
-            const select = document.getElementById('client-prep');
-            const clients = [...new Set(productDatabase.map(p => p.client))].sort();
-             clients.forEach(client => {
-                const option = document.createElement('option');
-                option.value = client;
-                option.textContent = client;
-                select.appendChild(option);
+                preparadorSelect.appendChild(option);
             });
         };
 
         document.addEventListener('DOMContentLoaded', () => {
             lucide.createIcons();
-            populateMaterialMachineSelector();
-            populatePreparadorSelector();
-            populateMaterialClients();
+            populateDropdowns();
             setupEventListeners();
             initialize();
         });
