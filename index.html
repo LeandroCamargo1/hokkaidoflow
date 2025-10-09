@@ -93,8 +93,8 @@
                  <label for="date-selector" class="font-semibold text-slate-600">Data de Produção:</label>
                  <input type="date" id="date-selector" class="border-slate-300 rounded-md p-2 bg-slate-50 focus:ring-2 focus:ring-cyan-500">
                  <button id="print-btn" class="bg-slate-600 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded-lg transition-colors flex items-center gap-2">
-                    <i data-lucide="printer"></i> Imprimir / PDF
-                </button>
+                     <i data-lucide="printer"></i> Imprimir / PDF
+                 </button>
              </div>
              <div id="save-status" class="text-sm text-slate-500 font-medium h-6 flex items-center gap-2 mt-4 md:mt-0">
                  <div id="connection-status-dot" class="w-3 h-3 rounded-full bg-yellow-400 animate-pulse"></div>
@@ -127,35 +127,35 @@
             
             <div class="no-print">
                  <form id="ciclo-form">
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-end mb-6">
-                        <div class="md:col-span-2">
-                            <label for="machine-selector" class="block text-sm font-medium text-slate-700">Selecionar Máquina para Apontar/Editar</label>
-                            <select id="machine-selector" class="mt-1 block w-full p-2 border-slate-300 bg-slate-50 rounded-md shadow-sm focus:ring-sky-500 focus:border-sky-500">
-                                <option value="">-- Escolha uma máquina --</option>
-                            </select>
-                        </div>
-                        <button id="save-ciclo-btn" type="submit" class="w-full bg-sky-600 hover:bg-sky-700 text-white font-bold py-2 px-4 rounded-lg transition-colors flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed">
-                           <i data-lucide="save" class="w-5 h-5"></i> Salvar Dados da Máquina
-                        </button>
-                    </div>
-                    
-                    <fieldset id="ciclo-fields" disabled class="mt-6 border-t pt-6">
-                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                            <div><label class="block text-sm font-medium text-slate-600">QTD TOTAL OP</label><input data-col="qtd_total_op" type="number" class="mt-1 table-input bg-white"></div>
-                            <div><label class="block text-sm font-medium text-slate-600">QTD REAL</label><input data-col="qtd_real" type="number" class="mt-1 table-input bg-white"></div>
-                            <div class="md:col-span-2"><label class="block text-sm font-medium text-slate-600">SALDO OP (FIM)</label><input data-col="fim" readonly class="mt-1 table-input bg-slate-200 font-bold"></div>
+                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-end mb-6">
+                         <div class="md:col-span-2">
+                             <label for="machine-selector" class="block text-sm font-medium text-slate-700">Selecionar Máquina para Apontar/Editar</label>
+                             <select id="machine-selector" class="mt-1 block w-full p-2 border-slate-300 bg-slate-50 rounded-md shadow-sm focus:ring-sky-500 focus:border-sky-500">
+                                 <option value="">-- Escolha uma máquina --</option>
+                             </select>
+                         </div>
+                         <button id="save-ciclo-btn" type="submit" class="w-full bg-sky-600 hover:bg-sky-700 text-white font-bold py-2 px-4 rounded-lg transition-colors flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed">
+                            <i data-lucide="save" class="w-5 h-5"></i> Salvar Dados da Máquina
+                         </button>
+                     </div>
+                     
+                     <fieldset id="ciclo-fields" disabled class="mt-6 border-t pt-6">
+                         <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                             <div><label class="block text-sm font-medium text-slate-600">QTD TOTAL OP</label><input data-col="qtd_total_op" type="number" class="mt-1 table-input bg-white"></div>
+                             <div><label class="block text-sm font-medium text-slate-600">QTD REAL</label><input data-col="qtd_real" type="number" class="mt-1 table-input bg-white"></div>
+                             <div class="md:col-span-2"><label class="block text-sm font-medium text-slate-600">SALDO OP (FIM)</label><input data-col="fim" readonly class="mt-1 table-input bg-slate-200 font-bold"></div>
 
-                            <div><label class="block text-sm font-medium text-slate-600">Cód. do Produto</label><input data-col="cod_produto" type="text" class="mt-1 table-input bg-white"></div>
-                            <div class="col-span-2 md:col-span-3"><label class="block text-sm font-medium text-slate-600">PEÇA</label><input data-col="peca" type="text" class="mt-1 table-input bg-white text-left px-2"></div>
-                            
-                            <div><label class="block text-sm font-medium text-slate-600">CAV.</label><input data-col="cav" type="text" class="mt-1 table-input bg-white"></div>
-                            <div><label class="block text-sm font-medium text-slate-600">CICLO</label><input data-col="ciclo" type="text" class="mt-1 table-input bg-white"></div>
-                            <div><label class="block text-sm font-medium text-slate-600">P.M.</label><input data-col="pm" type="text" class="mt-1 table-input bg-white"></div>
-                            <div><label class="block text-sm font-medium text-slate-600">OP</label><input data-col="op" type="text" class="mt-1 table-input bg-white"></div>
-                            
-                            <div class="col-span-2 md:col-span-4"><label class="block text-sm font-medium text-slate-600">MATERIAL</label><input data-col="material" type="text" class="mt-1 table-input bg-white text-left px-2"></div>
-                        </div>
-                    </fieldset>
+                             <div><label class="block text-sm font-medium text-slate-600">Cód. do Produto</label><input data-col="cod_produto" type="text" class="mt-1 table-input bg-white"></div>
+                             <div class="col-span-2 md:col-span-3"><label class="block text-sm font-medium text-slate-600">PEÇA</label><input data-col="peca" type="text" class="mt-1 table-input bg-white text-left px-2"></div>
+                             
+                             <div><label class="block text-sm font-medium text-slate-600">CAV.</label><input data-col="cav" type="text" class="mt-1 table-input bg-white"></div>
+                             <div><label class="block text-sm font-medium text-slate-600">CICLO</label><input data-col="ciclo" type="text" class="mt-1 table-input bg-white"></div>
+                             <div><label class="block text-sm font-medium text-slate-600">P.M.</label><input data-col="pm" type="text" class="mt-1 table-input bg-white"></div>
+                             <div><label class="block text-sm font-medium text-slate-600">OP</label><input data-col="op" type="text" class="mt-1 table-input bg-white"></div>
+                             
+                             <div class="col-span-2 md:col-span-4"><label class="block text-sm font-medium text-slate-600">MATERIAL</label><input data-col="material" type="text" class="mt-1 table-input bg-white text-left px-2"></div>
+                         </div>
+                     </fieldset>
                  </form>
             </div>
 
@@ -187,72 +187,72 @@
                 <label for="observacoes" class="block text-md font-semibold text-slate-700 no-print">Observações Gerais do Dia:</label>
                 <textarea id="observacoes" rows="3" class="mt-2 block w-full p-3 border border-slate-300 rounded-md shadow-sm focus:ring-sky-500 focus:border-sky-500 no-print" placeholder="Observações relevantes sobre o turno, máquinas ou materiais..."></textarea>
                  <div class="print:block hidden mt-4">
-                    <h3 class="text-lg font-semibold text-slate-700">Observações:</h3>
-                    <p id="print-observacoes" class="text-sm border p-2 rounded-md bg-slate-50 h-24"></p>
-                </div>
+                     <h3 class="text-lg font-semibold text-slate-700">Observações:</h3>
+                     <p id="print-observacoes" class="text-sm border p-2 rounded-md bg-slate-50 h-24"></p>
+                 </div>
             </div>
         </section>
 
         <!-- Seção 2: Anotação de Material Preparado -->
         <section id="material-container" class="page-section hidden relative bg-white p-6 rounded-lg shadow-lg border-t-4 border-green-500">
              <div class="loading-overlay hidden opacity-0 absolute inset-0 bg-white/80 justify-center items-center z-10 rounded-lg">
-                <i data-lucide="loader-2" class="w-8 h-8 text-green-500 animate-spin"></i>
+                 <i data-lucide="loader-2" class="w-8 h-8 text-green-500 animate-spin"></i>
              </div>
              <h2 class="text-2xl font-semibold text-green-700 border-b border-slate-200 pb-4 mb-6"><i data-lucide="box"></i>Anotação de Material Preparado</h2>
              <form id="form-material" class="bg-slate-50 p-6 rounded-md border border-slate-200 mb-8 no-print">
                  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                    <div>
-                        <label for="preparador" class="block text-sm font-medium text-slate-700">Preparador</label>
-                        <select id="preparador" required class="mt-1 block w-full p-2 border-slate-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500">
-                            <option value="">Selecione</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label for="maquina-prep" class="block text-sm font-medium text-slate-700">Máquina</label>
-                        <select id="maquina-prep" required class="mt-1 block w-full p-2 border-slate-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500">
-                            <option value="">Selecione</option>
-                        </select>
-                    </div>
-                    <div><label for="cod-produto-material" class="block text-sm font-medium text-slate-700">Cód. do Produto</label><input type="text" id="cod-produto-material" class="mt-1 block w-full p-2 border-slate-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500"></div>
-                    <div class="sm:col-span-2 lg:col-span-1"><label for="nome-peca" class="block text-sm font-medium text-slate-700">Nome da Peça</label><input type="text" id="nome-peca" required class="bg-white mt-1 block w-full p-2 border-slate-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500"></div>
-                    <div><label for="op-prep" class="block text-sm font-medium text-slate-700">OP</label><input type="text" id="op-prep" class="bg-white mt-1 block w-full p-2 border-slate-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500"></div>
-                    <div><label for="qtd-mat" class="block text-sm font-medium text-slate-700">Qtd. Mat.</label><input type="number" id="qtd-mat" class="mt-1 block w-full p-2 border-slate-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500"></div>
-                    <div><label for="sk-resina" class="block text-sm font-medium text-slate-700">SK Resina</label><input type="text" id="sk-resina" class="mt-1 block w-full p-2 border-slate-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500"></div>
-                    <div><label for="lote-resina" class="block text-sm font-medium text-slate-700">Lote Resina</label><input type="text" id="lote-resina" class="mt-1 block w-full p-2 border-slate-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500"></div>
-                    <div><label for="sk-master" class="block text-sm font-medium text-slate-700">SK Master</label><input type="text" id="sk-master" class="mt-1 block w-full p-2 border-slate-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500"></div>
-                    <div><label for="sk-aditivo" class="block text-sm font-medium text-slate-700">SK Aditivo</label><input type="text" id="sk-aditivo" class="mt-1 block w-full p-2 border-slate-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500"></div>
-                    <div><label for="lote-master" class="block text-sm font-medium text-slate-700">Lote Master</label><input type="text" id="lote-master" class="mt-1 block w-full p-2 border-slate-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500"></div>
-                    <div><label for="lote-adit" class="block text-sm font-medium text-slate-700">Lote Adit.</label><input type="text" id="lote-adit" class="mt-1 block w-full p-2 border-slate-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500"></div>
-                    <div><label for="percent-usado" class="block text-sm font-medium text-slate-700">% Usado</label><input type="number" step="0.001" id="percent-usado" class="mt-1 block w-full p-2 border-slate-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500"></div>
+                     <div>
+                         <label for="preparador" class="block text-sm font-medium text-slate-700">Preparador</label>
+                         <select id="preparador" required class="mt-1 block w-full p-2 border-slate-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500">
+                             <option value="">Selecione</option>
+                         </select>
+                     </div>
+                     <div>
+                         <label for="maquina-prep" class="block text-sm font-medium text-slate-700">Máquina</label>
+                         <select id="maquina-prep" required class="mt-1 block w-full p-2 border-slate-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500">
+                             <option value="">Selecione</option>
+                         </select>
+                     </div>
+                     <div><label for="cod-produto-material" class="block text-sm font-medium text-slate-700">Cód. do Produto</label><input type="text" id="cod-produto-material" class="mt-1 block w-full p-2 border-slate-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500"></div>
+                     <div class="sm:col-span-2 lg:col-span-1"><label for="nome-peca" class="block text-sm font-medium text-slate-700">Nome da Peça</label><input type="text" id="nome-peca" required class="bg-white mt-1 block w-full p-2 border-slate-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500"></div>
+                     <div><label for="op-prep" class="block text-sm font-medium text-slate-700">OP</label><input type="text" id="op-prep" class="bg-white mt-1 block w-full p-2 border-slate-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500"></div>
+                     <div><label for="qtd-mat" class="block text-sm font-medium text-slate-700">Qtd. Mat.</label><input type="number" id="qtd-mat" class="mt-1 block w-full p-2 border-slate-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500"></div>
+                     <div><label for="sk-resina" class="block text-sm font-medium text-slate-700">SK Resina</label><input type="text" id="sk-resina" class="mt-1 block w-full p-2 border-slate-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500"></div>
+                     <div><label for="lote-resina" class="block text-sm font-medium text-slate-700">Lote Resina</label><input type="text" id="lote-resina" class="mt-1 block w-full p-2 border-slate-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500"></div>
+                     <div><label for="sk-master" class="block text-sm font-medium text-slate-700">SK Master</label><input type="text" id="sk-master" class="mt-1 block w-full p-2 border-slate-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500"></div>
+                     <div><label for="sk-aditivo" class="block text-sm font-medium text-slate-700">SK Aditivo</label><input type="text" id="sk-aditivo" class="mt-1 block w-full p-2 border-slate-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500"></div>
+                     <div><label for="lote-master" class="block text-sm font-medium text-slate-700">Lote Master</label><input type="text" id="lote-master" class="mt-1 block w-full p-2 border-slate-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500"></div>
+                     <div><label for="lote-adit" class="block text-sm font-medium text-slate-700">Lote Adit.</label><input type="text" id="lote-adit" class="mt-1 block w-full p-2 border-slate-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500"></div>
+                     <div><label for="percent-usado" class="block text-sm font-medium text-slate-700">% Usado</label><input type="number" step="0.001" id="percent-usado" class="mt-1 block w-full p-2 border-slate-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500"></div>
                  </div>
                  <div class="mt-6 text-right">
-                    <button type="submit" class="inline-flex justify-center py-2 px-6 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
-                        <i data-lucide="plus-circle" class="w-5 h-5 mr-2"></i> Adicionar Registro
-                    </button>
+                     <button type="submit" class="inline-flex justify-center py-2 px-6 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+                         <i data-lucide="plus-circle" class="w-5 h-5 mr-2"></i> Adicionar Registro
+                     </button>
                  </div>
              </form>
              <div class="overflow-x-auto">
-                <table class="min-w-full divide-y divide-slate-200">
-                    <thead class="bg-slate-100">
-                        <tr>
-                            <th class="px-4 py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider">Preparador</th>
-                            <th class="px-4 py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider">Máquina</th>
-                            <th class="px-4 py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider">Cód. Prod.</th>
-                            <th class="px-4 py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider">OP</th>
-                            <th class="px-4 py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider">Nome da Peça</th>
-                            <th class="px-4 py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider">Qtd. Mat.</th>
-                            <th class="px-4 py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider">SK Resina</th>
-                            <th class="px-4 py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider">Lote Resina</th>
-                            <th class="px-4 py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider">SK Master</th>
-                            <th class="px-4 py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider">Lote Master</th>
-                            <th class="px-4 py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider">SK Aditivo</th>
-                            <th class="px-4 py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider">Lote Adit.</th>
-                            <th class="px-4 py-3 text-center text-xs font-medium text-slate-600 uppercase tracking-wider">% Usado</th>
-                            <th class="px-4 py-3 text-center text-xs font-medium text-slate-600 uppercase tracking-wider no-print">Ações</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tabela-material-body" class="bg-white divide-y divide-slate-200"></tbody>
-                </table>
+                 <table class="min-w-full divide-y divide-slate-200">
+                     <thead class="bg-slate-100">
+                         <tr>
+                             <th class="px-4 py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider">Preparador</th>
+                             <th class="px-4 py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider">Máquina</th>
+                             <th class="px-4 py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider">Cód. Prod.</th>
+                             <th class="px-4 py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider">OP</th>
+                             <th class="px-4 py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider">Nome da Peça</th>
+                             <th class="px-4 py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider">Qtd. Mat.</th>
+                             <th class="px-4 py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider">SK Resina</th>
+                             <th class="px-4 py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider">Lote Resina</th>
+                             <th class="px-4 py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider">SK Master</th>
+                             <th class="px-4 py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider">Lote Master</th>
+                             <th class="px-4 py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider">SK Aditivo</th>
+                             <th class="px-4 py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider">Lote Adit.</th>
+                             <th class="px-4 py-3 text-center text-xs font-medium text-slate-600 uppercase tracking-wider">% Usado</th>
+                             <th class="px-4 py-3 text-center text-xs font-medium text-slate-600 uppercase tracking-wider no-print">Ações</th>
+                         </tr>
+                     </thead>
+                     <tbody id="tabela-material-body" class="bg-white divide-y divide-slate-200"></tbody>
+                 </table>
              </div>
         </section>
     </div>
@@ -271,21 +271,27 @@
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, doc, getDoc, setDoc, addDoc, deleteDoc, onSnapshot, collection, query, where, serverTimestamp, writeBatch, getDocs } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        import { getAuth, signInAnonymously, onAuthStateChanged, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, doc, getDoc, setDoc, addDoc, deleteDoc, onSnapshot, collection, query, where, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-        // --- INÍCIO DA CONFIGURAÇÃO DO FIREBASE ---
-        const firebaseConfig = {
-          apiKey: "AIzaSyBm1x7UJwJafQkeffshu19SbR05cE5cVMw",
-          authDomain: "pmphokkaido.firebaseapp.com",
-          projectId: "pmphokkaido",
-          storageBucket: "pmphokkaido.appspot.com",
-          messagingSenderId: "51980668621",
-          appId: "1:51980668621:web:1f076cd52c7dd56ac6a384"
+        // --- CONFIGURAÇÃO DO FIREBASE ---
+        // Prioriza a configuração injetada pelo ambiente, que é mais segura.
+        // Se não estiver disponível, usa uma configuração fixa para desenvolvimento/preview.
+        const fallbackConfig = {
+            apiKey: "AIzaSyBm1x7UJwJafQkeffshu19SbR05cE5cVMw",
+            authDomain: "pmphokkaido.firebaseapp.com",
+            projectId: "pmphokkaido",
+            storageBucket: "pmphokkaido.appspot.com",
+            messagingSenderId: "51980668621",
+            appId: "1:51980668621:web:1f076cd52c7dd56ac6a384"
         };
+
+        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : fallbackConfig;
+        const appId = typeof __app_id !== 'undefined' ? __app_id : fallbackConfig.projectId;
         // --- FIM DA CONFIGURAÇÃO DO FIREBASE ---
 
-        const appId = firebaseConfig.projectId;
+        // --- BANCO DE DADOS DE PRODUTOS (EXTRAÍDO DO PDF) ---
+        const produtos = { "2": "ROSCA BAIXA P2000 28 400 ESTRIADA AZUL CB047 DPB064 - FT120", "3": "ROSCA BAIXA P2000 28 400 ESTRIADA BRANCO 767 DPB064-FT120-5180921", "4": "ROSCA BAIXA P2000 28 400 ESTRIADA OURO CB101 DPB064-FT120-5180974", "5": "ROSCA BAIXA P2000 28 400 ESTRIADA PRETO DPB064-FT120-5180922", "6": "ROSCA ALTA P2000 28 410 FOSCA BRANCA CB124 EF063-FT120-5181103", "7": "ROSCA ALTA P2000 28 410 FOSCA BRANCA 767 EF063-5180923", "9": "ROSCA ALTA P2000 28 410 FOSCA OURO CB149 EF063-FT120-5181192", "10": "ROSCA ALTA P2000 28 410 FOSCA OURO CB078 EF063-FT120-5180930", "11": "ROSCA ALTA P2000 28 410 FOSCA PRATA CB132 EF063-5181153", "12": "ROSCA ALTA P2000 28 410 ESTRIADA NATURAL PP EF062-5181020", "13": "ROSCA ALTA P2000 28 410 ESTRIADA VERMELHO CB122 PP EF062-5181080", "14": "ROSCA ALTA P2000 28 410 ESTRIADA BRANCA 767 PP DPB062 FT120-5188188", "15": "ROSCA ALTA P2000 28 410 FOSCO AZUL CB150 PP COPOLÍMERO EF063-5183994", "16": "ROSCA ALTA P2000 28 410 FOSCA NATURAL PP COPOLIMERO EF063-5180929", "17": "ROSCA ALTA P2000 28 410 FOSCA PRETO 017 PP COPOLÍMERO EF063-5179141", "20": "ROSCA P2000 24 410 LISA BRANCO PEROLA CB155 DPB061-RP347-5183999", "21": "ANEL TRAVA P2000 STD AZUL CB47 BRILHANTE PP DPB038-5180951", "22": "ANEL TRAVA P2000 STD AZUL CB103 BRILHANTE PP DPB038", "23": "ANEL TRAVA P2000 STD LILAS CB106 BRILHANTE PP DPB038", "24": "ANEL TRAVA P2000 STD NATURAL BRILHANTE PP DPB038-5181036", "25": "ANEL TRAVA P2000 STD OURO CB101 BRILHANTE PP DPB038-5180952", "26": "ANEL TRAVA P2000 STD ROSA CB107 BRILHANTE PP DPB038", "27": "ANEL TRAVA P2000 STD ROXO CB99 BRILHANTE PP DPB038", "30": "ANEL TRAVA P2000 STD VERMELHO CB98 BRILHANTE PP DPB038", "31": "ANEL TRAVA P2000 STD AZUL CB150 PP TEXT DPB038-5183993", "32": "ANEL TRAVA P2000 STD BRANCO 767 PP TEXT DPB038-5180948", "33": "ANEL TRAVA P2000 STD BRANCO CB124 PP TEXT DPB038-5181104", "34": "ANEL TRAVA P2000 STD LARANJA CB119 PP TEXT DPB038", "35": "ANEL TRAVA P2000 STD OURO CB78 PP TEXT DPB038-5180947", "37": "ANEL TRAVA P2000 STD OURO CB149 PP TEXT DPB038-5181193", "38": "ANEL TRAVA P2000 STD PRATA CB132 PP TEXT DPB038-5181155", "39": "ANEL TRAVA P2000 STD PRETO 17 PP TEXT DPB038-5179120", "41": "ANEL TRAVA P2000 STD ROSA CB120 PP TEXT DPB038", "42": "ANEL TRAVA P2000 STD VERMELHO CB122 PP TEXT DPB038-5181081", "43": "ANEL TRAVA P2000 STD VERDE CB121 PP TEXT DPB038", "46": "PISTÃO P2000 ROD PRINC AZUL CB47 PP DPB044-5181025", "47": "PISTÃO P2000 ROD PRINC AZUL CB150 PP DPB044-5183995", "48": "PISTÃO P2000 ROD PRINC BRANCO 767 PP DPB044-5180916", "49": "PISTÃO P2000 ROD PRINC BRANCO PÉROLA PP CB155 DPB044-5186132", "50": "PISTÃO P2000 ROD PRINC LARANJA CB119 PP DPB044-5181090", "52": "PISTÃO P2000 ROD PRINC NATURAL PP DPB044-5180936", "53": "PISTÃO P2000 ROD PRINC OURO CB78 PP DPB044-5180937", "54": "PISTÃO P2000 ROD PRINC OURO CB101 PP DPB044-5180938", "55": "PISTÃO P2000 ROD PRINC OURO CB149 PP DPB044-5181195", "56": "PISTAO P2000 ROD PRINC PRATA CB132 PP DPB044-5181156", "57": "PISTÃO P2000 ROD PRINC PRETO 017 PP DPB044-5179138", "62": "PISTÃO P2000 ROD PRINC VERDE CB121 PP DPB044-5184017", "65": "PISTÃO P2000 ROD PRINC VERMELHO CB122 PP DPB044-5181083", "67": "ATUADOR P2000 SATIN AZUL BEBÊ CB103 PP DPB039-5181040", "68": "ATUADOR P2000 SATIN AZUL CB47 PP DPB039-5180942", "69": "ATUADOR P2000 SATIN AZUL CB150 PP DPB039-5183996", "70": "ATUADOR P2000 SATIN BRANCO 767 PP DPB039-5180855", "71": "ATUADOR P2000 SATIN BRANCO CB124 PP DPB039-5181105", "72": "ATUADOR P2000 SATIN BRANCO PEROLA P CB155 PP DPB039-5183997", "73": "ATUADOR P2000 SATIN LARANJA CB119 PP DPB039-5181089", "74": "ATUADOR P2000 SATIN LILÁS CB106 PP PP DPB039-5180944", "75": "ATUADOR P2000 SATIN NATURAL PP DPB039-5180939", "76": "ATUADOR P2000 SATIN OURO CB78 PP DPB039-5180963", "77": "ATUADOR P2000 SATIN OURO CB101 PP DPB039-5180943", "78": "ATUADOR P2000 SATIN OURO CB149 PP DPB039-5181194", "79": "ATUADOR P2000 SATIN PRATA CB132 PP DPB039-5181154", "80": "ATUADOR P2000 SATIN PRETO 17 PP DPB039-5179121", "82": "ATUADOR P2000 SATIN ROSA CB107 PP DPB039-5180945", "83": "ATUADOR P2000 SATIN ROSA CB120 PP DPB039-5181093", "84": "ATUADOR P2000 SATIN ROXO CB99 PP DPB039-5180941", "85": "ATUADOR P2000 SATIN VERDE CB121 PP DPB039-5181086", "86": "ATUADOR P2000 SATIN VERMELHO CB98 PP DPB039-5180940", "88": "ATUADOR P2000 SATIN VERMELHO CB122 PP DPB039-5181082", "90": "PLUG P2000 STANDARD NATURAL PP EF073-H301-5179139", "91": "BUCHA P2000 2ML NATURAL PP - 5179122", "92": "ACUMULADOR P2000 28MM NAT PP EF045H301-5179118", "93": "ACUMULADOR P2000 JUNTA-A NATURAL EF045 - VERSÃO A - H301-5181044", "94": "TAMPA MKIV MD STD NATURAL PP PD06001-5179142", "97": "RETENTOR MKIV MD M300 STD NAT POM DF002-24 CAVIDADES - 5179163", "98": "ACUMULADOR MKIV MD STANDAR NAT PP (ESPANHOL. INTERNO) - H301-5179119", "99": "ACUMULADOR MKIV MD STAND NAT PP-5181076 (ESPANHOL. EXTERNO)", "102": "ATUADOR MKIV STD AZUL CB72 PP 01PD06002-5180962 (ATUAD. SPRAY)", "103": "ATUADOR MKIV STD BRANCO 767 PP 01PD06002-5180856 (ATUADOR SPRAY)", "104": "ATUADOR MKIV STD BRANCO ANIL PP 012PD06002-5181043 (ATUADOR SPRAY)", "105": "ATUADOR MKIV STD BRANCO CB124 PP 01PD06002-5181118 (ATUADOR SPRAY)", "108": "ATUADOR MKIV STD MARROM CB142 PP 01PD06002-5179160 (ATUADOR SPRAY)", "109": "ATUADOR MKIV STD NATURAL PP 01PD06002-5180858 (ATUADOR SPRAY)", "111": "ATUADOR MKIV STD PRETO 17 PP 01PD06002-5180976 (ATUADOR SPRAY)", "112": "ATUADOR MKIV STD ROSA CB79 PP 01PD06002-5180859 (ATUADOR SPRAY)", "113": "ATUADOR MKIV STD ROXO CB139 PP 01PD06002-5181132 (ATUADOR SPRAY)", "114": "ATUADOR MKIV STD ROXO CB144 PP 01PD06002-5181172 (ATUADOR SPRAY)", "115": "ATUADOR MKIV STD VERDE CB06 PP 01PD06002-5180961 (ATUADOR SPRAY)", "120": "ATUADOR MD STD BRANCO 767 PE-5180991 (DIF. DISP.)", "121": "ATUADOR MD STD BRANCO CB155 PE 01PD06003-5184012 (DIF. DISP.)", "124": "ATUADOR MD STD NATURAL PE 01PD060031.01.03.005.820", "125": "ATUADOR MD STD PRETO PE 01PD06003-5181119 (DIF. DISP.)", "126": "ATUADOR MD STD OURO CB112 PE 01PD06003-5179150 (DIF. DISP.)", "128": "ATUADOR MD STD ROXO CB139 PE 01PD06003-5181134 (DIF. DISP.)", "129": "ATUADOR MD STD VERDE CB06 PE 01PD06003-5181037 (DIF. DISP.)", "135": "ROSCA MKIV MD 18 415 LISA OURO CB49 PP 02PD06007-5181021", "139": "ROSCA MKIV MD 20 410 ESTRIADA AMARELO CB63 PP 05PD06007-5181006", "140": "ROSCA MKIV MD 20 410 ESTRIADA BRANCO 767 PP 05PD06007-5184914", "141": "ROSCA MKIV MD 20 410 ESTRIADA BRANCO ANIL 2902 PP 05PD06007-5181009", "143": "ROSCA MKIV MD 20 410 ESTRIADA ROXO CB105 PP 05PD06007-5181222", "146": "ROSCA MKIV MD 20 410 LISA BRANCA 767 PP 06PD06007-5181097", "148": "ROSCA MKIV MD 20 410 LISA MARROM CB142 PP 06PD06007-5179159", "149": "ROSCA MKIV MD 20 410 LISA NATURAL PP 06PD06007-5181046", "150": "ROSCA MKIV MD 20 410 LISA PRETO PP 06PD06007-5181010", "151": "ROSCA MKIV MD 20 410 LISA ROXO CB139 PP 06PD06007-5181133", "153": "ROSCA MKIV MD 22 415 ESTRIADA OURO CB112 PP 09PD06007-5179158", "154": "ROSCA MKIV MD 22 415 ESTRIADA PRETO 017 PP 09PD06007-5181011", "161": "ROSCA MKIV MD 24 410 ESTRIADA BRANCO 767 PP 13PD06007-5180925", "162": "ROSCA MKIV MD 24 410 ESTRIADA BRANCO CB155 PP 13PD06007-5184013", "163": "ROSCA MKIV MD 24 410 ESTRIADA NATURAL PP 13PD06007-5181008", "164": "ROSCA MKIV MD 24 410 ESTRIADA ROXO CB144 PP 13PD06007-5181171", "165": "ROSCA MKIV MD 24 410 ESTRIADA ROSA CB79 PP 13PD06007-5180924", "166": "ROSCA MKIV MD 24 410 LISA AZUL CB72 PP 13 PD06007-5181023", "167": "ROSCA MKIV MD 24 410 LISA BRANCO 767 PP 13 PD06007-5183989", "168": "ROSCA MKIV MD 24 410 LISA BRANCO CB124 PP 13 PD06007-5181117", "171": "ROSCA MKIV MD 24 410 LISA PRETA 17 PP PD06007-5196907", "172": "ROSCA MKIV MD 24 410 LISA ROXO CB139-5181131", "175": "RETENTOR M300 STD NAT POM DF002-64 CAVIDADES - 5179140", "176": "ACUMULADOR M300 STANDARD NAT PP DG007 FT120-5179117", "178": "PISTÃO M300 STD PRINC NAT PEBD DPB075 RESINA NACIONAL - 5179156", "180": "ROSCA M300 GL18 ESTRIADO AMARELO CB131 PP DPB072-5181113", "181": "ROSCA M300 GL18 ESTRIADO BEGE CB143 PP DPB072-5181164", "182": "ROSCA M300 GL18 ESTRIADO BRANCO 767 PP DPB072-5179146", "183": "ROSCA M300 GL18 ESTRIADO LARANJA CB80 PP DPB072-5180919", "184": "ROSCA M300 GL18 ESTRIADO LARANJA CB097 PP DPB072-5183693", "185": "ROSCA M300 GL18 ESTRIADO LARANJA CB146 PPDPB072-5181180", "188": "ROSCA M300 GL18 ESTRIADO LILÁS CB151 PP DPB072-5181227", "189": "ROSCA M300 GL18 ESTRIADO ROSA CB136 PP DPB072-5181124", "190": "ROSCA M300 GL18 ESTRIADO ROSA CB133 PP DPB072-5181120", "191": "ROSCA M300 GL18 ESTRIADO VERMELHO CB152 PP DPB072-5183990", "192": "ROSCA M300 GL18 ESTRIADO VERMELHO CB140 PP DPB 072-5181141", "193": "ROSCA M300 GL18 ESTRIADO VERMELHO CB77 PP DPB072-5181022", "194": "ATUADOR M300 AMARELO CB131 STD PP DPB007-FT120-5181114", "195": "ATUADOR M300 BEGE CB143 STD PP DPB007 - FT120-5181165", "196": "ATUADOR M300 BRANCO CB48 STD PP DPB007-FT120-5179149", "197": "ATUADOR M300 LARANJA CB146 STD PP DPB007-FT120-5181179", "198": "ATUADOR M300 LILÁS CB151 STD PP DPB007-FT120-5181228", "202": "ATUADOR M300 VERMELHO CB152 STD PP DPB007-FT120-5183992", "203": "ATUADOR M300 VERMELHO CB140 STD PP DPB007-5181142", "204": "ATUADOR M300 VERMELHO CB77 STD PP DPB007-FT120-5181045", "206": "CAPSULA MELODIE CLIKIT 17 NAT PP DP054-5180934", "207": "CAPSULA MELODIE CLIKIT 18 NAT PP DPB056-5180874", "210": "SUPORTE REDONDO BRANCO-753 200-000", "211": "SUPORTE REDONDO CINZA - 753 300-000", "212": "SUPORTE REDONDO PRETO", "213": "BOCAL 12", "214": "BOCAL 13", "215": "BOCAL 14", "216": "BOCAL 15", "217": "BOCAL 16", "219": "SUPORTE CURVO DA MANGUEIRA COM PINO BRANCO", "220": "SUPORTE CURVO DA MANGUEIRA COM PINO CINZA", "221": "BICO DE ENTRADA BRANCO (ESPIGÃO)", "222": "BICO DE ENTRADA CINZA (ESPIGÃO)", "223": "SUPORTE REDONDO 1\" BRANCO", "224": "SUPORTE REDONDO 1\" CINZA", "225": "SUPORTE REDONDO 1\" PRETO", "226": "FIXAÇÃO-GS-28/410CUST-28--THREAD-HDPE-WH - 29032088", "228": "TAMPA SERINGA PRETO", "233": "TRAVA DO CARRETEL", "234": "CARRETEL - GERDAU", "235": "CARRETEL - OVD (SEM INSCRIÇÃO)", "236": "CLIP AZUL 2945C (NACIONAL) - 30002026", "237": "CONECTOR AMARELO 17MS-30002192", "238": "CONECTOR AZUL 75 MS", "239": "SHELL PLASTIC EXELT™ WHITE 42MS (CONECT. BRANCO) - 1002042", "240": "CONECTOR LARANJA 42 MS-30002197", "241": "CONECTOR PRETO 300 MS", "242": "CONECTOR VERDE 9 MS-30002200", "243": "CORPO PLAST EXEL MS/DCD (COR VERME 25MS) - 1002047", "244": "CONECTOR VIOLETA 200 MS-30002201", "245": "CLIP AZUL 2945C (EXPORTAÇÃO) - 30002026", "246": "CONECTOR AMARELO 17 MS (EXPORTAÇÃO)", "247": "CONECTOR AZUL 75 MS (EXPORTAÇÃO)", "248": "CONECTOR BRANCO 100 MS (EXPORTAÇÃO)", "249": "CONECTOR LARANJA SEM NUMERAÇÃO (EXPORTAÇÃO)", "250": "CONECTOR PRETO 300 MS (EXPORTAÇÃO)", "252": "CONECTOR VERDE 9 MS (EXPORTAÇÃO)", "253": "CONECTOR VERMELHO 25 MS (EXPORTAÇÃO)", "254": "CONECTOR VIOLETA 200 MS (EXPORTAÇÃO)", "255": "TAMPA SUPERIOR PARA FILTRO - 285058449", "256": "TAMPA INFERIOR PARA FILTRO - 285058439", "257": "TAMPA PLÁSTICA SEM FURO - 285058389", "258": "TAMPA PLÁSTICA COM FURO - 285058399", "259": "BOCAL PARA FILTRO DE ÓLEO - 207803839", "260": "PISTÃO PARA FILTRO DE OLEO-275410349", "261": "TAMPA PLÁSTICA 5831-285058311", "262": "COROA PARA FILTRO DE ÓLEO - 219900509", "263": "ADAPTADOR - 204900818", "264": "SUPORTE PLÁSTICO SÉRIE 600 ESCAL (COM ABA) - 283600949", "265": "SUPORTE PLASTICO SERIE R260 (SEM ABA) - 283600939", "266": "PLUG 1/4-225 PARA FILTRO DE ÓLEO - 275410029", "267": "TAMPA PLÁSTICA 4 CAVIDADES - 285058959", "268": "TAMPA PLÁSTICA 5923-285059079", "269": "SUPORTE DO COPO - 6 CAVIDADES - NYLON - 283600909", "270": "SUPORTE DO COPO - 4 CAVIDADES - TECHNYL-283600909", "271": "SUPORTE DO COPO - 6 CAVIDADES - TECHNYL-283600909", "272": "SUPORTE DO COPO - 4 CAVIDADES - NYLON - 283600909", "273": "TAMPÃO PLÁSTICO AMARELO (MONTADO) P/FILTRO DE OLEO - 485500068", "274": "TAMPÃO PLÁSTICO NATURAL (MONTADO) P/ FILTRO DE OLEO - 485500038", "275": "PUXADOR COM BOMBA-445500078", "276": "PLUG 1/2\" 225 P/F OLEO COM ORING - 475400188", "277": "CONICO FILTRO OLEO-219910309", "278": "TURBINA (MONTADA) P/ FILTRO DE ÓLEO - 293900009", "279": "CONJUNTO TAMPÃO (MONTADO) - 485500078", "280": "PLUG DO DRENO + VEDADOR - 475400128", "282": "SUBCONJUNTO DRENO (MONTADO) - 475400248", "283": "SUPORTE USINADO-283601039", "289": "PAINEL FRONTAL MODULADOR RETANGULAR", "436": "CLIP PLASTICO PP-RND DS25 K2/F3 OURO (MODIF) - 29029923", "437": "ATUADOR_CAP-KAIAK--PP-BLUE-MATT---ESSEN - 8 CAV - 29029484", "438": "CAPA KAIAK 8 CAV PRETO BEM 09335 ESSENCIA - ATUADOR_CAP-KAIAK-29029497", "439": "ATUADOR CAP-KAIAK--PP-ORAN-MATT---ESSEN - 8 CAV-29029488", "440": "ATUADOR_CAP-KAIAK--PP-GREE-MATT---ESSEN - 8 CAV - 29029495", "441": "CLIP PLASTICO PP-RND MA00 K2/F3 PRETO (MODIF) - 29029916", "442": "CCLIPE-K--PP-NATU--RRNA0000410303988", "443": "ATUADOR_CAP-KAIAK--PP-BLUE-MATT---ESSEN-16 CAV-29029484", "444": "ATUADOR_CAP-KAIAK--PP-BLAC-MATT---ESSEN-16 CAV-29029497", "445": "ATUADOR_CAP-KAIAK--PP-ORAN-MATT---ESSEN - 16 CAV - 29029488", "446": "ATUADOR_CAP-KAIAK--PP-GREE-MATT---ESSEN - 16 CAV-29029495", "447": "ATUADOR_CAP-KAIAK--PP-WHIT-MATT---ESSEN-16 CAV - 29029501", "448": "ATUADOR_CAP-KAIAK--PP-WHIT-MATT---ESSEN - 8 CAV-29029501", "449": "ATUADOR_CAP-KAIAK--PP-RED-MATT-ES37--ES-16 CAV-29029494", "450": "ATUADOR_CAP-KAIAK--PP-RED-MATT-ES37--ES-8 CAV-29029494", "451": "ATUADOR CAP-KAIAK--PP-NATU-MATT-NT1954-16 CAV- 29029912", "452": "ATUADOR-EMII-PP--4,34-NATU---SPRAY---- 29025910", "453": "ATUADOR-EMII-PP--4,34-BLAC---SPRAY--MS06-29025904", "454": "ATUADOR -EMII-PP--4,34-BLUE---SPRAY--KS24-29032105", "455": "ATUADOR EM CLASSIC SPRAY VERDE - 31135179", "456": "ATUADOR-EMII-PP--4,34-BROW---SPRAY--HS11-29032438", "457": "TAMPA-EM-28,20-PP-NATU--SHNY EM STD-10603918", "458": "TAMPA-EM-28,20-PP-BLAC-SHNY-29029431", "459": "ATUADOR-EMII-PP--4,34-ORAN-SHNY--SPRAY-- 29001643", "464": "ATUADOR-EMII-PP--4,34-WHIT---SPRAY---- 29025986", "470": "ATUADOR M300 MARROM CB156 STD PP DPB007-FT120-5184002", "472": "ATUADOR M300 ROSA CB157 STD PP DPB007-5184005", "473": "ROSCA M300 GL18 ESTRIADO MARROM CB156 PP DPB0728-5184001", "477": "CLIP PLASTICO BRANCO CA01 K2/F3 - CLIPE-K--PP-WHIT-CA01--29025725", "478": "ATUADOR EM CLASSIC SPRAY PINK - ATUADOR-EMII-PP--4,34-PINK--- 29025949", "490": "TAMPA SERINGA INCOLOR", "518": "ROSCA M300 GL18 ESTRIADO ROSA CB157 PP DPB072-5184004", "534": "ACT EM CLASSIC PP MINT GREEN 1702395-SE-31134205", "539": "ROSCA M300 GL18 ESTRIADO ROSA ESCURO CB158 PP DPB072-5184007", "540": "ATUADOR M300 ROSA ESCURO CB158 STD PP DPB007-FT120-5184008", "541": "ATUADOR M300 VIOLETA CB162 STD PP DPB007-FT120-5189941", "543": "ROSCA P2000 24 410 LISA PRETO DPB061-5188322", "544": "CAPA KAIAK NATURAL NT1954 ESSENCIA-8 CAVIDADES - P6300198A", "580": "ROSCA M300 GL18 ESTRIADO VIOLETA CB162 PP DPB072", "581": "ROSCA M300 GL18 ESTRIADO ROSA CB163 PP DPB072", "582": "ATUADOR M300 ROSA CB163 STD PP DPB007 - FT120", "642": "COMPONENTES TRY OUT", "679": "ATUADOR M300 ROSA CB133 STD PP DPB007-5181121", "845": "CONECTOR BRANCO 42 MS-30002196", "846": "CONECTOR AZUL 65 MS-30002195", "847": "CONECTOR LARANJA 100 MS - 30002197", "861": "ROSCA MKIV MD 24 410 LISA PRETO CB166 PP PD06007", "862": "ATUADOR MD STD PRETO IMP CB166 PE 01PD06003 (DIF. DISP.)", "865": "TURBINA 2 PARA FILTRO DE ÓLEO", "866": "TURBINA 1 PARA FILTRO DE ÓLEO", "891": "TAMPÃO PLÁSTICO P/ FILTRO DE OLEO AMARELO (SEM O'RING) - 485500068", "892": "TAMPÃO PLÁSTICO P/ FILTRO DE OLEO NATURAL (SEM O'RING) - 485500038", "893": "PLUG 1/2\" 225 P/F OLEO (SEM O'RING) - 475400188", "894": "CONJUNTO TAMPÃO (SEM O'RING) - 485500078", "895": "PLUG DO DRENO + VEDADOR (SEM O'RING) - 475400128", "904": "TAMPA-EM-28,20-PP-BLAC--SHNYEM STD - 31147263", "905": "CLIP PLASTICO PP-RND DS10 K2/F3 DOURADO (MODIF) - 29029917", "921": "ATUADOR-EMII-PP--4,34-RED---SPRAY--ES38 29025968", "936": "ATUADOR-EMII-PP--4,34-RED-SHNY--SPRAY-A3 - 10605704", "937": "ATUADOR P2000 SATIN AZUL CB167 PP DPB039-5202563", "938": "PISTÃO P2000 ROD PRINC AZUL CB167 PP DPB044-5202564", "939": "ROSCA P2000 24 410 LISA AZUL CB167 PP DPB061FT120-5202562", "946": "ATUADOR MKIV STD PRETO 166 PP 01PD06002 (ATUADOR SPRAY)", "948": "ATUADOR-EMII-PP--4,34-BLUE---SPRAY--29025909", "951": "ATUADOR_CAP-KAIAK--PP-BLAC-MATT---VP3-16 CAV 29025937", "967": "ROSCA M300 GL18 ESTRIADO ROSA CB168 PP DPB072", "968": "ATUADOR M300 ROSA CB168 STD PP DPB007", "982": "ATUADOR MKIV STD PRETO IMP. CB166 PP 01PD06002", "1003": "ROSCA MKIV MD 24 410 LISA OURO CB112 PP 13 PD06007-5203349", "1005": "ATUADOR-EMII-PP--4,34-YELL---SPRAY--DS22-29025934", "1063": "ROSCA M300 GL18 ESTRIADO NATURAL PP DPB072-5204910", "1100": "TAMPA PLÁSTICA 5831-285058311", "1101": "SUPORTE DO COPO - 4 CAVIDADES - NYLON - 283600909", "1135": "FIXAÇÃO-GS-28/410CUST---THREAD-HDPE-WINE 31147706", "1145": "TAMPA PLÁSTICA 4 CAVIDADES - 285058959", "1146": "SUPORTE PLÁSTICO SÉRIE 600 ESCAL (COM ABA) - 283600949", "1177": "ATUADOR-EMII-PP--4,34-BLUE---SPRAY--293C-31160473", "1179": "ATUADOR-EMII-PP--4,34-BLUE---SPRAY-LMPP-31161295", "1187": "PISTÃO P2000 ROD PRINC NATURAL PP SEM ON/OFF DPB044-5207785", "1490": "ATUADOR M300 VERDE CB180 (UVA VERDE) - 5208567", "1493": "ATUADOR M300 ROSA CB177 (FRUTAS VERMELHAS) - 5208564", "1495": "ATUADOR M300 LILÁS CB181 (ALGODÃO) - 5208568", "1514": "FIXAÇÃO-GS-28/410CUST---THREAD-HDPE-PINK-31162234", "1601": "CLIPE-K-GS-PP-SILV-MB21--17,45--- (29029915)", "1617": "ATUADOR MD150 STD LILÁS CB183-5208648 (DIF. DISP)", "1618": "ROSCA MKIV MD 24 410 LISA LILÁS CB183-5208646", "1620": "ROSCA MKIV MD 20 410 LISA AMARELO CB184-5208980", "1622": "ATUADOR MD150 STD AMARELO CB184 01PD06003-5208981 (DIF. DISP.)", "1623": "TAMPA MKIV MD STD PRETA PP PD060-5208388", "1731": "ATUADOR-EMII-PP-4,34-GREY---SPRAY--- 31166627", "1767": "BLOCK ICE SKATE MSC PINK 035MS", "1768": "BLOCK ICE SKATE MSC WHITE 042MS", "1769": "BLOCK ICE SKATE MSC RED 025MS", "1770": "BLOCK ICE SKATE MSC YELLOW 017MS", "1771": "BLOCK ICE SKATE MSC BLUE 065MS", "1772": "BLOCK ICE SKATE MSC ORANGE 100MS", "1912": "SUPORTE PLÁSTICO - 283601089", "1925": "ATUADOR-EMII-PP-GOLD---SPARY--DS24-29025972", "2069": "TAMPA PLÁSTICA 5923-285059119 - LANXESS", "2155": "CAPA ALAV REG ALTURA A9-1154610X", "2171": "ALAVANCA HANDLE MONTADA", "2172": "ALAVANCA HANDLE MONTADA - (ESQ) 1280075X/1280071X (DIR)", "2181": "ATUADOR-EMII-PP--4,34-SILV---SPRAY----31147632", "2206": "SUPORTE DO COPO NOVO - 6 CAVIDADES - NYLON - 283601079", "2231": "ATUADOR-EMII-PP--4,34-YELL---SPRAY--DS27-29025969", "2232": "CLIPE-K-GS-PP-RED---17,45-31178644", "2278": "ATUADOR_CAP-KAIAK--PP-BLUE-MATT-433C-E- (16 CAVS) 31182968", "2290": "TAMPA-EM-28,20-PP-RED--SHNY-----EM STD-31178555", "2291": "ATUADOR-EMII-PP--4,34-RED---SPRAY 31178556", "2294": "SUPORTE DO COPO NOVO-6 CAVIDADES - TECHNYL-283601079", "2329": "FIXAÇÃO-GSA-28/410CUST---THREAD-HDPE-RED-31178148", "2448": "FIXAÇÃO-GSA-28/410CUST---THREAD-HDPE-ORA - 31186155", "2452": "ATUADOR CAP-KAIAK--PP-BLUE-MATT---ESSEN - 29029484", "2453": "ATUADOR_CAP-KAIAK--PP-BLAC-MATT---ESSEN - 29029497", "2454": "ATUADOR CAP-KAIAK--PP-ORAN-MATT---ESSEN - 29029488", "2455": "ATUADOR_CAP-KAIAK--PP-GREE-MATT---ESSEN - 29029495", "2456": "ATUADOR_CAP-KAIAK--PP-WHIT-MATT---ESSEN-29029501", "2457": "ATUADOR_CAP-KAIAK--PP-RED-MATT-ES37--ES-29029494", "2458": "ATUADOR_CAP-KAIAK--PP-NATU-MATT-NT1954-29029912", "2460": "ATUADOR_CAP-KAIAK--PP-BLUE-MATT-433C-E-31182968", "2463": "ATUADOR_CAP-KAIAK--PP-WHIT-MATT---ESSEN - 29029501 (REMESSA)", "2478": "FIXAÇÃO-GSA-28/410CUST---THREAD-HDPE-LIL - 31187111", "2505": "FIXAÇÃO-GSA-28/410CUST---THREAD-HDPE-ORA - 31188963", "2561": "ATUADOR-EMII-PP--4,34-GOLD---SPRAY - 31194945", "2563": "ROSCA BAIXA P2000 28 400 ESTRIADA NATURAL DPB064-DP179A-5225858", "2564": "ATUADOR MD150 STD ROSA METALIZADO CB203 01PD060-5217148 (DIF. DISP.)", "2574": "ATUADOR-EMII-PP--4,34-BLUE---SPRAY-- 31193634", "2666": "ATUADOR-EMII-PP--4,34-PINK---SPRAY-2405-31199260", "2701": "ATUADOR-EMII-PP--4,34-BLUE---SPRAY--KS17-29025931", "2704": "ROSCA P2000 24 410 LISA BR 767 PP DPB601-5229030", "2707": "ATUADOR-EMII-PP--4,34-WHIT---SPRAY--CS03-29025974", "2710": "ATUADOR-EMII-PP--4,34-GOLD---SPRAY--PPG1-31201727", "2895": "ATUADOR MKIV STD OURO CB233 PP 01PD06002-5234308 (ATUADOR SPRAY)", "2897": "ANEL TRAVA P2000 STD ROXO TEXT CB231 PP DPB038-5233797", "2898": "ROSCA ALTA P2000 28 410 TEXT ROXO CB231 PP-5233796 (FOSCO)", "2899": "ATUADOR P2000 SATIN ROXO CB231 PP DPB037-5233798", "2957": "ATUADOR-EMII-PP--4,34-ORAN---SPRAY-PR-31213312", "2963": "CORPO CANETA NOVA ZERO STICK CLEAR - CRISTAL NATURAL - 99.47.016", "2969": "CORPO CANETA NOVA ZERO STICK BRANCO FECHADO - 99.47.011", "2970": "CORPO CANETA NOVA ZERO STICK SOLID COLOR - VERDE - 99.47.012", "2998": "ROSCA ALTA P2000 28 410 FOSCA AZUL CB236 PP-5234579", "2999": "ANEL TRAVA P2000 STD AZUL CB236 PP TEXT DPB0381.01.01.005.496", "3000": "ATUADOR P2000 SATIN AZUL CB236 PP DPB037-5234577", "3002": "ATUADOR_CAP-KAIAK--PP-ORAN-MATT-7416C-31216799", "3003": "ATUADOR CAP-KAIAK--PP-GREE-MATT-7470C--31216879", "3008": "CORPO CANETA OFFICE BALCÃO PRETO FUMÊ CLARO 16 CAVS - 99.16.013", "3020": "CORPO SLIM CINZA GRAFITE PEROLIZADO II - 99.44.150", "3021": "TAMPA SLIM CINZA GRAFITE PEROLIZADO II - 99.43.071", "3031": "RODA DO LANÇADOR AZUL (SEM FURO TRAVA)", "3034": "ATUADOR MKIV STD AZUL CB241 PP 01PD06002-5243024 (ATUADOR SPRAY)", "3035": "ATUADOR MKIV STD VERMELHO CB242 PP 01PD06002-5243026 (ATUADOR SPRAY)", "3050": "ATUADOR MKIV STD PRETO CB243 PP 01PD06002-5243037 (ATUADOR SPRAY)", "3052": "ROSCA P2000 24 410 LISA CHUMBO CB194 PP DPB601-5211080", "3054": "ATUADOR P2000 SATIN CHUMBO CB194 PP-5211206", "3071": "TAMPA SLIM BLENDER - TRANSPARENTE II - 99.43.059", "3073": "TAMPA SLIM AMARELO CHEGUEI (NEON) II - 99.43.051", "3075": "TAMPA SLIM AMARELO VANILA (PASTEL) II-99.43.054", "3079": "TAMPA SLIM AZUL SAFIRA II - 99.43.038", "3081": "TAMPA SLIM AZUL SKY BLUE PASTEL II - 99.43.055", "3083": "TAMPA SLIM II BRANCO-99.43.048", "3085": "TAMPA SLIM CINZA CLARO II - 99.43.061", "3087": "TAMPA SLIM CINZA MEDIO II-99.43.062", "3089": "TAMPA SLIM CINZA PASTEL II - 99.43.063", "3091": "TAMPA SLIM LARANJA PESSEGO PASTEL II - 99.43.057", "3093": "TAMPA SLIM LARANJA PUMPKIN II - 99.43.041", "3095": "TAMPA SLIM LARANJA VULCAO (NEON) II - 99.43.065", "3097": "TAMPA SLIM MARROM CAOUCCINO II - 99.43.047", "3099": "TAMPA SLIM II ROSA MAGIC PINK-99.43.064", "3101": "TAMPA SLIM ROSA PINK (MEDIO) II - 99.43.044", "3103": "TAMPA SLIM II ROSA QUARTZ - 99.43.056", "3107": "TAMPA SLIM II ROXO LAVANDA (PASTEL) - 99.43.058", "3109": "TAMPA SLIM II VERDE AMAZONAS (ESCURO) - 99.43.040", "3111": "TAMPA SLIM II VERDE VER DE LONGE (NEON) - 99.43.052", "3113": "TAMPA SLIM II VERDE MENTA (PASTEL) - 99.43.053", "3115": "TAMPA SLIM VERDE OLIVA (FOSCO) II 99.43.068", "3117": "TAMPA SLIM II VERMELHO ESCARLETE - 99.43.039", "3119": "TAMPA SLIM II VERMELHO RED CANDY - 99.43.066", "3121": "TAMPA SLIM PRETO ONIX II-99.43.037", "3124": "CORPO SLIM PRETO ONIX II - 99.44.126", "3146": "CORPO SLIM PEROLADO II - 99.44.153", "3147": "TAMPA SLIM II ROXO THANOS (NEON) - 99.43.043", "3148": "TAMPA SLIM II MARROM CHOCOLATE (NEON) - 99.43.070", "3149": "TAMPA SLIM II CINZA GRAFITE (ESCURO) - 99.43.045", "3150": "TAMPA SLIM II AZUL ELETRIC BLUE - 99.43.050", "3152": "TAMPA SLIM II AMARELO GIRASSOL (FOSCO) - 99.43.042", "3153": "FIXAÇÃO-GSA-28/410CUST---THREAD-HDPE-RED - 31212750", "3159": "FIXACAO-GSA-28/410CUST---THREAD-HDPE-LIL-31205434", "3202": "ATUADOR MKIV STD BRONZE CB245 PP 01PD06002-5243743", "3204": "TAMPA MKIV MD BRONZE CB245 PP PD060-5243745", "3256": "TAMPA SLIM II PURPLE PISCES GLITTER (ROXO) - 99.43.075", "3263": "TAMPA SLIM II ORANGE CANCER GLITTER (LARANJA) - 99.43.084", "3264": "TAMPA SLIM II VIOLET VIRGO GLITTER (LILAS) - 99.43.074", "3267": "TAMPA SLIM II BLACK SCORPIO GLITTER (PRETO) - 99.43.081", "3268": "CORPO SLIM II BRANCO RADIANTE - 99.44.125", "3287": "CORPO CANETA NOVA ZERO STICK PRETO FECHADO - 99.47.010", "3292": "FIXAÇÃO-GSA-28/410CUST---THREAD-HDPE-GRE-31227541", "3381": "ATUADOR MKIV STD NATURAL PP CB214 01PD06002-5225211 (C/ ADITIVO)", "3442": "CONECTOR MODELO V CINZA", "3443": "CONECTOR MODELO R VERDE", "3444": "CONECTOR MODELO L AMARELO", "3445": "CONECTOR MODELO X MARROM", "3446": "CONECTOR MODELO T AZUL", "3457": "TAMPA PLÁSTICA 5923-285059119 - DURETHAN", "3459": "CORPO SLIM II ROXO LAVANDA - 99.45.145", "3460": "CORPO SLIM II ROSA QUARTZ - 99.44.140", "3461": "CORPO SLIM II AZUL SKY BLUE - 99.44.141", "3462": "CORPO SLIM II AMARELO VANILLA - 99.44.144", "3463": "CORPO SLIM II VERDE MENΤΑ - 99.44.142", "3464": "CORPO SLIM II LARANJA PESSEGO-99.44.146", "3465": "CORPO SLIM II MAGIC PINK (NEON) - 99.44.133", "3466": "CORPO SLIM II LARANJA VULCAO-99.44.130", "3467": "CORPO SLIM II VERDE VER DE LONGE - 99.44.139", "3468": "CORPO SLIM II AMARELO CHEGUEI - 99.44.138", "3474": "CORPO SLIM II PRATA - 99.44.135", "3503": "TAMPA SUPERIOR PARA FILTRO - 285058449", "3504": "TAMPA INFERIOR PARA FILTRO - 285058439", "3510": "ATUADOR-EMII-PP--4,34-BLUE---SPRAY----MO-31235033", "3511": "COMPONENTES TRY OUT - SILGAN", "3523": "ANEL TRAVA P2000 STD ROSA TEXT CB256 PP DPB038-5254020", "3524": "ROSCA ALTA P2000 28 410 TEXT ROSA CB256 PP DPB063-5254021", "3525": "ROSCA P2000 24 410 LISA ROSA CB256 PP DPB601-5254018", "3526": "ATUADOR P2000 SATIN ROSA CB256 PP DPB037-5254022", "3529": "CORPO SLIM II ROXO THANOS - 99.44.132", "3530": "CORPO SLIM II AZUL ELETRIC BLUE - 99.44.137", "3531": "ANEL TRAVA P2000 STD OURO TEXT CB257 PP DPB038-5254356", "3532": "ROSCA ALTA P2000 28 410 TEXT OURO CB257 PP DPB063-5254357", "3533": "ATUADOR P2000 SATIN OURO CB257 PP DPB037-5254358", "3544": "CORPO CANETA NOVA ZERO STICK COLOR FUME - 99.47.022", "3545": "ATUADOR MKIV STD ROSA CB256 PP 01PD06002-5254331", "3570": "ATUADOR-EMII-PP--4,34-GOLD---SPRAY - 31221881", "3586": "ATUADOR-EMII-PP--4,34-ORAN---SPRAY- -31238801", "3662": "FIXAÇÃO-GS-28/410CUST-28--THREAD-HDPE-NATURAL - 31151140", "3676": "ROSCA ALTA P2000 28 410 TEXT VERMELH CB260 PP DPB0631.01.03.005.759", "3677": "ANEL TRAVA P2000 STD VERMELHO TEXT CB260 PP DPB0381.01.03.005.760", "3682": "CORPO CANETA OFFICE BALCAO AZUL 16 CAVS-99.16.001", "3718": "CORPO CANETA NOVA ZERO STICK SOLID COLOR - AZUL MARINHO - 99.47.019", "3719": "CORPO CANETA NOVA ZERO STICK COLOR - AZUL-99.47.017", "3725": "TAMPA PLASTICA SEM FURO (NOVA VERSAO) - 285050749", "3745": "RETENTOR MKIV MD M300 STD NAT POM DF002-24 CAVS - 1.01.01.005.042", "3746": "RETENTOR M300 STD NAT POM DF002-64 CAVIDADES - 1.01.01.005.025", "3805": "ANEL TRAVA P2000 STD BRANCO CB 263 TEXT PP DPB0381.01.03.005.780", "3806": "ATUADOR P2000 SATIN BRANCO CB263 PP DPB037-1.01.03.005.781", "3807": "ROSCA ALTA P2000 28 410 TEXT BRANCO CB263 PP DPB0631.01.03.005.779", "3810": "CORPO SLIM II PRETO ONIX C/ GLITTER - 99.44.151", "3817": "TAMPA SUPERIOR PARA FILTRO - 285058449", "3818": "TAMPA INFERIOR PARA FILTRO - 285058439", "3825": "ROSCA P2000 28 410 TEXT AZUL CB266 PP DPB0631.01.03.005.788", "3826": "ATUADOR P2000 SATIN AZUL CB266 PP DPB0371.01.03.005.789", "3827": "ANEL TRAVA P2000 STD AZUL TEXT CB266 PP DPB0381.01.03.005.790", "3858": "POTE DE SORVETE BRANCO - CP191", "3859": "TAMPA BRANCA DO POTE DE SORVETE BRANCO - CP191", "3870": "ATUADOR-EMII-PP--4,34---SPRAY-BLACK-31262039", "3891": "FIXAÇÃO-GS-28/410CUST---THREAD-HDPE-PINK-31247523", "3924": "FIXAÇÃO-GS-28/410CUST---THREAD-HDPE-LILA - 31266385", "3939": "SHELL PLASTIC EXELT™ YELLOW 17MS (CONECT. AMARELO EXP.) - 1002040", "3943": "SHELL PLASTIC EXELT™ RED 25MS (CONECT. VERMELHO EXP.) - 1002047", "3956": "ATUADOR-EMII-PP--4,34-LILA---SPRAY-CL-31265594", "3983": "TAMPA PLASTICA 5831-285058311", "4003": "PAINEL SWITCHES LIGHT-S1700150", "4006": "FACE INTERNA BRANCA CSI - PECA 1", "4007": "FACE EXTERNA BRANCA CSI - PECA 2", "4008": "TAMPÃO BRANCO CSI - PECA 3", "4010": "SUPORTE PLASTICO SERIE 600 ESCAL (COM ABA) - 283600949", "4017": "PISTAO PARA FILTRO DE OLEO-275410349", "4046": "BOCAL PARA FILTRO DE OLEO - 207803839", "4047": "TAMPA PLASTICA 4 CAVIDADES - 285058959", "4048": "TAMPA PLASTICA SEM FURO - 285058389", "4050": "TAMPA PLASTICA SEM FURO (NOVA VERSAO) - 285050749", "4091": "CLIP-Q--PP-NATU-XX04-29029920", "4127": "FIXAÇÃO-GS-24/410--2N-THREAD-PP-WHIT--20 - (LISO COM DEGRAU) -29025477", "4128": "FIXAÇÃO-GS-24/410--2N-THREA-PP-RED--485 - (LISO COM DEGRAU) - 31192751", "4134": "FIXAÇÃO-GS-24/410--2N-THREA-PP-BLAC--MA - (LISO COM DEGRAU) - 29026043", "4141": "FIXAÇÃO-GS-24/410--2N-THREA-PP-VIOL----- (LISO COM DEGRAU) - 31242869", "4143": "ATUADOR-SENTIDOS-PP--5,75-WINE---LOT-ES4-29029209", "4150": "SUPORTE PLASTICO SERIE 600 ESCAL (COM ABA) - 283600949", "4152": "BOCAL PARA FILTRO DE OLEO - 207803839", "4153": "PISTAO PARA FILTRO DE OLEO-275410349", "4154": "TAMPA PLASTICA SEM FURO (NOVA VERSAO) - 285050749", "4157": "TAMPA PLASTICA 4 CAVIDADES - 285058959", "4160": "ATUADOR-SENTIDOS-PP--5,75-NATU---LOT-XX0-31149108", "4161": "ATUADOR-POEMA-PP--5,75-NATU---LOT-XX04-31194670", "4166": "FIXAÇÃO-GS-24/410--2N-THREAD-PP-NATU-XX (LISO COM DEGRAU) - 29029921", "4172": "J-HOOK LONG BLUE (CLIP AZUL) - 1020710", "4193": "TAMPA LILAS DO POTE DE SORVETE - CP191", "4194": "TAMPA LARANJA DO POTE DE SORVETE - CP191", "4195": "TAMPA AZUL DO POTE DE SORVETE - CP191", "4196": "FIXAÇÃO-GS-24/410--2N-THREA-PP-BEIG--- (LISO COM DEGRAU) - 31246287", "4198": "TAMPA VERMELHO DO POTE DE SORVETE - CP191", "4199": "TAMPA AMARELO DO POTE DE SORVETE - CP191", "4219": "FIXAÇÃO-GS-24/410--2N-THREAD-PP-GOLD---- (LISO COM DEGRAU) - 31219743", "4246": "FIXAÇÃO-GS-24/410--2N-THREAD-PP-YELL--DS (LISO COM DEGRAU) - 29032402", "4253": "ATUADOR-POEMA-PP--5,75-WINE---LOT-ES44--31227564", "4267": "FIXAÇÃO-GS-28/410CUST---THREAD-HDPE-LILA - 31285150", "4268": "FIXAÇÃO-GS-28/410CUST-28--THREAD-HDPE-NATURAL - 31285216", "4269": "FIXACAO-GSA-28/410CUST---THREAD-HDPE-LIL-31285116", "4270": "FIXAÇÃO-GS-28/410CUST---THREAD-HDPE-WINE - 31226472", "4271": "FIXACAO-GSA-28/410CUST---THREAD-HDPE-RED - 31285212", "4272": "FIXAÇÃO-GS-28/410CUST---THREAD-HDPE-PINK - 31285219", "4274": "FIXACAO-GSA-28/410CUST---THREAD-HDPE-ORA-31285244", "4275": "FIXACAO-GSA-28/410CUST---THREAD-HDPE-RED-31285119", "4300": "EMPUNHADURA 30X95 - MP00208", "4301": "ILUMINADOR CRYSTAL LUX - MP00026", "4321": "FIXAÇÃO-GS-24/410--2N-THREAD-PP-BLUE--31-31284786", "4322": "FIXAÇÃO-GS-24/410--2N-THREAD-PP-GREE--22-31284788 (LISO COM DEGRAU)", "4323": "FIXAÇÃO-GS-24/410--2N-THREAD-PP-LARANJA--15-31284542 (LISO COM DEGRAU)", "4324": "FIXAÇÃO-GS-24/410--2N-THREAD-PP-YELL--13-31284632 (LISO COM DEGRAU)", "4366": "FIXAÇÃO-GS-24/410--2N-THREAD-PP-PINK---- (LISO COM DEGRAU) - 31255322", "4371": "FIXAÇÃO-GS-24/410--2N-THREAD-PP-GREE----31263788", "4408": "TAMPA-EM-28,20-PP-ORAN--SHNY-31213174", "4409": "TAMPA-EM-28,20-PP-BLAC-BLACK 5C-SHNY---- 31262040", "4410": "ATUADOR MKIV STD BRANCO CB263 PP 01PD06002-1.01.03.005.848", "4425": "FIXAÇÃO-GS-28/410CUST---THREAD-HDPE-WINE - 31291815", "4442": "TAMPA-EM-28,02-PP-BLUE--SHNY-----MOCHILA - 31235004", "4447": "ROSCA MKIV MD 24 410 LISA BRANCA CB263 PP PD060071.01.03.005.850", "4448": "ROSCA MKIV MD 20 410 ESTRIADA PRETO 17 PP 05PD06007 -1.01.01.005.399", "4460": "ATUADOR-EMII-PP---4,34-PINK---SPRAYGL-31295342", "4485": "TAMPA MKIV MD STD BRANCA CB263 PP PD0601.01.03.005.849", "4497": "TAMPA-EM-28,02-PP-GOLD--SHNY-31221895", "4498": "ATUADOR-SENTIDOS-PP--5,85-ORAN---LOT--- 31188965", "4500": "ROSCA MKIV MD 20 410 ESTR BR ANIL 2902 05PD060071.01.01.005.126", "4501": "ROSCA MKIV MD 24 410 LISA VERMELHA CB242 PP-1.01.01.005.509", "4502": "ROSCA MKIV MD 24 410 LISA BR 767 PP-1.01.01.005.242", "4504": "ROSCA MKIV MD 24 410 LISA PRETO 017 PP-1.01.01.005.284", "4505": "TAMPA MKIV MD STD FUME CB280 PP PD0601.01.03.005.853", "4508": "FIXAÇÃO-GS-28/410CUST---THREAD-HDPE-GREE - 31295307", "4509": "ATUADOR-SENTIDOS-PP--5,75-PINK-LOT-31247527", "4512": "TAMPA-EM-28,20-PP-LILA--SHNYNIX TOD-31265596", "4514": "FIXAÇÃO-GS-24/410--3N-THREAD-PP-NATU-RRN (ESTR COM DEGRAU) - 10303840", "4536": "ATUADOR MKIV STD OURO CB281 PP 01PD06002-1.01.03.005.855", "4538": "ROSCA MKIV MD 20 410 LISA OURO CB281 PP1.01.03.005.856", "4555": "ROSCA ALTA P2000 28 410 TEXT ROXO CB270 DPB063-1.01.03.005.822", "4557": "ANEL TRAVA P2000 STD PP TEXT ROXO CB270 DPB038-1.01.03.005.823", "4558": "ROSCA P2000 24 410 LISA BRANCA CB263 PP DPB0611.01.03.005.826", "4596": "ROSCA MKIV MD 22 415 ESTRIADA PRETO 017 PP 09PD06007-1.01.01.005.128", "4597": "ROSCA MKIV MD 20 410 LISA OURO PEROLADO CB204 PP1.01.01.005.400", "4608": "ATUADOR MD STD ROSA CB282 01PD060031.01.03.005.858", "4609": "ROSCA MKIV MD 24 410 LISA ROSA CB282 PP1.01.03.005.859", "4645": "ROSCA MKIV MD 20 410 LISA BRONZE CB240 PP-1.01.01.005.506", "4647": "BASE TRIANGULAR - KG 3", "4666": "ATUADOR MD150 STD BEGE CB286 01PD060031.01.03.005.862", "4667": "ATUADOR MKIV STD BEGE CB286 PP 01PD06002-1.01.03.005.863", "4668": "ROSCA MKIV MD 24 410 LISA BEGE CB286 PP1.01.03.005.864", "4687": "FIXAÇÃO-GS-28/410CUST---THREAD-HDPE-YELL - 31300875", "4688": "ATUADOR-SENTIDOS-PP--5,85-YELL-LOT 31300894", "4690": "TAMPA-EM-28,20-PP-ORAN--SHNY-----EUROMIS-31300904", "4691": "ATUADOR-EMII-PP--4,34-ORAN---SPRAYEU- 31300906", "4693": "ATUADOR-EMII-PP--4,34-BLUE---SPRAY----CL-31302654", "4732": "JUNCAO SEM FURO - KG 2", "4749": "FIXAÇÃO-GS-24/410--2N-THREAD-PP-PINK----(LISO COM DEGRAU) 31233264", "4764": "CORREDICA FUNDO VAZADO 3M SEM FURO - KG 1B", "4766": "FIXADOR FUNDO FECHADO 3M SEM FURO - KG 1A", "4769": "FIXADOR FUNDO FECHADO 6M SEM FURO - KG 4A", "4783": "ROSCA ALTA P2000 28 410 TEXT AZUL CB288 DPB063-1.01.03.005.868", "4784": "ANEL TRAVA P2000 STD PP TEXT AZUL CB288 PP DPB0381.01.03.005.869", "4785": "ATUADOR P2000 SATIN AZUL CB288 PP DPB0371.01.03.005.870", "4794": "ROSCA ALTA P2000 28 410 TEXT ROSA CB271 DPB0631.01.03.005.875", "4795": "ANEL TRAVA P2000 STD PP TEXT ROSA CB271 PP DPB0381.01.03.005.876", "4807": "ROSCA MKIV MD 20 410 LISA NAT PP-1.01.01.005.429", "4808": "SUPORTE DO COPO 4 CAVIDADES - 283600249", "4823": "ROSCA MKIV MD 24 410 LISA AMERELO PEROLA CB289 PP-1.01.03.005.878", "4824": "ATUADOR MKIV STD AMARELO PEROLA CB289 PP 01PD06002-1.01.03.005.879", "4899": "CAIXA DE CONTROLE DO GERADOR DE CLORO RESIDENCIAL G5-40070236", "4900": "TAMPA CAIXA DE CONTROLE DO GERADOR DE CLORO RESIDENCIAL G5-40070237", "4906": "CREPINA SIMPLES ABERTA F-450 E F-550-40070281", "4907": "DISTRIBUIDOR DE CREPINA INFERIOR - 40070280", "4909": "DISTRIBUIDOR DE CREPINA SUPERIOR - 40070279", "4913": "UNIAO ROSCADA GERADOR DE CLORO RESIDENCIAL G5-40070238", "4914": "CORPO DO GERADOR DE CLORO RESIDENCIAL G5-40070234", "4915": "CREPINA SIMPLES ABERTA F-650 E F-750-40070282", "5025": "TAMPA-EM-28,20-PP-PINK--SHNY-TODODIA - 31313534", "5026": "ATUADOR-EMII-PP--4,34-PINK---SPRAY----TO-31313535", "5034": "CONECTOR, PLAST, MS-CONNECTOR ROJO - (CONECT. VERMELHO EXΧΡ.) - 10100169", "5035": "CONECTOR, PLAST, MS-CONNECTOR, AMARILLO - (CONECT. AMAR. EXP.) - 10100166", "5048": "BASE CASSETE MONTADA-510080655PLP", "5050": "TAMPA CASSETE-510080625PLP", "5079": "ROSCA ALTA P2000 28 410 TEXT VERDE CB295 DPB0631.01.03.005.899", "5081": "ATUADOR P2000 SATIN VERDE CB295 PP DPB0371.01.03.005.896", "5083": "ATUADOR-SENTIDOS-PP--5,75-LILA---LOT- 31266387", "5194": "FIXAÇÃO-GS-28/410CUST---THREAD-HDPE-PINK - 31328162", "5290": "SUPORTE FLIPTOP BRANCA - AST206", "5302": "ATUADOR-K2-PPNATURRNA00004--11001314", "5313": "ATUADOR-A03LV1-PP---NATURRNA00003--10302173", "5328": "ATUADOR-A46V1-PP-NATURRNA00003--10302176", "5332": "ACTU-A03LV1-PP---GREY-SHNYP228-29002515", "5339": "FIXAÇÃO-GS-28/410CUST---THREAD-HDPE-ORAN - 31322938", "5382": "ATUADOR-EMII-PP--4,34-GOLD---SPRAY-13017-31327903", "5416": "ACTU-K2-PP---BLUEP223-29001711", "5448": "BASE PARA TOMADAS 20A MILUZ-S1B24718", "5477": "CONJ DISP DE SEGURANÇA BRA/ITA 10/20A-BR59-HRB25067", "5482": "PECA 1 PRETO POLICARBONATO - P1P2024", "5484": "PECA 1 CINZA NYLON - P1N2024", "5537": "ATUADOR-A03LV1-PP---BLACMA0010302157", "5568": "TAMPA PARA TUBO EXTERNO-AST117-BL310062", "5569": "TUBO EXTERNO - AST121-BL310066", "5645": "ROSCA ALTA P2000 28 410 TEXT AZUL CB300 PP DPB0631.01.03.005.947", "5684": "ATUADOR-A03LV1-PP---BLUE-SHNY-329-31197642", "5708": "TAMPA-EM-28,20-PP-PURP--SHNY----- 31336631", "5709": "ATUADOR-EMII-PP--4,34-PURP---SPRAY 31336632", "5710": "ATUADOR-SENTIDOS-PP--5,75-BROW-LOT---31329776", "5728": "FIXAÇÃO-GS-28/410CUST---THREAD-HDPE-PURP - 31336756", "5729": "ATUADOR-EMII-PP--4,34-GOLD---SPRAY-31308323", "574": "MANOPLA MACA (HANDLER) - LHC 390-20351", "5741": "ATUADOR-K2-PP-BLACRBK000001--31025989", "5846": "FIXAÇÃO-GS-28/410CUST---THREAD-HDPE-PURP 31346237", "5855": "ROSCA MKIV MD 22 415 ESTRIADA OURO CB112 PP 09PD06007-1.01.01.005.039", "5858": "ATUADOR-EMII-PP--4,34-RED---SPRAY-36423-31349486", "5859": "ATUADOR-EMII-PP--4,34-ORAN---SPRAY----KA-31349501", "5860": "ATUADOR-EMII-PP--4,34-BLUE---SPRAY----KA - 31349610", "5861": "TAMPA-EM-28,20-PP-RED--SHNY-TODODIA-31349485", "5862": "TAMPA-EM-28,20-PP-ORAN-SHNY-----KAIAK F - 31349490", "5863": "TAMPA-EM-28,20-PP-BLUE--SHNY-KAIAK M - 31349609", "5870": "FLANGE PARA CARRETEL PLÁSTICO", "5879": "ATUADOR-EMII-PP--4,34-GREE---SPRAY----HE - 31347832", "5880": "TAMPA-EM-28,20-PP-GREE--SHNY-HERBAL 31347833", "5937": "ATUADOR-EMII-PP--4,34-GREE---SPRAY----HE-31347832", "5958": "FLANGE PARA CARRETEL PLÁSTICO REEL IN THE BOX 3000093 - 112", "5960": "DISPOSITIVO P/ENCAIXE DE CARRETEL - 3400118", "5974": "FIXAÇÃO-GS-28/410CUST-MARROM--THREAD-HDPE - 31349252", "5999": "ATUADOR-EMII-PP--4,34-PURP---SPRAY--SD 2-31354753", "6001": "TAMPA-EM-28,20-PP-PURP--SHNY31354752", "6005": "ATUADOR-EMII-PP--4,34-ORAN---SPRAY--2459-31355148", "6006": "TAMPA-EM-28,20-PP-ORAN-SHNY----PARIPUE - 31355147", "6083": "ATUADOR-SENTIDOS-PP--5,75-LILAS-LOT-31205436", "6152": "RETENTOR M300 STD NAT POM DF002-64 CAVIDADES - 1.01.01.005.025" };
 
         let db, auth, userId;
         let selectedDate = new Date().toISOString().split('T')[0];
@@ -331,46 +337,69 @@
             dot.className = `w-3 h-3 rounded-full ${color}`;
             dot.classList.remove('animate-pulse');
         };
+
+        const showConfirmModal = (message, onConfirm) => {
+            const modal = document.getElementById('confirm-modal');
+            const okBtn = modal.querySelector('#confirm-modal-ok-btn');
+            const cancelBtn = modal.querySelector('#confirm-modal-cancel-btn');
+
+            modal.querySelector('#confirm-modal-text').textContent = message;
+            modal.classList.remove('hidden');
+
+            const handleOkClick = () => {
+                onConfirm();
+                closeModal();
+            };
+
+            const closeModal = () => {
+                modal.classList.add('hidden');
+                okBtn.removeEventListener('click', handleOkClick);
+                cancelBtn.removeEventListener('click', closeModal);
+            };
+
+            okBtn.addEventListener('click', handleOkClick, { once: true });
+            cancelBtn.addEventListener('click', closeModal, { once: true });
+        };
         
         const updateMachineSelector = () => {
              const maquinas = [
-                'H-01', 'H-02', 'H-03', 'H-04', 'H-05', 'H-06', 'H-07', 'H-08', 'H-09', 'H-10', 
-                'H-11', 'H-12', 'H-13', 'H-14', 'H-15', 'H-16', 'H-17', 'H-18', 'H-19', 'H-20', 
-                'H-26', 'H-27', 'H-28', 'H-29', 'H-30', 'H-31', 'H-32'
-            ];
-            const maquinasComDados = Object.keys(cicloData.maquinas || {}).filter(maq =>
-                Object.values(cicloData.maquinas[maq]).some(val => val !== '')
-            ).sort((a, b) => parseInt(a.split('-')[1]) - parseInt(b.split('-')[1]));
+                 'H-01', 'H-02', 'H-03', 'H-04', 'H-05', 'H-06', 'H-07', 'H-08', 'H-09', 'H-10', 
+                 'H-11', 'H-12', 'H-13', 'H-14', 'H-15', 'H-16', 'H-17', 'H-18', 'H-19', 'H-20', 
+                 'H-26', 'H-27', 'H-28', 'H-29', 'H-30', 'H-31', 'H-32'
+             ];
+             const maquinasComDados = Object.keys(cicloData.maquinas || {}).filter(maq =>
+                 Object.values(cicloData.maquinas[maq]).some(val => val !== '')
+             ).sort((a, b) => parseInt(a.split('-')[1]) - parseInt(b.split('-')[1]));
 
-            const maquinasDisponiveis = maquinas.filter(maq => !maquinasComDados.includes(maq));
-            
-            const currentSelection = machineSelector.value;
-            machineSelector.innerHTML = '<option value="">-- Escolha uma máquina --</option>';
+             const maquinasDisponiveis = maquinas.filter(maq => !maquinasComDados.includes(maq));
+             
+             const currentSelection = machineSelector.value;
+             machineSelector.innerHTML = '<option value="">-- Escolha uma máquina --</option>';
 
-            if (maquinasDisponiveis.length > 0) {
-                const optgroupDisponiveis = document.createElement('optgroup');
-                optgroupDisponiveis.label = 'Máquinas para Novo Apontamento';
-                maquinasDisponiveis.forEach(maq => {
-                    const option = document.createElement('option');
-                    option.value = maq;
-                    option.textContent = maq;
-                    optgroupDisponiveis.appendChild(option);
-                });
-                machineSelector.appendChild(optgroupDisponiveis);
-            }
+             if (maquinasDisponiveis.length > 0) {
+                 const optgroupDisponiveis = document.createElement('optgroup');
+                 optgroupDisponiveis.label = 'Máquinas para Novo Apontamento';
+                 maquinasDisponiveis.forEach(maq => {
+                     const option = document.createElement('option');
+                     option.value = maq;
+                     option.textContent = maq;
+                     optgroupDisponiveis.appendChild(option);
+                 });
+                 machineSelector.appendChild(optgroupDisponiveis);
+             }
 
-            if (maquinasComDados.length > 0) {
-                const optgroupComDados = document.createElement('optgroup');
-                optgroupComDados.label = 'Editar Apontamento Existente';
-                maquinasComDados.forEach(maq => {
-                    const option = document.createElement('option');
-                    option.value = maq;
-                    option.textContent = maq;
-                    optgroupComDados.appendChild(option);
-                });
-                machineSelector.appendChild(optgroupComDados);
-            }
-            machineSelector.value = currentSelection;
+             if (maquinasComDados.length > 0) {
+                 const optgroupComDados = document.createElement('optgroup');
+                 optgroupComDados.label = 'Editar Apontamento Existente';
+                 maquinasComDados.forEach(maq => {
+                     const option = document.createElement('option');
+                     option.value = maq;
+                     option.textContent = maq;
+                     optgroupComDados.appendChild(option);
+                 });
+                 machineSelector.appendChild(optgroupComDados);
+             }
+             machineSelector.value = currentSelection;
         };
         
         const renderCicloTable = () => {
@@ -421,14 +450,15 @@
         
         const populateCicloForm = (maq) => {
             const data = cicloData.maquinas[maq] || {};
+            const codProdutoValue = data.cod_produto || '';
             cicloFields.querySelector('[data-col="qtd_total_op"]').value = data.qtd_total_op || '';
             cicloFields.querySelector('[data-col="qtd_real"]').value = data.qtd_real || '';
             cicloFields.querySelector('[data-col="fim"]').value = data.fim || '';
-            cicloFields.querySelector('[data-col="cod_produto"]').value = data.cod_produto || '';
+            cicloFields.querySelector('[data-col="cod_produto"]').value = codProdutoValue;
             cicloFields.querySelector('[data-col="cav"]').value = data.cav || '';
             cicloFields.querySelector('[data-col="ciclo"]').value = data.ciclo || '';
             cicloFields.querySelector('[data-col="pm"]').value = data.pm || '';
-            cicloFields.querySelector('[data-col="peca"]').value = data.peca || '';
+            cicloFields.querySelector('[data-col="peca"]').value = data.peca || produtos[codProdutoValue] || '';
             cicloFields.querySelector('[data-col="material"]').value = data.material || '';
             cicloFields.querySelector('[data-col="op"]').value = data.op || '';
             cicloFields.disabled = false;
@@ -439,13 +469,7 @@
             showLoading('ciclo-container', true);
             const docRef = doc(db, `artifacts/${appId}/public/data/ciclo_controles`, selectedDate);
             try {
-                // Adiciona um timeout à requisição
-                const controller = new AbortController();
-                const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 segundos
-                
-                const docSnap = await getDoc(docRef, { signal: controller.signal });
-                clearTimeout(timeoutId);
-
+                const docSnap = await getDoc(docRef);
                 cicloData = docSnap.exists() ? docSnap.data() : { maquinas: {}, observacoes: '' };
                 obsTextarea.value = cicloData.observacoes || '';
                 updateMachineSelector();
@@ -453,10 +477,10 @@
                 clearAndDisableCicloForm();
             } catch (error) {
                 console.error("Erro ao carregar dados de ciclo:", error);
-                if (error.name === 'AbortError') {
-                    showToast("Erro de conexão: A base de dados não respondeu. Verifique se o Firestore foi criado no seu projeto Firebase e se as regras de segurança estão corretas.", 'error');
+                 if (error.code === 'unavailable') {
+                    showToast("Erro de conexão com o banco de dados. Verifique sua internet.", 'error');
                 } else {
-                    showToast("Erro ao carregar dados de ciclo.", 'error');
+                    showToast("Erro ao carregar dados de ciclo. Verifique o console para mais detalhes.", 'error');
                 }
             } finally {
                 showLoading('ciclo-container', false);
@@ -627,6 +651,12 @@
         };
 
         const initialize = async () => {
+             if (!firebaseConfig || !firebaseConfig.apiKey) {
+                updateConnectionStatus("Erro de Configuração", "bg-red-500");
+                showToast("Configuração do Firebase não encontrada ou inválida. O aplicativo não pode ser iniciado.", 'error');
+                return;
+            }
+            
             let app;
             try {
                 app = initializeApp(firebaseConfig);
@@ -641,14 +671,18 @@
             auth = getAuth(app);
             
             try {
-                await signInAnonymously(auth);
+                if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                    await signInWithCustomToken(auth, __initial_auth_token);
+                } else {
+                    await signInAnonymously(auth);
+                }
             } catch(error) {
                 console.error("Erro na autenticação:", error);
                 updateConnectionStatus("Falha na Autenticação", "bg-red-500");
                 let userMessage = `Erro na autenticação: ${error.message}.`;
-                if (error.code === 'auth/configuration-not-found') {
-                    userMessage = "Falha na autenticação: O login anónimo não está ativado no seu projeto Firebase. Por favor, ative-o na consola do Firebase -> Authentication -> Sign-in method.";
-                }
+                 if (error.code === 'auth/configuration-not-found' || error.code.includes('PERMISSION_DENIED')) {
+                     userMessage = "Falha na autenticação: Verifique se o método de login está ativado no seu projeto Firebase (Authentication -> Sign-in method).";
+                 }
                 showToast(userMessage, 'error');
                 return;
             }
@@ -723,20 +757,44 @@
             
             formMaterial.addEventListener('submit', addMaterial);
 
+            // AUTO-COMPLETAR NOME DA PEÇA
+            const codProdutoCicloInput = cicloFields.querySelector('[data-col="cod_produto"]');
+            const pecaCicloInput = cicloFields.querySelector('[data-col="peca"]');
+            const codProdutoMaterialInput = document.getElementById('cod-produto-material');
+            const nomePecaMaterialInput = document.getElementById('nome-peca');
+
+            const handleProductCodeChange = (code, targetPecaInput, sourceInput) => {
+                const trimmedCode = code.trim();
+                sourceInput.classList.remove('border-red-500', 'border-2');
+                const peca = produtos[trimmedCode];
+                if (peca) {
+                    targetPecaInput.value = peca;
+                } else {
+                    targetPecaInput.value = '';
+                    if (trimmedCode !== '') {
+                        sourceInput.classList.add('border-red-500', 'border-2');
+                    }
+                }
+            };
+            
+            codProdutoCicloInput.addEventListener('input', (e) => {
+                handleProductCodeChange(e.target.value, pecaCicloInput, e.target);
+            });
+
+            codProdutoMaterialInput.addEventListener('input', (e) => {
+                handleProductCodeChange(e.target.value, nomePecaMaterialInput, e.target);
+            });
+
+
             document.getElementById('material-container').addEventListener('click', e => {
                 const deleteBtn = e.target.closest('.delete-material-btn');
                 if(deleteBtn) {
                     const id = deleteBtn.dataset.id;
                     const peca = deleteBtn.dataset.peca;
-                    const modal = document.getElementById('confirm-modal');
-                    modal.querySelector('#confirm-modal-text').textContent = `Isso removerá permanentemente o registro do material para a peça "${peca}".`;
-                    modal.classList.remove('hidden');
-                    const okBtn = modal.querySelector('#confirm-modal-ok-btn');
-                    const cancelBtn = modal.querySelector('#confirm-modal-cancel-btn');
-                    const handleOkClick = () => { deleteMaterial(id); closeModal(); };
-                    const closeModal = () => { modal.classList.add('hidden'); okBtn.removeEventListener('click', handleOkClick); };
-                    okBtn.addEventListener('click', handleOkClick, { once: true });
-                    cancelBtn.addEventListener('click', closeModal, { once: true });
+                    showConfirmModal(
+                        `Isso removerá permanentemente o registro do material para a peça "${peca}".`,
+                        () => deleteMaterial(id)
+                    );
                 }
             });
 
@@ -744,15 +802,10 @@
                 const deleteBtn = e.target.closest('.delete-ciclo-btn');
                 if (deleteBtn) {
                     const maq = deleteBtn.dataset.maq;
-                    const modal = document.getElementById('confirm-modal');
-                    modal.querySelector('#confirm-modal-text').textContent = `Isso removerá permanentemente o lançamento de ciclo para a máquina "${maq}".`;
-                    modal.classList.remove('hidden');
-                    const okBtn = modal.querySelector('#confirm-modal-ok-btn');
-                    const cancelBtn = modal.querySelector('#confirm-modal-cancel-btn');
-                    const handleOkClick = () => { deleteCicloEntry(maq); closeModal(); };
-                    const closeModal = () => { modal.classList.add('hidden'); okBtn.removeEventListener('click', handleOkClick); };
-                    okBtn.addEventListener('click', handleOkClick, { once: true });
-                    cancelBtn.addEventListener('click', closeModal, { once: true });
+                    showConfirmModal(
+                        `Isso removerá permanentemente o lançamento de ciclo para a máquina "${maq}".`,
+                        () => deleteCicloEntry(maq)
+                    );
                 }
             });
         };
