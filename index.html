@@ -12,7 +12,7 @@
         .table-input {
             width: 100%;
             background-color: transparent;
-            border: 1px solid transparent;
+            border: 1px solid #d1d5db; /* Cor da borda mais escura */
             padding: 8px;
             box-sizing: border-box;
             text-align: center;
@@ -65,7 +65,7 @@
                 margin: 0.5in;
             }
             table {
-                font-size: 9pt;
+                font-size: 8pt;
             }
             th, td {
                 padding: 4px 6px;
@@ -123,7 +123,7 @@
             <div class="loading-overlay hidden opacity-0 absolute inset-0 bg-white/80 justify-center items-center z-10 rounded-lg">
                 <i data-lucide="loader-2" class="w-8 h-8 text-sky-500 animate-spin"></i>
             </div>
-            <h2 class="text-2xl font-semibold text-sky-700 flex items-center gap-2 border-b border-slate-200 pb-4 mb-6 no-print"><i data-lucide="settings-2"></i>Controle de Ciclo & Cavitação</h2>
+            <h2 class="text-2xl font-semibold text-sky-700 flex items-center gap-2 border-b border-slate-200 pb-4 mb-6"><i data-lucide="settings-2"></i>Controle de Ciclo & Cavitação</h2>
             
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 no-print">
                 <!-- Coluna 1: Visualizador de Apontamento -->
@@ -153,13 +153,13 @@
                         
                         <fieldset id="ciclo-fields" disabled class="mt-6 border-t pt-6">
                             <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
-                                <div><label class="block text-sm font-medium text-slate-600">CAV.</label><input data-col="cav" type="text" class="mt-1 table-input border-slate-300 border bg-white"></div>
-                                <div><label class="block text-sm font-medium text-slate-600">CICLO</label><input data-col="ciclo" type="text" class="mt-1 table-input border-slate-300 border bg-white"></div>
-                                <div><label class="block text-sm font-medium text-slate-600">P.M.</label><input data-col="pm" type="text" class="mt-1 table-input border-slate-300 border bg-white"></div>
-                                <div class="col-span-2 md:col-span-3"><label class="block text-sm font-medium text-slate-600">PEÇA</label><input data-col="peca" type="text" class="mt-1 table-input border-slate-300 border bg-white text-left px-2"></div>
-                                <div><label class="block text-sm font-medium text-slate-600">FIM</label><input data-col="fim" type="text" class="mt-1 table-input border-slate-300 border bg-white"></div>
-                                <div><label class="block text-sm font-medium text-slate-600">MATERIAL</label><input data-col="material" type="text" class="mt-1 table-input border-slate-300 border bg-white"></div>
-                                <div><label class="block text-sm font-medium text-slate-600">OP</label><input data-col="op" type="text" class="mt-1 table-input border-slate-300 border bg-white"></div>
+                                <div><label class="block text-sm font-medium text-slate-600">CAV.</label><input data-col="cav" type="text" class="mt-1 table-input bg-white"></div>
+                                <div><label class="block text-sm font-medium text-slate-600">CICLO</label><input data-col="ciclo" type="text" class="mt-1 table-input bg-white"></div>
+                                <div><label class="block text-sm font-medium text-slate-600">P.M.</label><input data-col="pm" type="text" class="mt-1 table-input bg-white"></div>
+                                <div class="col-span-2 md:col-span-3"><label class="block text-sm font-medium text-slate-600">PEÇA</label><input data-col="peca" type="text" class="mt-1 table-input bg-white text-left px-2"></div>
+                                <div><label class="block text-sm font-medium text-slate-600">FIM</label><input data-col="fim" type="text" class="mt-1 table-input bg-white"></div>
+                                <div><label class="block text-sm font-medium text-slate-600">MATERIAL</label><input data-col="material" type="text" class="mt-1 table-input bg-white"></div>
+                                <div><label class="block text-sm font-medium text-slate-600">OP</label><input data-col="op" type="text" class="mt-1 table-input bg-white"></div>
                             </div>
                         </fieldset>
                      </form>
@@ -218,9 +218,20 @@
                             <option value="">Selecione</option>
                         </select>
                     </div>
-                    <div><label for="cod-produto" class="block text-sm font-medium text-slate-700">Cód. do Produto</label><input type="text" id="cod-produto" class="mt-1 block w-full p-2 border-slate-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500"></div>
+                    <div>
+                        <label for="client-prep" class="block text-sm font-medium text-slate-700">Cliente</label>
+                        <select id="client-prep" required class="mt-1 block w-full p-2 border-slate-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500">
+                            <option value="">Selecione</option>
+                        </select>
+                    </div>
+                     <div>
+                        <label for="product-prep" class="block text-sm font-medium text-slate-700">Produto</label>
+                        <select id="product-prep" required class="mt-1 block w-full p-2 border-slate-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500" disabled>
+                            <option value="">Selecione um cliente</option>
+                        </select>
+                    </div>
                     <div><label for="op-prep" class="block text-sm font-medium text-slate-700">OP</label><input type="text" id="op-prep" class="bg-white mt-1 block w-full p-2 border-slate-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500"></div>
-                    <div class="sm:col-span-2"><label for="nome-peca" class="block text-sm font-medium text-slate-700">Nome da Peça</label><input type="text" id="nome-peca" required class="bg-white mt-1 block w-full p-2 border-slate-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500"></div>
+                    <div class="sm:col-span-2"><label for="nome-peca" class="block text-sm font-medium text-slate-700">Nome da Peça</label><input type="text" id="nome-peca" required readonly class="bg-slate-200 mt-1 block w-full p-2 border-slate-300 rounded-md shadow-sm"></div>
                     <div><label for="qtd-mat" class="block text-sm font-medium text-slate-700">Qtd. Mat.</label><input type="number" id="qtd-mat" class="mt-1 block w-full p-2 border-slate-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500"></div>
                     <div><label for="sk-resina" class="block text-sm font-medium text-slate-700">SK Resina</label><input type="text" id="sk-resina" class="mt-1 block w-full p-2 border-slate-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500"></div>
                     <div><label for="lote-resina" class="block text-sm font-medium text-slate-700">Lote Resina</label><input type="text" id="lote-resina" class="mt-1 block w-full p-2 border-slate-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500"></div>
@@ -241,7 +252,6 @@
                         <tr>
                             <th class="px-4 py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider">Preparador</th>
                             <th class="px-4 py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider">Máquina</th>
-                            <th class="px-4 py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider">Cód. Prod.</th>
                             <th class="px-4 py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider">OP</th>
                             <th class="px-4 py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider">Nome da Peça</th>
                             <th class="px-4 py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider">Qtd. Mat.</th>
@@ -274,12 +284,21 @@
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
         import { getFirestore, doc, getDoc, setDoc, addDoc, deleteDoc, onSnapshot, collection, query, where, serverTimestamp, writeBatch, getDocs } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-        const appId = typeof __app_id !== 'undefined' ? __app_id : 'hokkaido-flow-dev';
-        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : { apiKey: "DEV", authDomain: "DEV", projectId: "DEV" };
-        const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+        const appId = 'pmphokkaido';
+        
+        // --- INÍCIO DA CONFIGURAÇÃO DO FIREBASE ---
+        const firebaseConfig = {
+          apiKey: "AIzaSyBm1x7UJwJafQkeffshu19SbR05cE5cVMw",
+          authDomain: "pmphokkaido.firebaseapp.com",
+          projectId: "pmphokkaido",
+          storageBucket: "pmphokkaido.appspot.com",
+          messagingSenderId: "51980668621",
+          appId: "1:51980668621:web:1f076cd52c7dd56ac6a384"
+        };
+        // --- FIM DA CONFIGURAÇÃO DO FIREBASE ---
 
         let db, auth, userId;
         let selectedDate = new Date().toISOString().split('T')[0];
@@ -298,16 +317,7 @@
 
         // Banco de dados de produtos
         const productDatabase = [
-            { code: 'P21867', op: '21867', name: 'SUPORTE DO COPO 4CAV.' },
-            { code: 'P22000', op: '22000', name: 'ROSCA GS 28 VINHO' },
-            { code: 'P21180', op: '21180', name: 'ACUMULADOR P2000' },
-            { code: 'P21946', op: '21946', name: 'ACUMULADOR M300' },
-            { code: 'P22105', op: '22105', name: 'ATUADOR SPRAY SILGAN' },
-            { code: 'P21555', op: '21555', name: 'ROSCA ALTA P2000 28/410' },
-            { code: 'P20987', op: '20987', name: 'CAPA KAIAK 16 CAV' },
-            { code: 'P21345', op: '21345', name: 'CLIP K2 APTAR' },
-            { code: 'P22301', op: '22301', name: 'ROSCA SENTIDOS - MOLDE 1 (A)' },
-            { code: 'P22302', op: '22302', name: 'ROSCA SENTIDOS - MOLDE 2 (D)' }
+            { client: 'APTAR', name: 'ATUADOR CLASSIC' },{ client: 'APTAR', name: 'ATUADOR SENTIDOS / POEMA' },{ client: 'APTAR', name: 'CAPA KAIAK 16 CAVIDADES' },{ client: 'APTAR', name: 'CAPA KAIAK 8 CAVIDADES' },{ client: 'APTAR', name: 'CLIP K2' },{ client: 'APTAR', name: 'CLIP Q3' },{ client: 'APTAR', name: 'ROSCA 24/410 ESTRIADA / LISA - APTAR' },{ client: 'APTAR', name: 'ROSCA SENTIDOS - MOLDE 1 (A)' },{ client: 'APTAR', name: 'ROSCA SENTIDOS - MOLDE 2 (D)' },{ client: 'APTAR', name: 'TAMPA EUROMIST' },{ client: 'CSN', name: 'FACE INTERNA' },{ client: 'GERDAU', name: 'CARRETEL' },{ client: 'GERDAU', name: 'TRAVA DO CARRETEL' },{ client: 'HOKKAIDO', name: 'I - 180 - VERMELHO' },{ client: 'HOKKAIDO', name: 'L - 90 - AMARELO' },{ client: 'HOKKAIDO', name: 'POTE DO SORVETE' },{ client: 'HOKKAIDO', name: 'R - 120 - VERDE' },{ client: 'HOKKAIDO', name: 'T - 180/90 - AZUL' },{ client: 'HOKKAIDO', name: 'TAMPA DO POTE DO SORVETE' },{ client: 'HOKKAIDO', name: 'V- 30 CINZA' },{ client: 'HOKKAIDO', name: 'X - 360 - MARROM' },{ client: 'INDUSMACK', name: 'BICO ENTRADA (ESPIGÃO)' },{ client: 'INDUSMACK', name: 'BOCAL I2' },{ client: 'INDUSMACK', name: 'BOCAL I3' },{ client: 'INDUSMACK', name: 'BOCAL I4' },{ client: 'INDUSMACK', name: 'BOCAL I5' },{ client: 'INDUSMACK', name: 'BOCAL I6' },{ client: 'INDUSMACK', name: 'SUPORTE DA MANGUEIRA' },{ client: 'INDUSMACK', name: 'SUPORTE REDONDO 1"' },{ client: 'INDUSMACK', name: 'SUPORTE REDONDO 3/4"' },{ client: 'JORNADA', name: 'FACE EXTERNA' },{ client: 'JORNADA', name: 'TAMPÃO' },{ client: 'LH COLUS', name: 'BARRA TRIPLA CORREDIÇA (SLIDE THREE BAR )' },{ client: 'LH COLUS', name: 'BASE TRIANGULAR - KG3 - SK4647' },{ client: 'LH COLUS', name: 'CEILING RING NYLON' },{ client: 'LH COLUS', name: 'CORREDIÇA FUNDO VAZADO 3M SEM FURO - KG 1B - SK4764' },{ client: 'LH COLUS', name: 'CORREDIÇA FUNDO VAZADO 6M SEM FURO - KG 4B - SK4763' },{ client: 'LH COLUS', name: 'FIXADOR FUNDO FECHADO 3M SEM FURO - KG 1A - SK4766' },{ client: 'LH COLUS', name: 'FIXADOR FUNDO FECHADO 6M SEM FURO - KG 4A - SK4769' },{ client: 'LH COLUS', name: 'JUNÇÃO SEM FURO - KG2 - SK4732' },{ client: 'LH COLUS', name: 'MANOPLA MACA (HANDLER)' },{ client: 'LH COLUS', name: 'SHIM SUPPORT LITTER (SUPORTE CALÇO MACA)' },{ client: 'ÓRICA', name: 'CLIP' },{ client: 'ÓRICA', name: 'CONECTOR' },{ client: 'PARKER', name: 'ADAPTADOR' },{ client: 'PARKER', name: 'BOCAL P/ FILTRO / PISTÃO' },{ client: 'PARKER', name: 'CONJUNTO TAMPÃO' },{ client: 'PARKER', name: 'COROA P/ FILTRO' },{ client: 'PARKER', name: 'CORPO DO DRENO' },{ client: 'PARKER', name: 'CÔNICO' },{ client: 'PARKER', name: 'PLUG 1/2' },{ client: 'PARKER', name: 'PLUG 1/4' },{ client: 'PARKER', name: 'PLUG DO DRENO' },{ client: 'PARKER', name: 'PUXADOR COM BOMBA' },{ client: 'PARKER', name: 'SUPORTE DO COPO - 6 CAVS - NOVO' },{ client: 'PARKER', name: 'SUPORTE ESCAL 600' },{ client: 'PARKER', name: 'SUPORTE R260' },{ client: 'PARKER', name: 'SUPORTE USINADO INJETADO' },{ client: 'PARKER', name: 'TAMPA 4 CAVIDADES' },{ client: 'PARKER', name: 'TAMPA 5831' },{ client: 'PARKER', name: 'TAMPA 5923' },{ client: 'PARKER', name: 'TAMPA BEGE INFERIOR' },{ client: 'PARKER', name: 'TAMPA BEGE SUPERIOR' },{ client: 'PARKER', name: 'TAMPA PLÁSTICA C/ FURO' },{ client: 'PARKER', name: 'TAMPA PLÁSTICA S/ FURO' },{ client: 'PARKER', name: 'TAMPÃO PLÁSTICO' },{ client: 'PARKER', name: 'TURBINA 1' },{ client: 'PARKER', name: 'TURBina 2' },{ client: 'SILGAN', name: 'ACUMULADOR M300' },{ client: 'SILGAN', name: 'ACUMULADOR P2000' },{ client: 'SILGAN', name: 'ANEL TRAVA BRILHANTE / TEXTURIZADA' },{ client: 'SILGAN', name: 'ATUADOR DISPENSADOR' },{ client: 'SILGAN', name: 'ATUADOR P2000' },{ client: 'SILGAN', name: 'ATUADOR SPRAY' },{ client: 'SILGAN', name: 'BUCHA P2000' },{ client: 'SILGAN', name: 'CLIKIT 17' },{ client: 'SILGAN', name: 'RETENTOR DA MOLA 24 CAV' },{ client: 'SILGAN', name: 'RETENTOR DA MOLA 64 CAV' },{ client: 'SILGAN', name: 'ROSCA ALTA P2000 24/410 LISA' },{ client: 'SILGAN', name: 'ROSCA ALTA P2000 28/410 FOSCA / ESTRIADA' },{ client: 'SILGAN', name: 'ROSCA BAIXA P2000' },{ client: 'SILGAN', name: 'ROSCA M300' },{ client: 'SILGAN', name: 'ROSCA MKIV 18/415' },{ client: 'SILGAN', name: 'ROSCA MKIV 20/410' },{ client: 'SILGAN', name: 'ROSCA MKIV 22/415' },{ client: 'SILGAN', name: 'ROSCA MKIV 24/410' },{ client: 'SILGAN', name: 'SOBRETAMPA' },{ client: 'SUNVISOR', name: 'COMEDOR CATBOWL' },{ client: 'SUNVISOR', name: 'PRATO DESCARTÁVEL' }
         ];
         
         const dateSelector = document.getElementById('date-selector');
@@ -530,10 +540,9 @@
                 date: selectedDate,
                 preparador: document.getElementById('preparador').value,
                 maquina: document.getElementById('maquina-prep').value,
-                codProduto: document.getElementById('cod-produto').value,
                 op: document.getElementById('op-prep').value,
-                qtdMat: document.getElementById('qtd-mat').value,
                 nomePeca: document.getElementById('nome-peca').value,
+                qtdMat: document.getElementById('qtd-mat').value,
                 skResina: document.getElementById('sk-resina').value,
                 loteResina: document.getElementById('lote-resina').value,
                 skMtAd: document.getElementById('sk-mt-ad').value,
@@ -580,7 +589,7 @@
 
                 tabelaMaterialBody.innerHTML = '';
                 if(querySnapshot.empty){
-                    tabelaMaterialBody.innerHTML = `<tr><td colspan="13" class="text-center p-4 text-slate-500">Nenhum material preparado para esta data.</td></tr>`;
+                    tabelaMaterialBody.innerHTML = `<tr><td colspan="12" class="text-center p-4 text-slate-500">Nenhum material preparado para esta data.</td></tr>`;
                 } else {
                     sortedDocs.forEach((doc) => {
                         const data = doc.data();
@@ -589,7 +598,6 @@
                         row.innerHTML = `
                             <td class="px-4 py-3 text-sm text-slate-700">${data.preparador || '-'}</td>
                             <td class="px-4 py-3 text-sm text-slate-700">${data.maquina}</td>
-                            <td class="px-4 py-3 text-sm text-slate-700">${data.codProduto || '-'}</td>
                             <td class="px-4 py-3 text-sm text-slate-700">${data.op || '-'}</td>
                             <td class="px-4 py-3 text-sm font-medium text-slate-800">${data.nomePeca}</td>
                             <td class="px-4 py-3 text-sm text-slate-700 text-center">${data.qtdMat || '-'}</td>
@@ -625,10 +633,10 @@
 
              if (existingData.empty) {
                 const testData = [
-                    { date: selectedDate, maquina: "H-29", codProduto: "P21867", op: "21867", qtdMat: "150", nomePeca: "SUPORTE DO COPO 4CAV.", loteResina: "608371", preparador: "Wagner", createdAt: serverTimestamp()},
-                    { date: selectedDate, maquina: "H-30", codProduto: "P22000", op: "22000", qtdMat: "206", nomePeca: "ROSCA GS 28 VINHO", loteResina: "RSGGOF004E", preparador: "Wagner", createdAt: serverTimestamp()},
-                    { date: selectedDate, maquina: "H-10", codProduto: "P21180", op: "21180", qtdMat: "205", nomePeca: "ACUMULADOR P2000", loteResina: "RJIAOC045E", preparador: "Wagner", createdAt: serverTimestamp()},
-                    { date: selectedDate, maquina: "H-03", codProduto: "P21946", op: "21946", qtdMat: "102", nomePeca: "ACUMULADOR M300", loteResina: "SPHAOD028E", preparador: "Wagner", createdAt: serverTimestamp()},
+                    { date: selectedDate, maquina: "H-29", op: "21867", nomePeca: "SUPORTE DO COPO 4CAV.", loteResina: "608371", preparador: "Wagner", createdAt: serverTimestamp()},
+                    { date: selectedDate, maquina: "H-30", op: "22000", nomePeca: "ROSCA GS 28 VINHO", loteResina: "RSGGOF004E", preparador: "Wagner", createdAt: serverTimestamp()},
+                    { date: selectedDate, maquina: "H-10", op: "21180", nomePeca: "ACUMULADOR P2000", loteResina: "RJIAOC045E", preparador: "Wagner", createdAt: serverTimestamp()},
+                    { date: selectedDate, maquina: "H-03", op: "21946", nomePeca: "ACUMULADOR M300", loteResina: "SPHAOD028E", preparador: "Wagner", createdAt: serverTimestamp()},
                 ];
                 const batch = writeBatch(db);
                 testData.forEach(item => {
@@ -641,17 +649,29 @@
         };
 
         const initialize = async () => {
-            const app = initializeApp(firebaseConfig);
+            let app;
+            try {
+                app = initializeApp(firebaseConfig);
+            } catch(e) {
+                console.error("Falha ao inicializar o Firebase:", e);
+                updateConnectionStatus("Erro de Configuração", "bg-red-500");
+                showToast("Configuração do Firebase inválida.", 'error');
+                return;
+            }
+
             db = getFirestore(app);
             auth = getAuth(app);
             
             try {
-                if (initialAuthToken) { await signInWithCustomToken(auth, initialAuthToken); } 
-                else { await signInAnonymously(auth); }
+                await signInAnonymously(auth);
             } catch(error) {
                 console.error("Erro na autenticação:", error);
                 updateConnectionStatus("Falha na Autenticação", "bg-red-500");
-                showToast("Não foi possível conectar ao servidor.", 'error');
+                let userMessage = `Erro na autenticação: ${error.message}.`;
+                if (error.code === 'auth/configuration-not-found') {
+                    userMessage = "Falha na autenticação: O login anónimo não está ativado no seu projeto Firebase. Por favor, ative-o na consola do Firebase -> Authentication -> Sign-in method.";
+                }
+                showToast(userMessage, 'error');
                 return;
             }
 
@@ -660,7 +680,6 @@
                     userId = user.uid;
                     updateConnectionStatus("Conectado em tempo real", "bg-green-500");
                     loadAllDataForDate();
-                    seedTestData();
                 } else {
                     userId = null;
                     updateConnectionStatus("Desconectado", "bg-red-500");
@@ -697,22 +716,7 @@
                 const formattedDate = new Date(selectedDate + 'T00:00:00').toLocaleDateString('pt-BR', { timeZone: 'UTC' });
                 printDateSpans.forEach(span => span.textContent = formattedDate);
                 document.getElementById('print-observacoes').textContent = obsTextarea.value;
-
-                document.body.classList.add('printing');
-                
-                // Força as seções a serem visíveis para impressão
-                pageSections.forEach(section => section.classList.remove('hidden'));
-
                 window.print();
-
-                // Limpa após a impressão
-                document.body.classList.remove('printing');
-                const activeTab = document.querySelector('.tab-button.active');
-                pageSections.forEach(section => {
-                    if (section.id !== activeTab.dataset.target.substring(1)) {
-                        section.classList.add('hidden');
-                    }
-                });
             });
 
             cicloForm.addEventListener('submit', saveCicloData);
@@ -738,48 +742,40 @@
                 }
             });
             
-            const codProdutoInput = document.getElementById('cod-produto');
+            const clientPrepSelect = document.getElementById('client-prep');
+            const productPrepSelect = document.getElementById('product-prep');
             const opPrepInput = document.getElementById('op-prep');
             const nomePecaInput = document.getElementById('nome-peca');
 
-            codProdutoInput.addEventListener('input', () => {
-                const productCode = codProdutoInput.value.trim().toUpperCase();
-                const product = productDatabase.find(p => p.code.toUpperCase() === productCode);
+            clientPrepSelect.addEventListener('change', () => {
+                const selectedClient = clientPrepSelect.value;
+                productPrepSelect.innerHTML = '<option value="">Selecione um produto</option>';
+                nomePecaInput.value = '';
 
-                if (product) {
-                    nomePecaInput.value = product.name;
-                    opPrepInput.value = product.op;
-                    
-                    nomePecaInput.readOnly = true;
-                    opPrepInput.readOnly = true;
-
-                    nomePecaInput.classList.add('bg-slate-200');
-                    opPrepInput.classList.add('bg-slate-200');
+                if (selectedClient) {
+                    const products = productDatabase.filter(p => p.client === selectedClient);
+                    products.forEach(p => {
+                        const option = document.createElement('option');
+                        option.value = p.name;
+                        option.textContent = p.name;
+                        productPrepSelect.appendChild(option);
+                    });
+                    productPrepSelect.disabled = false;
                 } else {
-                    if (productCode === '') {
-                        nomePecaInput.value = '';
-                        opPrepInput.value = '';
-                    }
-                    nomePecaInput.readOnly = false;
-                    opPrepInput.readOnly = false;
-                    
-                    nomePecaInput.classList.remove('bg-slate-200');
-                    opPrepInput.classList.remove('bg-slate-200');
+                    productPrepSelect.disabled = true;
                 }
+            });
+
+            productPrepSelect.addEventListener('change', () => {
+                nomePecaInput.value = productPrepSelect.value;
             });
 
             formMaterial.addEventListener('submit', addMaterial);
             
             formMaterial.addEventListener('reset', () => {
                 setTimeout(() => {
-                    const nomePecaInput = document.getElementById('nome-peca');
-                    const opPrepInput = document.getElementById('op-prep');
-                    
-                    nomePecaInput.readOnly = false;
-                    opPrepInput.readOnly = false;
-
-                    nomePecaInput.classList.remove('bg-slate-200');
-                    opPrepInput.classList.remove('bg-slate-200');
+                    productPrepSelect.innerHTML = '<option value="">Selecione um cliente</option>';
+                    productPrepSelect.disabled = true;
                 }, 0);
             });
 
@@ -820,18 +816,27 @@
                 select.appendChild(option);
             });
         };
+        
+        const populateMaterialClients = () => {
+            const select = document.getElementById('client-prep');
+            const clients = [...new Set(productDatabase.map(p => p.client))].sort();
+             clients.forEach(client => {
+                const option = document.createElement('option');
+                option.value = client;
+                option.textContent = client;
+                select.appendChild(option);
+            });
+        };
 
         document.addEventListener('DOMContentLoaded', () => {
             lucide.createIcons();
             populateMaterialMachineSelector();
             populatePreparadorSelector();
+            populateMaterialClients();
             setupEventListeners();
             initialize();
         });
     </script>
 </body>
 </html>
-
-
-
 
