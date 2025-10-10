@@ -25,15 +25,6 @@
             border-color: #38bdf8;
             box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.4);
         }
-        /* Remove arrows from number inputs */
-        input::-webkit-outer-spin-button,
-        input::-webkit-inner-spin-button {
-            -webkit-appearance: none;
-            margin: 0;
-        }
-        input[type=number] {
-            -moz-appearance: textfield;
-        }
         .toast {
             animation: toast-in 0.5s, toast-out 0.5s 4.5s;
             transform: translateX(110%);
@@ -60,21 +51,24 @@
                 display: block !important; /* Mostra ambas as seções */
                 box-shadow: none !important;
                 border: none !important;
-                margin-bottom: 1rem; /* Margem reduzida para impressão */
+                margin-bottom: 2rem;
                 page-break-inside: avoid;
+            }
+            #material-container {
+                page-break-before: always; /* Força uma nova página para a segunda aba */
             }
             .print-header {
                 display: block !important;
             }
             @page {
                 size: A4 landscape;
-                margin: 0.4in; /* Margem reduzida para caber mais conteúdo */
+                margin: 0.5in;
             }
             table {
-                font-size: 7.5pt; /* Fonte ligeiramente menor */
+                font-size: 8pt;
             }
             th, td {
-                padding: 3px 5px;
+                padding: 4px 6px;
             }
             .container {
                 padding: 0 !important;
@@ -99,7 +93,7 @@
                  <label for="date-selector" class="font-semibold text-slate-600">Data de Produção:</label>
                  <input type="date" id="date-selector" class="border-slate-300 rounded-md p-2 bg-slate-50 focus:ring-2 focus:ring-cyan-500">
                  <button id="print-btn" class="bg-slate-600 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded-lg transition-colors flex items-center gap-2">
-                    <i data-lucide="save"></i> Salvar PDF
+                    <i data-lucide="printer"></i> Imprimir / PDF
                 </button>
              </div>
              <div id="save-status" class="text-sm text-slate-500 font-medium h-6 flex items-center gap-2 mt-4 md:mt-0">
@@ -151,12 +145,12 @@
                             <div><label class="block text-sm font-medium text-slate-600">QTD REAL</label><input data-col="qtd_real" type="number" class="mt-1 table-input bg-white"></div>
                             <div class="md:col-span-2"><label class="block text-sm font-medium text-slate-600">SALDO OP (FIM)</label><input data-col="fim" readonly class="mt-1 table-input bg-slate-200 font-bold"></div>
 
-                            <div><label class="block text-sm font-medium text-slate-600">Cód. do Produto</label><input data-col="cod_produto" type="number" class="mt-1 table-input bg-white"></div>
+                            <div><label class="block text-sm font-medium text-slate-600">Cód. do Produto</label><input data-col="cod_produto" type="text" class="mt-1 table-input bg-white"></div>
                             <div class="col-span-2 md:col-span-3"><label class="block text-sm font-medium text-slate-600">PEÇA</label><input data-col="peca" type="text" class="mt-1 table-input bg-white text-left px-2"></div>
                             
                             <div><label class="block text-sm font-medium text-slate-600">CAV.</label><input data-col="cav" type="number" class="mt-1 table-input bg-white"></div>
-                            <div><label class="block text-sm font-medium text-slate-600">CICLO</label><input data-col="ciclo" type="number" step="0.01" class="mt-1 table-input bg-white"></div>
-                            <div><label class="block text-sm font-medium text-slate-600">Peso Médio</label><input data-col="pm" type="number" step="0.001" class="mt-1 table-input bg-white"></div>
+                            <div><label class="block text-sm font-medium text-slate-600">CICLO</label><input data-col="ciclo" type="number" class="mt-1 table-input bg-white"></div>
+                            <div><label class="block text-sm font-medium text-slate-600">P.M.</label><input data-col="pm" type="number" class="mt-1 table-input bg-white"></div>
                             <div><label class="block text-sm font-medium text-slate-600">OP</label><input data-col="op" type="number" class="mt-1 table-input bg-white"></div>
                             
                             <div class="col-span-2 md:col-span-4"><label class="block text-sm font-medium text-slate-600">MATERIAL</label><input data-col="material" type="number" class="mt-1 table-input bg-white text-left px-2"></div>
@@ -179,7 +173,7 @@
                                 <th class="px-4 py-3 text-center text-xs font-medium text-slate-600 uppercase tracking-wider">Saldo</th>
                                 <th class="px-4 py-3 text-center text-xs font-medium text-slate-600 uppercase tracking-wider">CAV.</th>
                                 <th class="px-4 py-3 text-center text-xs font-medium text-slate-600 uppercase tracking-wider">Ciclo</th>
-                                <th class="px-4 py-3 text-center text-xs font-medium text-slate-600 uppercase tracking-wider">Peso Médio</th>
+                                <th class="px-4 py-3 text-center text-xs font-medium text-slate-600 uppercase tracking-wider">P.M.</th>
                                 <th class="px-4 py-3 text-left text-xs font-medium text-slate-600 uppercase tracking-wider">Material</th>
                                 <th class="px-4 py-3 text-center text-xs font-medium text-slate-600 uppercase tracking-wider no-print">Ações</th>
                             </tr>
@@ -219,9 +213,9 @@
                             <option value="">Selecione</option>
                         </select>
                     </div>
-                    <div><label for="cod-produto-material" class="block text-sm font-medium text-slate-700">Cód. do Produto</label><input type="number" id="cod-produto-material" class="mt-1 block w-full p-2 border-slate-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500"></div>
+                    <div><label for="cod-produto-material" class="block text-sm font-medium text-slate-700">Cód. do Produto</label><input type="text" id="cod-produto-material" class="mt-1 block w-full p-2 border-slate-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500"></div>
                     <div class="sm:col-span-2 lg:col-span-1"><label for="nome-peca" class="block text-sm font-medium text-slate-700">Nome da Peça</label><input type="text" id="nome-peca" required class="bg-white mt-1 block w-full p-2 border-slate-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500"></div>
-                    <div><label for="op-prep" class="block text-sm font-medium text-slate-700">OP</label><input type="number" id="op-prep" class="bg-white mt-1 block w-full p-2 border-slate-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500"></div>
+                    <div><label for="op-prep" class="block text-sm font-medium text-slate-700">OP</label><input type="text" id="op-prep" class="bg-white mt-1 block w-full p-2 border-slate-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500"></div>
                     <div><label for="qtd-mat" class="block text-sm font-medium text-slate-700">Qtd. Mat.</label><input type="number" id="qtd-mat" class="mt-1 block w-full p-2 border-slate-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500"></div>
                     <div><label for="sk-resina" class="block text-sm font-medium text-slate-700">SK Resina</label><input type="text" id="sk-resina" class="mt-1 block w-full p-2 border-slate-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500"></div>
                     <div><label for="lote-resina" class="block text-sm font-medium text-slate-700">Lote Resina</label><input type="text" id="lote-resina" class="mt-1 block w-full p-2 border-slate-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500"></div>
@@ -726,7 +720,7 @@
 
             qtdTotalOpInput.addEventListener('input', calculateSaldo);
             qtdRealInput.addEventListener('input', calculateSaldo);
-
+            
             formMaterial.addEventListener('submit', addMaterial);
 
             document.getElementById('material-container').addEventListener('click', e => {
@@ -762,7 +756,7 @@
                 }
             });
         };
-        
+
         const populateDropdowns = () => {
             const maquinas = [
                 'H-01', 'H-02', 'H-03', 'H-04', 'H-05', 'H-06', 'H-07', 'H-08', 'H-09', 'H-10', 
@@ -787,7 +781,6 @@
                 preparadorSelect.appendChild(option);
             });
         };
-
 
         document.addEventListener('DOMContentLoaded', () => {
             lucide.createIcons();
